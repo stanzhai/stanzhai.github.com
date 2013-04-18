@@ -1,0 +1,383 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用C语言解析文本文件 | StanZhai::Blog</title>
+  <meta name="author" content="StanZhai 翟士丹">
+  
+  <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="使用C语言解析文本文件"/>
+  <meta property="og:site_name" content="StanZhai::Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="StanZhai::Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">StanZhai::Blog</a></h1>
+  <h2><a href="/">好记性不如烂键盘！</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-03-31T00:00:00.000Z"><a href="/2013/03/31/use-c-parse-file/">2013/3/31</a></time>
+      
+      
+  
+    <h1 class="title">使用C语言解析文本文件</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>起因</h2>
+<p>又是周末了，事情多啊，我的一名研究生同学，最近在整理论文资料，让我帮忙将一个格式混乱的Excel文件，写个程序调整成按列存储的格式。</p>
+<p>刚刚把Linux弄好，还没来得及装Windows，平时最擅长的语言是C#，可是同学比较急，无奈，就在Linux写个C程序来解析吧。</p>
+<p><a name="more"></a></p>
+<h2>原始格式(2条示例信息)</h2>
+<pre><code><span class="comment">1</span>,<span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span>
+<span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span>
+<span class="comment">Workflow</span> <span class="comment">process</span> <span class="comment">modelling</span> <span class="comment">and</span> <span class="comment">resource</span> <span class="comment">allocation</span> <span class="comment">based</span> <span class="comment">on</span> <span class="comment">polychromatic</span> <span class="comment">sets</span> <span class="comment">theory</span>,<span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span>   <span class="comment">SCI</span>
+<span class="comment">Gao</span>, <span class="comment">Xinqin</span> <span class="comment">(School</span> <span class="comment">of</span> <span class="comment">Mechanical</span> <span class="comment">and</span> <span class="comment">Precision</span> <span class="comment">Instrument</span> <span class="comment">Engineering</span>, <span class="comment">Xi'an</span> <span class="comment">University</span> <span class="comment">of</span> <span class="comment">Technology</span>, <span class="comment">Xi'an</span> <span class="comment">710048</span>, <span class="comment">China);</span> <span class="comment">Xu</span>, <span class="comment">Lida;</span> <span class="comment">Wang</span>, <span class="comment">Xueping;</span> <span class="comment">Li</span>, <span class="comment">Yan;</span> <span class="comment">Yang</span>, <span class="comment">Mingshun;</span> <span class="comment">Liu</span>, <span class="comment">Yong</span>  <span class="comment">Source:</span> <span class="comment">Enterprise</span> <span class="comment">Information</span> <span class="comment">Systems</span>, <span class="comment">v</span> <span class="comment">7</span>, <span class="comment">n</span> <span class="comment">2</span>, <span class="comment">p</span> <span class="comment">198</span>-<span class="comment">226</span>, <span class="comment">May</span> <span class="comment">2013</span>,<span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span>  
+<span class="comment">Database:</span> <span class="comment">Compendex</span>,<span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span>
+<span class="comment">Abstract</span> <span class="comment">|</span> <span class="comment">Detailed</span> <span class="comment">|</span> <span class="comment">|</span>,<span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span>
+<span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span>
+<span class="comment">2</span>,<span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span>
+<span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span>
+<span class="comment">A</span> <span class="comment">new</span> <span class="comment">cooperative</span> <span class="comment">spectrum</span> <span class="comment">sensing</span> <span class="comment">scheme</span> <span class="comment">for</span> <span class="comment">cognitive</span> <span class="comment">Ad</span>-<span class="comment">Hoc</span> <span class="comment">networks</span>,<span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span>   <span class="comment">SCI</span>
+<span class="comment">Du</span>, <span class="comment">Yang</span> <span class="comment">(School</span> <span class="comment">of</span> <span class="comment">Automation</span> <span class="comment">Science</span> <span class="comment">and</span> <span class="comment">Electrical</span> <span class="comment">Engineering</span>, <span class="comment">Beihang</span> <span class="comment">University</span>, <span class="comment">Beijing</span>, <span class="comment">China);</span> <span class="comment">Li</span>, <span class="comment">Hongxiang;</span> <span class="comment">Lin</span>, <span class="comment">Weiyao;</span> <span class="comment">Liu</span>, <span class="comment">Lingjia;</span> <span class="comment">Wang</span>, <span class="comment">Xudong;</span> <span class="comment">Khan</span>, <span class="comment">Samee</span> <span class="comment">U</span>.<span class="comment">;</span> <span class="comment">Wu</span>, <span class="comment">Sentang</span>  <span class="comment">Source:</span> <span class="comment">Mobile</span> <span class="comment">Networks</span> <span class="comment">and</span> <span class="comment">Applications</span>, <span class="comment">v</span> <span class="comment">17</span>, <span class="comment">n</span> <span class="comment">6</span>, <span class="comment">p</span> <span class="comment">746</span>-<span class="comment">757</span>, <span class="comment">December</span> <span class="comment">2012</span>, <span class="comment">Mobility</span> <span class="comment">in</span> <span class="comment">Support</span> <span class="comment">of</span> <span class="comment">Social</span> <span class="comment">Communication</span>,<span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span>
+<span class="comment">Database:</span> <span class="comment">Compendex</span>,<span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span>
+<span class="comment">Abstract</span> <span class="comment">|</span> <span class="comment">Detailed</span> <span class="comment">|</span> <span class="comment">|</span>,<span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span>
+<span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span><span class="string">,</span>
+</code></pre>
+<h2>目标格式(2条示例信息)</h2>
+<pre><code><span class="number">1</span>,Workflow <span class="keyword">process</span> modelling <span class="keyword">and</span> resource allocation based <span class="keyword">on</span> polychromatic sets theory,SCI,Gao_ Xinqin ; Xu_ Lida; Wang_ Xueping; Li_ Yan; Yang_ Mingshun; Liu_ Yong, Enterprise Information Systems,<span class="number">2013</span>
+<span class="number">2</span>,A <span class="keyword">new</span> cooperative spectrum sensing scheme <span class="keyword">for</span> cognitive Ad-Hoc networks,SCI,Du_ Yang ; Li_ Hongxiang; Lin_ Weiyao; Liu_ Lingjia; Wang_ Xudong; Khan_ Samee U.; Wu_ Sentang, Mobile Networks <span class="keyword">and</span> Applications,<span class="number">2012</span>
+</code></pre>
+<h2>解析代码</h2>
+<pre><code><span class="comment">/*
+ * 翟士丹，2013/3/31,论文信息格式化处理工具
+ */</span>
+<span class="preprocessor">#include &lt;stdio.h&gt;</span>
+<span class="preprocessor">#include &lt;sys/types.h&gt;</span>
+<span class="preprocessor">#include &lt;string.h&gt;</span>
+<span class="preprocessor">#include &lt;regex.h&gt;</span>
+
+<span class="preprocessor">#define MAX_LENGTH 1024</span>
+
+int main(int argc, char *argv[])
+{
+    if (argc != <span class="number">3</span>) {
+        fprintf(stderr, <span class="string">"usage: format srcfile desfile\n"</span>)<span class="comment">;</span>
+        return <span class="number">0</span><span class="comment">;</span>
+    }
+
+    FILE* src<span class="comment">;</span>
+    FILE* des<span class="comment">;</span>
+
+    src = fopen(argv[<span class="number">1</span>], <span class="string">"r"</span>)<span class="comment">;</span>
+    des = fopen(argv[<span class="number">2</span>], <span class="string">"w"</span>)<span class="comment">;</span>
+
+    char buf[MAX_LENGTH] = {<span class="number">0</span>}<span class="comment">;        // 原始记录缓冲区</span>
+    char result[MAX_LENGTH] = {<span class="number">0</span>}<span class="comment">;     // 记录处理结果</span>
+    char tempbuf[MAX_LENGTH] = {<span class="number">0</span>}<span class="comment">;    // 临时处理缓冲区</span>
+    int num = <span class="number">0</span><span class="comment">;            // 记录行号</span>
+
+    // 正则表达式相关
+    regex_t reg<span class="comment">;</span>
+    char* regexp = <span class="string">"[0-9]{4}"</span><span class="comment">;     // 奇怪,\\d{4}怎么就不行呢</span>
+    int err, status<span class="comment">;</span>
+    char errbuf[MAX_LENGTH]<span class="comment">;</span>
+    int nm = <span class="number">1</span><span class="comment">;</span>
+    regmatch_t pmatch[nm]<span class="comment">;</span>
+
+    // 编译正则表达式
+    if (regcomp(&amp;reg, regexp, REG_EXTENDED) &lt; <span class="number">0</span>) {
+        regerror(err, &amp;reg, errbuf, sizeof(errbuf))<span class="comment">;</span>
+        fprintf(stdout, <span class="string">"err:%s\n"</span>, errbuf)<span class="comment">;</span>
+    }
+
+    // 记录查找的字符位置
+    char* ptr<span class="comment">;</span>
+    char* temp_ptr<span class="comment">;</span>
+
+    while (fgets(buf, MAX_LENGTH, src) != NULL) {
+        fprintf(stdout, <span class="string">"%d:%s"</span>, num + <span class="number">1</span>, buf)<span class="comment">;</span>
+        if (strncmp(buf, <span class="string">",,,,,,"</span>, <span class="number">6</span>) == <span class="number">0</span> ||
+            strncmp(buf, <span class="string">"Abstract"</span>, <span class="number">8</span>) == <span class="number">0</span> ||
+            strncmp(buf, <span class="string">"Database"</span>, <span class="number">8</span>) == <span class="number">0</span>) {
+            continue<span class="comment">;</span>
+        }
+
+        num++<span class="comment">;</span>
+        // 解析处理
+        if (num == <span class="number">1</span> || num == <span class="number">2</span>) {
+            ptr = strchr(buf, <span class="string">','</span>)<span class="comment">;</span>
+            strncat(result, buf, ptr-buf+<span class="number">1</span>)<span class="comment">;</span>
+        }
+        if (num == <span class="number">2</span>) {
+            ptr = strstr(buf, <span class="string">", "</span>)<span class="comment">;</span>
+            if (ptr != NULL) {
+                ptr++<span class="comment">;</span>
+                while(*ptr == <span class="string">' '</span>) {
+                    ptr++<span class="comment">;</span>
+                }
+                strncat(result, ptr, strlen(ptr)-<span class="number">1</span>)<span class="comment">;</span>
+            }
+            strcat(result, <span class="string">","</span>)<span class="comment">;</span>
+        } 
+        if (num == <span class="number">3</span>) {
+            ptr = strchr(buf, <span class="string">'('</span>)<span class="comment">;</span>
+            temp_ptr = buf<span class="comment">;</span>
+            if (ptr != NULL) {
+                strncat(tempbuf, buf, ptr-buf)<span class="comment">;</span>
+                temp_ptr = strchr(ptr, <span class="string">')'</span>)+<span class="number">1</span><span class="comment">;</span>
+            }
+            ptr = strstr(temp_ptr, <span class="string">"  Source: "</span>)<span class="comment">;</span>
+            strncat(tempbuf, temp_ptr, ptr-temp_ptr)<span class="comment">;</span>
+            // 将人名中的逗号替换
+            int i = <span class="number">0</span><span class="comment">;</span>
+            for (i<span class="comment">; tempbuf[i]; i++) {</span>
+                if (tempbuf[i] == <span class="string">','</span>) {
+                    tempbuf[i] = <span class="string">'_'</span><span class="comment">;</span>
+                }
+            }
+            // 拼接论文来源
+            strcat(tempbuf, <span class="string">","</span>)<span class="comment">;</span>
+            temp_ptr = ptr+<span class="number">10</span><span class="comment">;</span>
+            ptr = strchr(temp_ptr, <span class="string">','</span>)<span class="comment">;</span>
+            strncat(tempbuf, temp_ptr, ptr-temp_ptr+<span class="number">1</span>)<span class="comment">;</span>
+            // 拼接发布时间
+            temp_ptr = ptr+<span class="number">1</span><span class="comment">;</span>
+            for (i=<span class="number">0</span><span class="comment">; i&lt;3; i++) {</span>
+                temp_ptr = strchr(temp_ptr, <span class="string">','</span>) + <span class="number">1</span><span class="comment">;</span>
+            }
+            // 通过正则表达式提取时间
+            status = regexec(&amp;reg, temp_ptr, nm, pmatch, REG_NOTBOL)<span class="comment">;</span>
+            if (status == REG_NOMATCH)
+                printf(<span class="string">"no match\n"</span>)<span class="comment">;</span>
+            if (status == <span class="number">0</span>) {
+                strncat(tempbuf, temp_ptr + pmatch[<span class="number">0</span>]<span class="preprocessor">.rm</span>_so, pmatch[<span class="number">0</span>]<span class="preprocessor">.rm</span>_eo - pmatch[<span class="number">0</span>]<span class="preprocessor">.rm</span>_so)<span class="comment">;</span>
+            }
+            strcat(result, tempbuf)<span class="comment">;</span>
+        }
+        if (num == <span class="number">3</span>) {
+            fprintf(des, <span class="string">"%s\n"</span>, result)<span class="comment">;</span>
+            fprintf(stdout, <span class="string">"%s\n"</span>, result)<span class="comment">;</span>
+            memset(result, <span class="number">0</span>, sizeof(result))<span class="comment">;</span>
+            memset(tempbuf, <span class="number">0</span>, sizeof(tempbuf))<span class="comment">;</span>
+            num = <span class="number">0</span><span class="comment">;</span>
+        }
+        memset(buf, <span class="number">0</span>, sizeof(buf))<span class="comment">;</span>
+    }
+    regfree(&amp;reg)<span class="comment">;</span>
+    fclose(src)<span class="comment">;</span>
+    fclose(des)<span class="comment">;</span>
+    return <span class="number">0</span><span class="comment">;</span>
+}
+</code></pre>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/学习/">学习</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/C语言/">C语言</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    <!-- JiaThis Button BEGIN -->
+    <ul class="tag_box jiathis_style">
+      <a class="jiathis_button_tools_1"></a>
+      <a class="jiathis_button_tools_2"></a>
+      <a class="jiathis_button_tools_3"></a>
+      <a class="jiathis_button_tools_4"></a>
+      <a href="http://www.jiathis.com/share?uid=1715390" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+      <a class="jiathis_counter_style"></a>
+    </ul>
+    <script type="text/javascript">
+    var jiathis_config = {data_track_clickback:'true'};
+    </script>
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1347364934817650" charset="utf-8"></script>
+    <!-- JiaThis Button END -->
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <!-- UY BEGIN -->
+	<div id="uyan_frame"></div>
+	<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1715390" async=""></script>
+	<!-- UY END -->
+</section>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form id="search" class="pull-right" enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse" target="_blank">
+    <input type="search" name="q" results="0" placeholder="搜索"/>
+    <input type="hidden" name="cx" value="010188267663376520215:afr8qibwduq"/>
+    <input type="hidden" name="ie" value="UTF-8"/>
+    
+    <input name="siteurl" type="hidden" value="blog.zhaishidan.cn"><input name="ref" type="hidden" value="blog.zhaishidan.cn"><input name="ss" type="hidden" value="">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/人文思考/">人文思考</a><small>1</small></li>
+  
+    <li><a href="/categories/学习/">学习</a><small>13</small></li>
+  
+    <li><a href="/categories/工作/">工作</a><small>1</small></li>
+  
+    <li><a href="/categories/工具/">工具</a><small>3</small></li>
+  
+    <li><a href="/categories/读书笔记/">读书笔记</a><small>5</small></li>
+  
+    <li><a href="/categories/问题修复/">问题修复</a><small>13</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/C%26C%2B%2B/">C&amp;C++</a><small>1</small></li>
+  
+    <li><a href="/tags/C%2B%2B/">C++</a><small>1</small></li>
+  
+    <li><a href="/tags/C语言/">C语言</a><small>1</small></li>
+  
+    <li><a href="/tags/Eclipse/">Eclipse</a><small>1</small></li>
+  
+    <li><a href="/tags/Linq/">Linq</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>8</small></li>
+  
+    <li><a href="/tags/Redis/">Redis</a><small>1</small></li>
+  
+    <li><a href="/tags/Redmine/">Redmine</a><small>1</small></li>
+  
+    <li><a href="/tags/SQL/">SQL</a><small>1</small></li>
+  
+    <li><a href="/tags/SQLServer/">SQLServer</a><small>1</small></li>
+  
+    <li><a href="/tags/TeamViewer/">TeamViewer</a><small>1</small></li>
+  
+    <li><a href="/tags/Tomcat/">Tomcat</a><small>1</small></li>
+  
+    <li><a href="/tags/WPF/">WPF</a><small>1</small></li>
+  
+    <li><a href="/tags/gdb/">gdb</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>1</small></li>
+  
+    <li><a href="/tags/jekyll/">jekyll</a><small>1</small></li>
+  
+    <li><a href="/tags/js/">js</a><small>1</small></li>
+  
+    <li><a href="/tags/log4net/">log4net</a><small>1</small></li>
+  
+    <li><a href="/tags/pip/">pip</a><small>1</small></li>
+  
+    <li><a href="/tags/python/">python</a><small>1</small></li>
+  
+    <li><a href="/tags/sqlite/">sqlite</a><small>1</small></li>
+  
+    <li><a href="/tags/vi/">vi</a><small>1</small></li>
+  
+    <li><a href="/tags/代码大全/">代码大全</a><small>4</small></li>
+  
+    <li><a href="/tags/多线程/">多线程</a><small>1</small></li>
+  
+    <li><a href="/tags/工作/">工作</a><small>2</small></li>
+  
+    <li><a href="/tags/方法论/">方法论</a><small>1</small></li>
+  
+    <li><a href="/tags/正则表达式/">正则表达式</a><small>1</small></li>
+  
+    <li><a href="/tags/游戏引擎/">游戏引擎</a><small>1</small></li>
+  
+    <li><a href="/tags/项目管理/">项目管理</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 StanZhai 翟士丹
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
