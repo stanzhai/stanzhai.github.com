@@ -1,0 +1,405 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>将博客从jekyll迁移到了hexo | StanZhai::Blog</title>
+  <meta name="author" content="StanZhai 翟士丹">
+  
+  <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="将博客从jekyll迁移到了hexo"/>
+  <meta property="og:site_name" content="StanZhai::Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="StanZhai::Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">StanZhai::Blog</a></h1>
+  <h2><a href="/">好记性不如烂键盘！</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="https://github.com/stanzhai">GitHub</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-18T10:09:01.000Z"><a href="/2013/04/18/jekyll-2-hexo/">2013/4/18</a></time>
+      
+      
+  
+    <h1 class="title">将博客从jekyll迁移到了hexo</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>关于hexo和jekyll</h2>
+<p>hexo和jekyll一样都是个静态网站生成工具，hexo是一个台湾小伙使用nodejs开发的，jekyll则是用ruby开发，github内置了jekyll，可以直接将jekyll相关的文件提交到github，github会自动给你生成静态页面。</p>
+<a name="more"></a>
+
+<p>hexo由于采用nodejs开发的，因此需要在本地生成静态页面后在提交到github，不过hexo内置了<code>hexo deploy</code>命令，提交博客也是挺方便的。</p>
+<p>之前使用jekyll搭建的个人博客，由于jekyll对分页和文章摘要支持的不是很好，了解一下hexo这个新东西，感觉其页面生成速度还是蛮不错的，对分页和文章摘要也支持的挺好，主要是小清新的light主题吸引了我，于是乎，马上有种把博客迁移到hexo的念头。</p>
+<h2>安装hexo</h2>
+<p>首先需要安装<a href="http://nodejs.org/">nodejs</a>,安装成功后，在命令行下通过<code>npm install hexo -g</code>安装hexo。</p>
+<p>根据hexo<a href="http://zespia.tw/hexo/">官方文档</a>,创建一个网站，生成页面，并通过<code>hexo server</code>本地查看网站，都挺简单的，不在啰嗦了。</p>
+<h2>迁移jekyll到hexo</h2>
+<p>这个对于程序员就比较简单了，对比一下两种markdown文件的差异，写个程序处理一下就OK了，我用c#处理的，贴出代码：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+</pre></td><td class="code"><pre>using System<span class="comment">;</span>
+using System<span class="preprocessor">.Collections</span><span class="preprocessor">.Generic</span><span class="comment">;</span>
+using System<span class="preprocessor">.IO</span><span class="comment">;</span>
+using System<span class="preprocessor">.Linq</span><span class="comment">;</span>
+using System<span class="preprocessor">.Text</span><span class="comment">;</span>
+using System<span class="preprocessor">.Text</span><span class="preprocessor">.RegularExpressions</span><span class="comment">;</span>
+
+namespace Jekyll2Hexo
+{
+    class Program
+    {
+        // 将jekyll中包含md文件的文件夹拖放到生成的exe上，处理后的文档保存在文件夹的上级目录
+        // 本程序是针对jekyll-bootstrap博客中的文档做的处理
+        static void Main(string[] args)
+        {
+            if (args<span class="preprocessor">.Length</span> == <span class="number">0</span>)
+            {
+                return<span class="comment">;</span>
+            }
+            string folder = args[<span class="number">0</span>]<span class="comment">;</span>
+            if (Directory<span class="preprocessor">.Exists</span>(folder))
+            {
+                foreach (var file <span class="keyword">in</span> Directory<span class="preprocessor">.GetFiles</span>(folder, <span class="string">"*.md"</span>))
+                {
+                    FileInfo fi = new FileInfo(file)<span class="comment">;</span>
+                    string date = fi<span class="preprocessor">.Name</span><span class="preprocessor">.Substring</span>(<span class="number">0</span>, <span class="number">10</span>)<span class="comment">;</span>
+                    StringBuilder sb = new StringBuilder()<span class="comment">;</span>
+
+                    FileStream fs = new FileStream(file, FileMode<span class="preprocessor">.Open</span>)<span class="comment">;</span>
+                    using (StreamReader sr = new StreamReader(fs, Encoding<span class="preprocessor">.UTF</span>8))
+                    {
+                        int lineCount = <span class="number">0</span><span class="comment">;</span>
+                        while (!sr<span class="preprocessor">.EndOfStream</span>)
+                        {
+                            var line = sr<span class="preprocessor">.ReadLine</span>()<span class="comment">;</span>
+                            if (line<span class="preprocessor">.StartsWith</span>(<span class="string">"tagline:"</span>))
+                            {
+                                continue<span class="comment">;</span>
+                            }
+                            lineCount++<span class="comment">;</span>
+
+                            if (lineCount == <span class="number">1</span> || lineCount == <span class="number">2</span> || lineCount == <span class="number">4</span> || lineCount == <span class="number">8</span>)
+                            {
+                                continue<span class="comment">;</span>
+                            }
+                            if (lineCount == <span class="number">3</span>)
+                            {
+                                sb<span class="preprocessor">.AppendLine</span>(line<span class="preprocessor">.Replace</span>(<span class="string">"\""</span>, <span class="string">""</span>))<span class="comment">;</span>
+                                sb<span class="preprocessor">.AppendLine</span>(<span class="string">"date: "</span> + date)<span class="comment">;</span>
+                                continue<span class="comment">;</span>
+                            }
+                            if (lineCount == <span class="number">5</span>)
+                            {
+                                sb<span class="preprocessor">.AppendLine</span>(<span class="string">"categories:"</span> + line<span class="preprocessor">.Split</span>(<span class="string">':'</span>)[<span class="number">1</span>])<span class="comment">;</span>
+                                continue<span class="comment">;</span>
+                            }
+                            if (lineCount == <span class="number">16</span>)
+                            {
+                                sb<span class="preprocessor">.AppendLine</span>(<span class="string">"&lt;!-- more --&gt;"</span>)<span class="comment">;</span>
+                            }
+                            sb<span class="preprocessor">.AppendLine</span>(line)<span class="comment">;</span>
+                        }
+                    }
+                    // 保存处理后的md文件
+                    File<span class="preprocessor">.WriteAllText</span>(Path<span class="preprocessor">.Combine</span>(fi<span class="preprocessor">.Directory</span><span class="preprocessor">.Parent</span><span class="preprocessor">.FullName</span>, fi<span class="preprocessor">.Name</span><span class="preprocessor">.Substring</span>(<span class="number">11</span>)),
+                        sb<span class="preprocessor">.ToString</span>(),
+                        Encoding<span class="preprocessor">.UTF</span>8)<span class="comment">;</span>
+                }
+            }
+        }
+    }
+}
+</pre></td></tr></table></figure>
+
+<h2>遇到的一些问题</h2>
+<p><strong> 文章摘要设置 </strong></p>
+<p>hexo和jekyll一样，都支持使用markdown编写文章，hexo的文章保存在source/_post目录下。</p>
+<p>需要注意的是，在编写markdown文档是，在文档中插入<code>&lt;!--more--&gt;</code>就可以将文章切分开了，more以上的部分会已摘要的形式显示，当查看全文是more一下的部分也会显示出来。</p>
+<p><strong> 图片路径问题 </strong></p>
+<p>这个也很简单，直接将图片文件夹放到source目录下即可。</p>
+<p>同理将favicon.ico和CNAME（github支持在CNAME文件中加入自定义域名，通过自定义的域名访问自己的网站）也放到source目录。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/工具/">工具</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/hexo/">hexo</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    <!-- JiaThis Button BEGIN -->
+    <ul class="tag_box jiathis_style">
+      <a class="jiathis_button_tools_1"></a>
+      <a class="jiathis_button_tools_2"></a>
+      <a class="jiathis_button_tools_3"></a>
+      <a class="jiathis_button_tools_4"></a>
+      <a href="http://www.jiathis.com/share?uid=1715390" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+      <a class="jiathis_counter_style"></a>
+    </ul>
+    <script type="text/javascript">
+    var jiathis_config = {data_track_clickback:'true'};
+    </script>
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1347364934817650" charset="utf-8"></script>
+    <!-- JiaThis Button END -->
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <!-- UY BEGIN -->
+	<div id="uyan_frame"></div>
+	<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1715390" async=""></script>
+	<!-- UY END -->
+</section>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form id="search" class="pull-right" enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse" target="_blank">
+    <input type="search" name="q" results="0" placeholder="搜索"/>
+    <input type="hidden" name="cx" value="010188267663376520215:afr8qibwduq"/>
+    <input type="hidden" name="ie" value="UTF-8"/>
+    
+    <input name="siteurl" type="hidden" value="blog.zhaishidan.cn"><input name="ref" type="hidden" value="blog.zhaishidan.cn"><input name="ss" type="hidden" value="">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/人文思考/">人文思考</a><small>1</small></li>
+  
+    <li><a href="/categories/学习/">学习</a><small>13</small></li>
+  
+    <li><a href="/categories/工作/">工作</a><small>1</small></li>
+  
+    <li><a href="/categories/工具/">工具</a><small>4</small></li>
+  
+    <li><a href="/categories/读书笔记/">读书笔记</a><small>5</small></li>
+  
+    <li><a href="/categories/问题修复/">问题修复</a><small>13</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/C%26C%2B%2B/">C&amp;C++</a><small>1</small></li>
+  
+    <li><a href="/tags/C%2B%2B/">C++</a><small>1</small></li>
+  
+    <li><a href="/tags/C语言/">C语言</a><small>1</small></li>
+  
+    <li><a href="/tags/Eclipse/">Eclipse</a><small>1</small></li>
+  
+    <li><a href="/tags/Linq/">Linq</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>8</small></li>
+  
+    <li><a href="/tags/Redis/">Redis</a><small>1</small></li>
+  
+    <li><a href="/tags/Redmine/">Redmine</a><small>1</small></li>
+  
+    <li><a href="/tags/SQL/">SQL</a><small>1</small></li>
+  
+    <li><a href="/tags/SQLServer/">SQLServer</a><small>1</small></li>
+  
+    <li><a href="/tags/TeamViewer/">TeamViewer</a><small>1</small></li>
+  
+    <li><a href="/tags/Tomcat/">Tomcat</a><small>1</small></li>
+  
+    <li><a href="/tags/WPF/">WPF</a><small>1</small></li>
+  
+    <li><a href="/tags/gdb/">gdb</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>1</small></li>
+  
+    <li><a href="/tags/jekyll/">jekyll</a><small>1</small></li>
+  
+    <li><a href="/tags/js/">js</a><small>1</small></li>
+  
+    <li><a href="/tags/log4net/">log4net</a><small>1</small></li>
+  
+    <li><a href="/tags/pip/">pip</a><small>1</small></li>
+  
+    <li><a href="/tags/python/">python</a><small>1</small></li>
+  
+    <li><a href="/tags/sqlite/">sqlite</a><small>1</small></li>
+  
+    <li><a href="/tags/vi/">vi</a><small>1</small></li>
+  
+    <li><a href="/tags/代码大全/">代码大全</a><small>4</small></li>
+  
+    <li><a href="/tags/多线程/">多线程</a><small>1</small></li>
+  
+    <li><a href="/tags/工作/">工作</a><small>2</small></li>
+  
+    <li><a href="/tags/方法论/">方法论</a><small>1</small></li>
+  
+    <li><a href="/tags/正则表达式/">正则表达式</a><small>1</small></li>
+  
+    <li><a href="/tags/游戏引擎/">游戏引擎</a><small>1</small></li>
+  
+    <li><a href="/tags/项目管理/">项目管理</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 StanZhai 翟士丹
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
