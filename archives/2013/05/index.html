@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tomcat | StanZhai::Blog</title>
+  <title>文章：2013/5 | StanZhai::Blog</title>
   <meta name="author" content="StanZhai 翟士丹">
   
   <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
@@ -47,24 +47,94 @@
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title tag">Tomcat</h2>
+<h2 class="archive-title">2013/5</h2>
 
 
-  <div class="archive">
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2013-03-17T00:00:00.000Z"><a href="/2013/03/17/tomcat-run-error/">2013/3/17</a></time>
-            
-              <h1 class="title"><a href="/2013/03/17/tomcat-run-error/">tomcat: org.apache.catalina.LifecycleException</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-03T11:54:32.000Z"><a href="/2013/05/03/how-to-close-screen-and-lock-pc/">2013/5/3</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/03/how-to-close-screen-and-lock-pc/">Windows平台编程实现关闭显示器并锁定计算机</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>为何搞个这东西？</h2>
+<p>额，最近主管给俺们这些开发的申请了双显示器，开发感觉相当爽啊。可是公司有规定，离开工位需要锁定计算机，关闭显示器。2个显示器，来回关也挺麻烦的。于是乎突然有了弄个关闭显示器玩玩的想法。</p>
+<p>另一名开发同学也有此想法，并且从网上找个了类似的程序，看了下是Delphi写的，带界面的，功能是有，不过用起来不方便。</p>
+<p><strong> 我想要的是 </strong></p>
+<p>有个程序一双击就可以把我的显示器关闭，同时还能锁屏。注意：这个程序可不是一直开着的哦，只要双击一下就可以了，也不麻烦。</p>
+<p>此程序小巧，尽量不依赖其他运行环境，第一时间想到了用C或C++。</p>
+<h2>想想功能简单，不如自己写个，就当学习了</h2>
+<p>从网站查资料找到了2个关键功能的实现方法。</p>
+<ul>
+<li>关闭显示器：使用<code>SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, 2);</code>关于SC_MONITORPOWER消息，自己查一下MSDN吧，写的比较清楚。</li>
+<li>锁定计算机：本想模拟组合键Win+L，这了些资料没有找到靠谱的方法，最后使用rundll32这个命令来实现的<code>ShellExecute(0,&quot;open&quot;,&quot;rundll32.exe&quot;,&quot;USER32,LockWorkStation&quot;,&quot;&quot;,SW_SHOW);</code></li>
+</ul>
+<h2>程序源代码，一个源文件搞定</h2>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre><span class="preprocessor">#include &lt;Windows.h&gt;</span>
+
+<span class="keyword">int</span> WinMain( __<span class="keyword">in</span> HINSTANCE hInstance, 
+    __in_opt HINSTANCE hPrevInstance,
+    __<span class="keyword">in</span> LPSTR lpCmdLine,
+    __<span class="keyword">in</span> <span class="keyword">int</span> nShowCmd )
+{
+    <span class="comment">// 关闭显示器</span>
+    SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, <span class="number">2</span>);
+    <span class="comment">// 锁定计算机</span>
+    ShellExecute(<span class="number">0</span>,<span class="string">"open"</span>,<span class="string">"rundll32.exe"</span>,<span class="string">"USER32,LockWorkStation"</span>,<span class="string">""</span>,SW_SHOW);
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</pre></td></tr></table></figure>
+
+<h2>其他：给程序加图标的问题</h2>
+<p>为项目添加一个资源文件，想资源文件添加一个合适的图标，编译一下就有了。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/05/03/how-to-close-screen-and-lock-pc/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
   </div>
+</article>
+
+
+  
+
+  <nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav>
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
