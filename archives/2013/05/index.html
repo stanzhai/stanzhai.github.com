@@ -57,7 +57,173 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-05T08:49:13.000Z"><a href="/2013/05/05/csharp-handle-close-event/">2013/5/5</a></time>
+        <time datetime="2013-05-06T13:18:01.000Z"><a href="/2013/05/06/use-lambda-in-generic-class/">2013/5/6</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/06/use-lambda-in-generic-class/">C#在泛型类中，通过表达式树构造lambda表达式</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>场景</h2>
+<p>最近对爬虫的数据库架构做调整，需要将数据迁移到MongoDB上去，需要重新实现一个针对MongoDB的Dao泛型类，好吧，动手开工，当实现删除操作的时候问题来了。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/05/06/use-lambda-in-generic-class/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T12:43:58.000Z"><a href="/2013/05/06/cdn/">2013/5/6</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/06/cdn/">内容分发网络</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>CDN - 内容分发网络</h2>
+<p>内容分发网络（Content delivery network或Content distribution network，常简写成CDN）是指一种通过互联网互相连接的电脑网络系统，提供高性能、可扩展性、及低成本的网络将内容传递给用户。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/05/06/cdn/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T12:25:15.000Z"><a href="/2013/05/06/sdn-and-openflow/">2013/5/6</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/06/sdn-and-openflow/">SDN和OpenFlow学习</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>SDN</h2>
+<p>Software Development Network。 </p>
+<p>Software-Defined Network软件定义网络。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/05/06/sdn-and-openflow/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T06:04:30.000Z"><a href="/2013/05/06/linux-permission-denied/">2013/5/6</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/06/linux-permission-denied/">linux permission denied的奇怪问题</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>问题描述</h2>
+<p>创建了一个带有执行权限的软连接文件，放到了/usr/local/bin目录下，非root用户执行时提示权限不足。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>[zhaishidan<span class="property">@molinux</span> ~]$ ll <span class="regexp">/usr/local/bin/m</span>ongo
+lrwxrwxrwx. <span class="number">1</span> root root <span class="number">19</span> May <span class="number">6</span> <span class="number">11</span>:<span class="number">59</span> <span class="regexp">/usr/local/bin/mongo -&gt; /root/mongodb/m</span>ongo
+[zhaishidan<span class="property">@molinux</span> ~]$ <span class="regexp">/usr/local/bin/m</span>ongo 
+-bash: <span class="regexp">/usr/local/bin/m</span>ongo: Permission denied
+</pre></td></tr></table></figure>
+
+<h2>解决方案</h2>
+<p>软链接的文件权限并不代表真实文件的权限，查看/root目录权限如下：</p>
+<p><figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="comment">dr</span>-<span class="comment">xr</span>-<span class="comment">x</span>-<span class="literal">-</span><span class="literal">-</span><span class="string">.</span>  <span class="comment">25</span> <span class="comment">root</span> <span class="comment">root</span>  <span class="comment">4096</span> <span class="comment">May</span>  <span class="comment">6</span> <span class="comment">13:43</span> <span class="comment">root
+</pre></td></tr></table></figure>
+可知其他用户没有对/root目录的访问权限，自然也就不能执行其中的程序。</p>
+<p>解决方法是：将程序调整到<code>/usr/local/bin</code>目录下，就可以了。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/05/06/linux-permission-denied/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-05T07:49:13.000Z"><a href="/2013/05/05/csharp-handle-close-event/">2013/5/5</a></time>
       
       
   
@@ -88,46 +254,11 @@
 
 
   
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-03T12:54:32.000Z"><a href="/2013/05/03/how-to-close-screen-and-lock-pc/">2013/5/3</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/03/how-to-close-screen-and-lock-pc/">Windows平台编程实现关闭显示器并锁定计算机</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2>为何搞个这东西？</h2>
-<p>额，最近主管给俺们这些开发的申请了双显示器，开发感觉相当爽啊。可是公司有规定，离开工位需要锁定计算机，关闭显示器。2个显示器，来回关也挺麻烦的。于是乎突然有了弄个关闭显示器玩玩的想法。
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/05/03/how-to-close-screen-and-lock-pc/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
 
   <nav id="pagination">
   
+  
+    <a href="/archives/2013/05/page/2/" class="alignright next">下一页</a>
   
   <div class="clearfix"></div>
 </nav>
@@ -150,7 +281,7 @@
   
     <li><a href="/categories/人文思考/">人文思考</a><small>1</small></li>
   
-    <li><a href="/categories/学习/">学习</a><small>16</small></li>
+    <li><a href="/categories/学习/">学习</a><small>20</small></li>
   
     <li><a href="/categories/工作/">工作</a><small>1</small></li>
   
@@ -162,6 +293,8 @@
   
     <li><a href="/categories/问题修复/">问题修复</a><small>13</small></li>
   
+    <li><a href="/categories/学习/问题修复/">问题修复</a><small>1</small></li>
+  
   </ul>
 </div>
 
@@ -170,7 +303,7 @@
 <div class="widget tagcloud">
   <h3 class="title">标签云</h3>
   <div class="entry">
-    <a href="/tags/C%26C%2B%2B/" style="font-size: 16.13px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 18.71px;">C++</a><a href="/tags/C语言/" style="font-size: 15.16px;">C语言</a><a href="/tags/Eclipse/" style="font-size: 12.90px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 15.48px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.68px;">Linux</a><a href="/tags/Redis/" style="font-size: 16.77px;">Redis</a><a href="/tags/Redmine/" style="font-size: 14.19px;">Redmine</a><a href="/tags/SQL/" style="font-size: 16.45px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 11.61px;">SQLServer</a><a href="/tags/TeamViewer/" style="font-size: 17.42px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 11.29px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 10.65px;">WPF</a><a href="/tags/gdb/" style="font-size: 10.97px;">gdb</a><a href="/tags/git/" style="font-size: 13.23px;">git</a><a href="/tags/hexo/" style="font-size: 14.52px;">hexo</a><a href="/tags/jQuery/" style="font-size: 11.94px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 10.00px;">jekyll</a><a href="/tags/js/" style="font-size: 14.84px;">js</a><a href="/tags/log4net/" style="font-size: 12.26px;">log4net</a><a href="/tags/pip/" style="font-size: 13.87px;">pip</a><a href="/tags/python/" style="font-size: 13.55px;">python</a><a href="/tags/sqlite/" style="font-size: 17.74px;">sqlite</a><a href="/tags/vi/" style="font-size: 15.81px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.35px;">代码大全</a><a href="/tags/多线程/" style="font-size: 10.32px;">多线程</a><a href="/tags/工作/" style="font-size: 18.39px;">工作</a><a href="/tags/方法论/" style="font-size: 18.06px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 17.10px;">正则表达式</a><a href="/tags/游戏引擎/" style="font-size: 12.58px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 19.03px;">项目管理</a>
+    <a href="/tags/C%26C%2B%2B/" style="font-size: 10.00px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 18.75px;">C++</a><a href="/tags/C语言/" style="font-size: 10.94px;">C语言</a><a href="/tags/Eclipse/" style="font-size: 10.31px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 11.25px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.69px;">Linux</a><a href="/tags/Redis/" style="font-size: 17.19px;">Redis</a><a href="/tags/Redmine/" style="font-size: 11.56px;">Redmine</a><a href="/tags/SQL/" style="font-size: 15.63px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 14.38px;">SQLServer</a><a href="/tags/TeamViewer/" style="font-size: 17.81px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 11.88px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 12.19px;">WPF</a><a href="/tags/gdb/" style="font-size: 13.75px;">gdb</a><a href="/tags/git/" style="font-size: 14.69px;">git</a><a href="/tags/hexo/" style="font-size: 13.44px;">hexo</a><a href="/tags/jQuery/" style="font-size: 10.63px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 16.88px;">jekyll</a><a href="/tags/js/" style="font-size: 16.56px;">js</a><a href="/tags/linux/" style="font-size: 18.13px;">linux</a><a href="/tags/log4net/" style="font-size: 12.81px;">log4net</a><a href="/tags/pip/" style="font-size: 14.06px;">pip</a><a href="/tags/python/" style="font-size: 15.00px;">python</a><a href="/tags/sqlite/" style="font-size: 15.94px;">sqlite</a><a href="/tags/vi/" style="font-size: 15.31px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.38px;">代码大全</a><a href="/tags/多线程/" style="font-size: 12.50px;">多线程</a><a href="/tags/工作/" style="font-size: 18.44px;">工作</a><a href="/tags/方法论/" style="font-size: 16.25px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 13.13px;">正则表达式</a><a href="/tags/游戏引擎/" style="font-size: 17.50px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 19.06px;">项目管理</a>
   </div>
 </div>
 
@@ -181,23 +314,23 @@
   <ul class="entry">
     
       <li>
+        <a href="/2013/05/06/use-lambda-in-generic-class/">C#在泛型类中，通过表达式树构造lambda表达式</a>
+      </li>
+    
+      <li>
+        <a href="/2013/05/06/cdn/">内容分发网络</a>
+      </li>
+    
+      <li>
+        <a href="/2013/05/06/sdn-and-openflow/">SDN和OpenFlow学习</a>
+      </li>
+    
+      <li>
+        <a href="/2013/05/06/linux-permission-denied/">linux permission denied的奇怪问题</a>
+      </li>
+    
+      <li>
         <a href="/2013/05/05/csharp-handle-close-event/">C#处理控制台关闭事件</a>
-      </li>
-    
-      <li>
-        <a href="/2013/05/03/how-to-close-screen-and-lock-pc/">Windows平台编程实现关闭显示器并锁定计算机</a>
-      </li>
-    
-      <li>
-        <a href="/2013/04/19/linux-background-job/">Linux后台任务相关命令学习</a>
-      </li>
-    
-      <li>
-        <a href="/2013/04/18/jekyll-2-hexo/">将博客从jekyll迁移到了hexo</a>
-      </li>
-    
-      <li>
-        <a href="/2013/04/17/install-pip/">安装python包管理工具pip</a>
       </li>
     
   </ul>

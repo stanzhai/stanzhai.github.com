@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>linux permission denied的奇怪问题 | StanZhai::Blog</title>
+  <meta name="author" content="StanZhai 翟士丹">
+  
+  <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="linux permission denied的奇怪问题"/>
+  <meta property="og:site_name" content="StanZhai::Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="StanZhai::Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">StanZhai::Blog</a></h1>
+  <h2><a href="/">好记性不如烂键盘！</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="https://github.com/stanzhai">GitHub</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T06:04:30.000Z"><a href="/2013/05/06/linux-permission-denied/">2013/5/6</a></time>
+      
+      
+  
+    <h1 class="title">linux permission denied的奇怪问题</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>问题描述</h2>
+<p>创建了一个带有执行权限的软连接文件，放到了/usr/local/bin目录下，非root用户执行时提示权限不足。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>[zhaishidan<span class="property">@molinux</span> ~]$ ll <span class="regexp">/usr/local/bin/m</span>ongo
+lrwxrwxrwx. <span class="number">1</span> root root <span class="number">19</span> May <span class="number">6</span> <span class="number">11</span>:<span class="number">59</span> <span class="regexp">/usr/local/bin/mongo -&gt; /root/mongodb/m</span>ongo
+[zhaishidan<span class="property">@molinux</span> ~]$ <span class="regexp">/usr/local/bin/m</span>ongo 
+-bash: <span class="regexp">/usr/local/bin/m</span>ongo: Permission denied
+</pre></td></tr></table></figure>
+
+<h2>解决方案</h2>
+<p>软链接的文件权限并不代表真实文件的权限，查看/root目录权限如下：</p>
+<p><figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="comment">dr</span>-<span class="comment">xr</span>-<span class="comment">x</span>-<span class="literal">-</span><span class="literal">-</span><span class="string">.</span>  <span class="comment">25</span> <span class="comment">root</span> <span class="comment">root</span>  <span class="comment">4096</span> <span class="comment">May</span>  <span class="comment">6</span> <span class="comment">13:43</span> <span class="comment">root
+</pre></td></tr></table></figure>
+可知其他用户没有对/root目录的访问权限，自然也就不能执行其中的程序。</p>
+<p>解决方法是：将程序调整到<code>/usr/local/bin</code>目录下，就可以了。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/学习/">学习</a>, <a href="/categories/学习/问题修复/">问题修复</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/linux/">linux</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    <!-- JiaThis Button BEGIN -->
+    <ul class="tag_box jiathis_style">
+      <a class="jiathis_button_tools_1"></a>
+      <a class="jiathis_button_tools_2"></a>
+      <a class="jiathis_button_tools_3"></a>
+      <a class="jiathis_button_tools_4"></a>
+      <a href="http://www.jiathis.com/share?uid=1715390" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+      <a class="jiathis_counter_style"></a>
+    </ul>
+    <script type="text/javascript">
+    var jiathis_config = {data_track_clickback:'true'};
+    </script>
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1347364934817650" charset="utf-8"></script>
+    <!-- JiaThis Button END -->
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <!-- UY BEGIN -->
+	<div id="uyan_frame"></div>
+	<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1715390" async=""></script>
+	<!-- UY END -->
+</section>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form id="search" class="pull-right" enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse" target="_blank">
+    <input type="search" name="q" results="0" placeholder="搜索"/>
+    <input type="hidden" name="cx" value="010188267663376520215:afr8qibwduq"/>
+    <input type="hidden" name="ie" value="UTF-8"/>
+    
+    <input name="siteurl" type="hidden" value="blog.zhaishidan.cn"><input name="ref" type="hidden" value="blog.zhaishidan.cn"><input name="ss" type="hidden" value="">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/人文思考/">人文思考</a><small>1</small></li>
+  
+    <li><a href="/categories/学习/">学习</a><small>20</small></li>
+  
+    <li><a href="/categories/工作/">工作</a><small>1</small></li>
+  
+    <li><a href="/categories/工具/">工具</a><small>4</small></li>
+  
+    <li><a href="/categories/学习/置顶/">置顶</a><small>2</small></li>
+  
+    <li><a href="/categories/读书笔记/">读书笔记</a><small>5</small></li>
+  
+    <li><a href="/categories/问题修复/">问题修复</a><small>13</small></li>
+  
+    <li><a href="/categories/学习/问题修复/">问题修复</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/C%26C%2B%2B/" style="font-size: 10.00px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 18.75px;">C++</a><a href="/tags/C语言/" style="font-size: 10.94px;">C语言</a><a href="/tags/Eclipse/" style="font-size: 10.31px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 11.25px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.69px;">Linux</a><a href="/tags/Redis/" style="font-size: 17.19px;">Redis</a><a href="/tags/Redmine/" style="font-size: 11.56px;">Redmine</a><a href="/tags/SQL/" style="font-size: 15.63px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 14.38px;">SQLServer</a><a href="/tags/TeamViewer/" style="font-size: 17.81px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 11.88px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 12.19px;">WPF</a><a href="/tags/gdb/" style="font-size: 13.75px;">gdb</a><a href="/tags/git/" style="font-size: 14.69px;">git</a><a href="/tags/hexo/" style="font-size: 13.44px;">hexo</a><a href="/tags/jQuery/" style="font-size: 10.63px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 16.88px;">jekyll</a><a href="/tags/js/" style="font-size: 16.56px;">js</a><a href="/tags/linux/" style="font-size: 18.13px;">linux</a><a href="/tags/log4net/" style="font-size: 12.81px;">log4net</a><a href="/tags/pip/" style="font-size: 14.06px;">pip</a><a href="/tags/python/" style="font-size: 15.00px;">python</a><a href="/tags/sqlite/" style="font-size: 15.94px;">sqlite</a><a href="/tags/vi/" style="font-size: 15.31px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.38px;">代码大全</a><a href="/tags/多线程/" style="font-size: 12.50px;">多线程</a><a href="/tags/工作/" style="font-size: 18.44px;">工作</a><a href="/tags/方法论/" style="font-size: 16.25px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 13.13px;">正则表达式</a><a href="/tags/游戏引擎/" style="font-size: 17.50px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 19.06px;">项目管理</a>
+  </div>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新博文</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2013/05/06/use-lambda-in-generic-class/">C#在泛型类中，通过表达式树构造lambda表达式</a>
+      </li>
+    
+      <li>
+        <a href="/2013/05/06/cdn/">内容分发网络</a>
+      </li>
+    
+      <li>
+        <a href="/2013/05/06/sdn-and-openflow/">SDN和OpenFlow学习</a>
+      </li>
+    
+      <li>
+        <a href="/2013/05/06/linux-permission-denied/">linux permission denied的奇怪问题</a>
+      </li>
+    
+      <li>
+        <a href="/2013/05/05/csharp-handle-close-event/">C#处理控制台关闭事件</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  <div class="widget twitter">
+  <h3 class="title">新浪微博</h3>
+  <div class="entry">
+	  <iframe id="sina_widget_2884160830" style="width:100%; height:330px;" frameborder="0" scrolling="no" src="http://v.t.sina.com.cn/widget/widget_blog.php?uid=2884160830&height=330&skin=wd_01&showpic=1"></iframe>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 StanZhai 翟士丹
+  
+  <script src="http://s14.cnzz.com/stat.php?id=5017720&web_id=5017720&show=pic" language="JavaScript"></script>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

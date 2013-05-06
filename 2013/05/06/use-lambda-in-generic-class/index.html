@@ -1,0 +1,307 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C#在泛型类中，通过表达式树构造lambda表达式 | StanZhai::Blog</title>
+  <meta name="author" content="StanZhai 翟士丹">
+  
+  <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="C#在泛型类中，通过表达式树构造lambda表达式"/>
+  <meta property="og:site_name" content="StanZhai::Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="StanZhai::Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">StanZhai::Blog</a></h1>
+  <h2><a href="/">好记性不如烂键盘！</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="https://github.com/stanzhai">GitHub</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-06T13:18:01.000Z"><a href="/2013/05/06/use-lambda-in-generic-class/">2013/5/6</a></time>
+      
+      
+  
+    <h1 class="title">C#在泛型类中，通过表达式树构造lambda表达式</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>场景</h2>
+<p>最近对爬虫的数据库架构做调整，需要将数据迁移到MongoDB上去，需要重新实现一个针对MongoDB的Dao泛型类，好吧，动手开工，当实现删除操作的时候问题来了。</p>
+<a name="more"></a>
+
+<p>我们的删除操作定义如下：<code>void Delete(TEntity entity)</code>。TEntity是我们的泛型类。</p>
+<p>而MongoDB官方驱动自带的删除操作是这样的：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="comment">// 假设数据模型为已定义的Article</span>
+var query = Query&lt;Article&gt;<span class="variable">.EQ</span>(t =&gt; t<span class="variable">.Id</span>, <span class="keyword">id</span>);
+coll<span class="variable">.Remove</span>(query);
+</pre></td></tr></table></figure>
+
+<p>Dao操作的接口是不能修改的，这就要求我们必须实现以下操作：</p>
+<ol>
+<li>获取entity的Id值</li>
+<li>构造lambda表达式用于获取Id属性</li>
+</ol>
+<h2>实现</h2>
+<p>对于第1个好办，直接通过反射拿就可以了，至于第2个构造lambda表达式却不知该如何下手了。</p>
+<p>在网上查资料了解到<code>C# Lambda表达式树允许我们像处理数据（比如读取，修改）一样来处理Lambda表达式。</code>。这就有方向了，研究了一下表达式树的相关知识，历经坎坷终于将其实现。</p>
+<p>我用到的lambda表达式比较简单，也容易构造，代码中看注释应该就明白了，代码：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+</pre></td><td class="code"><pre><span class="comment"><span class="xmlDocTag">///</span> &lt;summary&gt;</span>
+<span class="comment"><span class="xmlDocTag">///</span> 因为使用的Mongodb，每个数据模型必定包含Id属性，通过Id属性来删除实体</span>
+<span class="comment"><span class="xmlDocTag">///</span> &lt;/summary&gt;</span>
+<span class="comment"><span class="xmlDocTag">///</span> &lt;param name="entity"&gt;&lt;/param&gt;</span>
+<span class="keyword">public</span> <span class="keyword">void</span> Delete(TEntity entity)
+{
+    <span class="keyword">var</span> coll = _db.GetCollection&lt;TEntity&gt;(<span class="keyword">typeof</span>(TEntity).Name);
+    <span class="keyword">if</span> (entity == <span class="keyword">null</span>)
+    {
+        <span class="keyword">return</span>;
+    }
+    ObjectId id = (ObjectId)<span class="keyword">typeof</span>(TEntity).GetProperty(<span class="string">"Id"</span>).GetValue(entity, <span class="keyword">null</span>);
+
+    <span class="comment">// 通过表达式树构造lambda表达式{t =&gt; t.Id}</span>
+    <span class="comment">// 构造调用目标t</span>
+    <span class="keyword">var</span> target = Expression.Parameter(<span class="keyword">typeof</span>(TEntity), <span class="string">"t"</span>);
+    <span class="comment">// 构造对t的属性Id的表达式</span>
+    MemberExpression bodyExp = Expression.Property(
+        target,
+        <span class="string">"Id"</span>);
+
+    <span class="comment">// 构造完整的lambda表达式</span>
+    Expression&lt;Func&lt;TEntity, ObjectId&gt;&gt; selector =
+        Expression.Lambda&lt;Func&lt;TEntity, ObjectId&gt;&gt;(bodyExp, <span class="keyword">new</span> [] { target });
+
+    <span class="comment">// 使用泛型前的语句： Query&lt;Article&gt;.EQ(t =&gt; t.Id, id);</span>
+    <span class="keyword">var</span> query = Query&lt;TEntity&gt;.EQ(selector, id);
+    coll.Remove(query);
+}
+</pre></td></tr></table></figure>
+
+<h2>参考资料</h2>
+<ol>
+<li><a href="http://www.csharpwin.com/csharpspace/5379r5603.shtml">C# Lambda表达式树浅谈</a></li>
+<li><a href="http://www.webjx.com/aspnet/2009-04-12/11231.html">C#教程:lambda表达式转换成表达式树</a></li>
+</ol>
+<h2>用到的工具</h2>
+<p>之前都是直接使用lambda表示，而且用的还很Happy，今天遇到的问题，让我很傻眼，基础还得巩固啊。今天也是第一次调试lambda表达式，用到了<a href="http://exprtreevisualizer.codeplex.com/releases?ReleaseId=88943">Expression Tree Visualizer for VS 2010</a>这个小工具。在项目调试过程中可以比较直观的查看编译好的lambda表达式。</p>
+<p>安装和使用方法，请参见:<a href="http://zhangyue.info/?p=351">在Visual Studio 2010设置Expression Tree Visualizer</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/学习/">学习</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    <!-- JiaThis Button BEGIN -->
+    <ul class="tag_box jiathis_style">
+      <a class="jiathis_button_tools_1"></a>
+      <a class="jiathis_button_tools_2"></a>
+      <a class="jiathis_button_tools_3"></a>
+      <a class="jiathis_button_tools_4"></a>
+      <a href="http://www.jiathis.com/share?uid=1715390" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+      <a class="jiathis_counter_style"></a>
+    </ul>
+    <script type="text/javascript">
+    var jiathis_config = {data_track_clickback:'true'};
+    </script>
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1347364934817650" charset="utf-8"></script>
+    <!-- JiaThis Button END -->
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <!-- UY BEGIN -->
+	<div id="uyan_frame"></div>
+	<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1715390" async=""></script>
+	<!-- UY END -->
+</section>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form id="search" class="pull-right" enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse" target="_blank">
+    <input type="search" name="q" results="0" placeholder="搜索"/>
+    <input type="hidden" name="cx" value="010188267663376520215:afr8qibwduq"/>
+    <input type="hidden" name="ie" value="UTF-8"/>
+    
+    <input name="siteurl" type="hidden" value="blog.zhaishidan.cn"><input name="ref" type="hidden" value="blog.zhaishidan.cn"><input name="ss" type="hidden" value="">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/人文思考/">人文思考</a><small>1</small></li>
+  
+    <li><a href="/categories/学习/">学习</a><small>20</small></li>
+  
+    <li><a href="/categories/工作/">工作</a><small>1</small></li>
+  
+    <li><a href="/categories/工具/">工具</a><small>4</small></li>
+  
+    <li><a href="/categories/学习/置顶/">置顶</a><small>2</small></li>
+  
+    <li><a href="/categories/读书笔记/">读书笔记</a><small>5</small></li>
+  
+    <li><a href="/categories/问题修复/">问题修复</a><small>13</small></li>
+  
+    <li><a href="/categories/学习/问题修复/">问题修复</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/C%26C%2B%2B/" style="font-size: 10.00px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 18.75px;">C++</a><a href="/tags/C语言/" style="font-size: 10.94px;">C语言</a><a href="/tags/Eclipse/" style="font-size: 10.31px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 11.25px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.69px;">Linux</a><a href="/tags/Redis/" style="font-size: 17.19px;">Redis</a><a href="/tags/Redmine/" style="font-size: 11.56px;">Redmine</a><a href="/tags/SQL/" style="font-size: 15.63px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 14.38px;">SQLServer</a><a href="/tags/TeamViewer/" style="font-size: 17.81px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 11.88px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 12.19px;">WPF</a><a href="/tags/gdb/" style="font-size: 13.75px;">gdb</a><a href="/tags/git/" style="font-size: 14.69px;">git</a><a href="/tags/hexo/" style="font-size: 13.44px;">hexo</a><a href="/tags/jQuery/" style="font-size: 10.63px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 16.88px;">jekyll</a><a href="/tags/js/" style="font-size: 16.56px;">js</a><a href="/tags/linux/" style="font-size: 18.13px;">linux</a><a href="/tags/log4net/" style="font-size: 12.81px;">log4net</a><a href="/tags/pip/" style="font-size: 14.06px;">pip</a><a href="/tags/python/" style="font-size: 15.00px;">python</a><a href="/tags/sqlite/" style="font-size: 15.94px;">sqlite</a><a href="/tags/vi/" style="font-size: 15.31px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.38px;">代码大全</a><a href="/tags/多线程/" style="font-size: 12.50px;">多线程</a><a href="/tags/工作/" style="font-size: 18.44px;">工作</a><a href="/tags/方法论/" style="font-size: 16.25px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 13.13px;">正则表达式</a><a href="/tags/游戏引擎/" style="font-size: 17.50px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 19.06px;">项目管理</a>
+  </div>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新博文</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2013/05/06/use-lambda-in-generic-class/">C#在泛型类中，通过表达式树构造lambda表达式</a>
+      </li>
+    
+      <li>
+        <a href="/2013/05/06/cdn/">内容分发网络</a>
+      </li>
+    
+      <li>
+        <a href="/2013/05/06/sdn-and-openflow/">SDN和OpenFlow学习</a>
+      </li>
+    
+      <li>
+        <a href="/2013/05/06/linux-permission-denied/">linux permission denied的奇怪问题</a>
+      </li>
+    
+      <li>
+        <a href="/2013/05/05/csharp-handle-close-event/">C#处理控制台关闭事件</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  <div class="widget twitter">
+  <h3 class="title">新浪微博</h3>
+  <div class="entry">
+	  <iframe id="sina_widget_2884160830" style="width:100%; height:330px;" frameborder="0" scrolling="no" src="http://v.t.sina.com.cn/widget/widget_blog.php?uid=2884160830&height=330&skin=wd_01&showpic=1"></iframe>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 StanZhai 翟士丹
+  
+  <script src="http://s14.cnzz.com/stat.php?id=5017720&web_id=5017720&show=pic" language="JavaScript"></script>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
