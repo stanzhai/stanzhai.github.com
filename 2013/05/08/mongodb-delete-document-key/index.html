@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>gdb | StanZhai::Blog</title>
+  <title>MongoDB 删除document中的key | StanZhai::Blog</title>
   <meta name="author" content="StanZhai 翟士丹">
   
   <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="MongoDB 删除document中的key"/>
   <meta property="og:site_name" content="StanZhai::Blog"/>
 
   
@@ -46,25 +46,105 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title tag">gdb</h2>
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-08T04:47:07.000Z"><a href="/2013/05/08/mongodb-delete-document-key/">2013/5/8</a></time>
+      
+      
+  
+    <h1 class="title">MongoDB 删除document中的key</h1>
+  
 
+    </header>
+    <div class="entry">
+      
+        <h2>需求</h2>
+<p>假设当前Document中的实体为以下形式：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>{
+  "<span class="attribute">_id</span>" : <span class="value"><span class="number">1234</span></span>,
+  "<span class="attribute">name</span>" : <span class="value"><span class="string">"Chris"</span></span>,
+  "<span class="attribute">description</span>" : <span class="value"><span class="string">"Awesome"</span>
+}</span>
+</pre></td></tr></table></figure>
 
-  <div class="archive">
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2013-04-05T00:00:00.000Z"><a href="/2013/04/05/debug-program-with-gdb/">2013/4/5</a></time>
-            
-              <h1 class="title"><a href="/2013/04/05/debug-program-with-gdb/">使用gdb调试程序</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
+<a name="more"></a>
+
+<p>需要将其调整成以下形式：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>{
+  "<span class="attribute">_id</span>" : <span class="value"><span class="number">1234</span></span>,
+  "<span class="attribute">name</span>" : <span class="value"><span class="string">"Chris"</span>
+}</span>
+</pre></td></tr></table></figure>
+
+<h2>操作方法</h2>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">db</span><span class="class">.collection_name</span><span class="class">.update</span>(<span class="rules">{ <span class="rule"><span class="attribute">_id</span>:<span class="value"> <span class="number">1234</span> }</span></span></span>, <span class="rules">{ <span class="rule">$<span class="attribute">unset </span>:<span class="value"> { description : <span class="number">1</span>}</span></span></span> });
+</pre></td></tr></table></figure>
+update方法默认情况下只会更新第一个匹配，如果对所有符合条件的记录做修改，则需要使用以下方法：
+
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">db</span><span class="class">.collection_name</span><span class="class">.update</span>(<span class="rules">{<span class="rule">}</span></span>, <span class="rules">{ <span class="rule">$<span class="attribute">unset </span>:<span class="value"> { description : <span class="number">1</span>}</span></span></span> }, <span class="tag">false</span>, <span class="tag">true</span>);
+</pre></td></tr></table></figure>
+
+<p>其中第三个参数为upsert,这个参数是个布尔类型，默认是false。当它为true的时候，update方法会首先查找与第一个参数匹配的记录，在用第二个参数更新之，如果找不到与第一个参数匹配的的记录，就插入一条（upsert 的名字也很有趣是个混合体：update+insert）。</p>
+<p>第4个参数设置为true表示更新所有符合条件的记录。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/学习/">学习</a>
   </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    <!-- JiaThis Button BEGIN -->
+    <ul class="tag_box jiathis_style">
+      <a class="jiathis_button_tools_1"></a>
+      <a class="jiathis_button_tools_2"></a>
+      <a class="jiathis_button_tools_3"></a>
+      <a class="jiathis_button_tools_4"></a>
+      <a href="http://www.jiathis.com/share?uid=1715390" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+      <a class="jiathis_counter_style"></a>
+    </ul>
+    <script type="text/javascript">
+    var jiathis_config = {data_track_clickback:'true'};
+    </script>
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1347364934817650" charset="utf-8"></script>
+    <!-- JiaThis Button END -->
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <!-- UY BEGIN -->
+	<div id="uyan_frame"></div>
+	<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1715390" async=""></script>
+	<!-- UY END -->
+</section>
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
