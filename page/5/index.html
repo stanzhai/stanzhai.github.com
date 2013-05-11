@@ -53,19 +53,19 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-05T00:00:00.000Z"><a href="/2013/04/05/debug-program-with-gdb/">2013/4/5</a></time>
+        <time datetime="2013-04-08T00:00:00.000Z"><a href="/2013/04/08/about-product/">2013/4/8</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/05/debug-program-with-gdb/">使用gdb调试程序</a></h1>
+    <h1 class="title"><a href="/2013/04/08/about-product/">做个懂产品的程序员</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h2>前期准备</h2>
-<p>安装gcc和gdb（废话）.</p>
-<p>使用gcc编译程序时需要指定-g参数生成调试信息。</p>
+        <h2>程序员和产品经理之间的关系</h2>
+<p>在很多公司里，程序员和产品经理是“铁路公安各管一段”，程序员只管实施，根本不关心也不用关心产品给谁用，怎么用；而产品经理只管规划，根本不关心技术上能不能实现，实现代价多大。</p>
+<p>程序员就像瞎子，只会走路不会看路；产品经理就像跛子，只会看路不会走路。所谓分工协作，就是跛子指挥瞎子，大家一起逃命。</p>
 <p>
       
     </div>
@@ -73,7 +73,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/04/05/debug-program-with-gdb/#more" class="more-link">阅读全文</a>
+            <a href="/2013/04/08/about-product/#more" class="more-link">阅读全文</a>
           </div>
         
         
@@ -91,19 +91,57 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-05T00:00:00.000Z"><a href="/2013/04/05/error-while-loading-shared-libraries/">2013/4/5</a></time>
+        <time datetime="2013-04-08T00:00:00.000Z"><a href="/2013/04/08/use-js-replace-string/">2013/4/8</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/04/05/error-while-loading-shared-libraries/">Linux下，解决error while loading shared libraries</a></h1>
+    <h1 class="title"><a href="/2013/04/08/use-js-replace-string/">使用js替换字符串</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h2>问题描述</h2>
-<p>最近开发Linux应用，启动程序时提示：error while loading shared libraries: libhiredis.so.0.10: cannot open shared</p>
-<p>hiredis是我编译好的redis客户端连接驱动，在/usr/local/lib/目录中存在libhiredis相关的so文件，推测应该是so目录缺少了/usr/local/lib这个目录。</p>
+        <h2>使用js替换字符需要注意的问题</h2>
+<p>js中使用replace方法替换字符串是，如果使用这种方式：<code>str.replace(&#39;a&#39;, &#39;b&#39;)</code>那么str中只有第一个a会被替换成b。</p>
+<p>还需要注意的是replace方法不会修改str中的原始内容，它会返回替换后的结果。
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/08/use-js-replace-string/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-07T00:00:00.000Z"><a href="/2013/04/07/redis-db/">2013/4/7</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/07/redis-db/">redis中数据库相关概念</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>相关概念</h2>
+<p>Redis对于新的连接，默认使用数据库0，也就是编号为0的数据库，Redis中的数据库都是用数据做编号的。</p>
+<h2>如何创建或切换到其他数据库</h2>
 <p>
       
     </div>
@@ -111,7 +149,47 @@
       
         
           <div class="alignleft">
-            <a href="/2013/04/05/error-while-loading-shared-libraries/#more" class="more-link">阅读全文</a>
+            <a href="/2013/04/07/redis-db/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-04-06T00:00:00.000Z"><a href="/2013/04/06/linux-vi-settings/">2013/4/6</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/04/06/linux-vi-settings/">Linux vi开发配置</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>开发必备插件</h2>
+<ol>
+<li>ctags:为项目生成索引，方便阅读代码时的定位，<code>ctags -R</code>生成索引，<code>Ctrl + ]</code>定位到函数声明处，<code>Ctrl + o</code>返回。</li>
+<li>taglist：借助ctags，现实代码中的宏定义，变量和函数，阅读一份代码就比较直观了。（在taglist窗口中通过Ctrl+w+w切换代码窗口）.</li>
+<li>Autocomplpop:自动完成插件，编码时自动出现代码提示，下载插件后直接解压到~/.vim文件夹下就可以使用了。</li>
+<li>CppCompleete：为C和C++优化的代码提示插件。
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/04/06/linux-vi-settings/#more" class="more-link">阅读全文</a>
           </div>
         
         
@@ -161,83 +239,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-05T00:00:00.000Z"><a href="/2013/04/05/git-pull-error/">2013/4/5</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/05/git-pull-error/">解决git pull更新版本库失败的问题</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2>错误描述</h2>
-<p>今天使用git pull来更新版本库，提示如下错误：</p>
-<pre><code><span class="title">git</span> <span class="built_in">error</span>: unable to resolve reference refs/remotes/origin/master:
-</code></pre>
-<p>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/04/05/git-pull-error/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-05T00:00:00.000Z"><a href="/2013/04/05/run-teamviewer8-error-on-centos/">2013/4/5</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/05/run-teamviewer8-error-on-centos/">解决在CentOS中运行TeamViewer8报错的问题</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2>错误信息</h2>
-<p><img src="/images/teamviewer_error.png" alt=""></p>
-<h2>解决方案</h2>
-<p>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/04/05/run-teamviewer8-error-on-centos/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
 
 <nav id="pagination">
   
@@ -268,7 +269,7 @@
   
     <li><a href="/categories/学习/">学习</a><small>22</small></li>
   
-    <li><a href="/categories/工作/">工作</a><small>1</small></li>
+    <li><a href="/categories/工作/">工作</a><small>6</small></li>
   
     <li><a href="/categories/工具/">工具</a><small>4</small></li>
   
@@ -276,7 +277,9 @@
   
     <li><a href="/categories/读书笔记/">读书笔记</a><small>5</small></li>
   
-    <li><a href="/categories/问题修复/">问题修复</a><small>15</small></li>
+    <li><a href="/categories/问题修复/">问题修复</a><small>14</small></li>
+  
+    <li><a href="/categories/学习/问题修复/">问题修复</a><small>1</small></li>
   
     <li><a href="/categories/学习/项目管理/">项目管理</a><small>1</small></li>
   
@@ -288,7 +291,7 @@
 <div class="widget tagcloud">
   <h3 class="title">标签云</h3>
   <div class="entry">
-    <a href="/tags/C%26C%2B%2B/" style="font-size: 17.81px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 18.44px;">C++</a><a href="/tags/C语言/" style="font-size: 18.13px;">C语言</a><a href="/tags/Eclipse/" style="font-size: 10.63px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 16.25px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.69px;">Linux</a><a href="/tags/Redis/" style="font-size: 15.94px;">Redis</a><a href="/tags/Redmine/" style="font-size: 14.69px;">Redmine</a><a href="/tags/SQL/" style="font-size: 16.88px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 13.44px;">SQLServer</a><a href="/tags/TeamViewer/" style="font-size: 11.25px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 17.50px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 13.13px;">WPF</a><a href="/tags/gdb/" style="font-size: 12.50px;">gdb</a><a href="/tags/git/" style="font-size: 12.81px;">git</a><a href="/tags/hexo/" style="font-size: 16.56px;">hexo</a><a href="/tags/jQuery/" style="font-size: 15.00px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 13.75px;">jekyll</a><a href="/tags/js/" style="font-size: 17.19px;">js</a><a href="/tags/linux/" style="font-size: 10.94px;">linux</a><a href="/tags/log4net/" style="font-size: 10.00px;">log4net</a><a href="/tags/pip/" style="font-size: 14.38px;">pip</a><a href="/tags/python/" style="font-size: 14.06px;">python</a><a href="/tags/sqlite/" style="font-size: 15.31px;">sqlite</a><a href="/tags/vi/" style="font-size: 11.56px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.38px;">代码大全</a><a href="/tags/多线程/" style="font-size: 12.19px;">多线程</a><a href="/tags/工作/" style="font-size: 19.06px;">工作</a><a href="/tags/方法论/" style="font-size: 10.31px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 15.63px;">正则表达式</a><a href="/tags/游戏引擎/" style="font-size: 11.88px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 18.75px;">项目管理</a>
+    <a href="/tags/C%26C%2B%2B/" style="font-size: 15.31px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 18.75px;">C++</a><a href="/tags/C语言/" style="font-size: 17.50px;">C语言</a><a href="/tags/Eclipse/" style="font-size: 12.19px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 14.69px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.69px;">Linux</a><a href="/tags/Redis/" style="font-size: 15.94px;">Redis</a><a href="/tags/Redmine/" style="font-size: 13.44px;">Redmine</a><a href="/tags/SQL/" style="font-size: 15.63px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 10.94px;">SQLServer</a><a href="/tags/TeamViewer/" style="font-size: 16.56px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 18.13px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 14.38px;">WPF</a><a href="/tags/gdb/" style="font-size: 10.63px;">gdb</a><a href="/tags/git/" style="font-size: 12.50px;">git</a><a href="/tags/hexo/" style="font-size: 13.75px;">hexo</a><a href="/tags/jQuery/" style="font-size: 11.25px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 10.00px;">jekyll</a><a href="/tags/js/" style="font-size: 17.81px;">js</a><a href="/tags/linux/" style="font-size: 10.31px;">linux</a><a href="/tags/log4net/" style="font-size: 11.56px;">log4net</a><a href="/tags/pip/" style="font-size: 13.13px;">pip</a><a href="/tags/python/" style="font-size: 12.81px;">python</a><a href="/tags/sqlite/" style="font-size: 16.88px;">sqlite</a><a href="/tags/vi/" style="font-size: 15.00px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.38px;">代码大全</a><a href="/tags/多线程/" style="font-size: 14.06px;">多线程</a><a href="/tags/工作/" style="font-size: 19.06px;">工作</a><a href="/tags/方法论/" style="font-size: 17.19px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 16.25px;">正则表达式</a><a href="/tags/游戏引擎/" style="font-size: 11.88px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 18.44px;">项目管理</a>
   </div>
 </div>
 
@@ -299,23 +302,23 @@
   <ul class="entry">
     
       <li>
-        <a href="/2013/05/08/mongodb-delete-document-key/">MongoDB 删除document中的key</a>
+        <a href="/2013/05/11/excellence-and-normal/">卓越和普通</a>
       </li>
     
       <li>
-        <a href="/2013/05/07/mstsc-limit/">Win2003,解决远程桌面“终端服务器超出了最大允许连接数”</a>
+        <a href="/2013/05/11/da-gong-si-you-du/">大公司有毒</a>
       </li>
     
       <li>
-        <a href="/2013/05/07/blogml/">BlogML</a>
+        <a href="/2013/05/11/work-but-not-for-money/">不为钱工作，然后去挣钱</a>
       </li>
     
       <li>
-        <a href="/2013/05/07/cmmi/">CMMI-软件能力成熟度模型集成</a>
+        <a href="/2013/05/11/learn-programming/">每个人都应该学习编程</a>
       </li>
     
       <li>
-        <a href="/2013/05/06/use-lambda-in-generic-class/">C#在泛型类中，通过表达式树构造lambda表达式</a>
+        <a href="/2013/05/11/folklore/">陈规陋习</a>
       </li>
     
   </ul>
