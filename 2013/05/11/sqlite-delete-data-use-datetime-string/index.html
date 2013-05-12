@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>第 9 页 | 文章：2013 | StanZhai::Blog</title>
+  <title>sqlite按照日期删除数据是需要注意的地方 | StanZhai::Blog</title>
   <meta name="author" content="StanZhai 翟士丹">
   
   <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="sqlite按照日期删除数据是需要注意的地方"/>
   <meta property="og:site_name" content="StanZhai::Blog"/>
 
   
@@ -48,41 +48,62 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title">2013</h2>
-
-
-  
-    <article class="post">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-03-17T00:00:00.000Z"><a href="/2013/03/17/eclipse-error/">2013/3/17</a></time>
+        <time datetime="2013-05-11T15:44:49.000Z"><a href="/2013/05/11/sqlite-delete-data-use-datetime-string/">2013/5/11</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/03/17/eclipse-error/">Eclipse:Failed to load the JNI shared library</a></h1>
+    <h1 class="title">sqlite按照日期删除数据是需要注意的地方</h1>
   
 
     </header>
     <div class="entry">
       
-        <h2>问题描述</h2>
-<p>启动Eclipse出现如下错误：</p>
-<p><img src="/images/eclipse_error.png" alt="Eclipse error">
+        <h2>注意点</h2>
+<p>在sqlite中按照日期删除数据时，日期格式必须是yyyy-MM-dd HH:mm:ss这种格式的。</p>
+<p>如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>var conn = new SQLiteConnection("data.db");
+conn.Execute("<span class="operator"><span class="keyword">delete</span> <span class="keyword">from</span> bbs <span class="keyword">where</span> publish &gt;</span>= ?", new[] { "2013-05-10" });
+</pre></td></tr></table></figure>
+
+<p>其中日期字符串不能写成&quot;2013-5-10&quot;，sqlite中和日期相关的其他操作同理。</p>
 
       
     </div>
     <footer>
       
         
-          <div class="alignleft">
-            <a href="/2013/03/17/eclipse-error/#more" class="more-link">阅读全文</a>
-          </div>
+  
+  <div class="categories">
+    <a href="/categories/问题修复/">问题修复</a>
+  </div>
+
         
         
+  <div class="addthis addthis_toolbox addthis_default_style">
+    <!-- JiaThis Button BEGIN -->
+    <ul class="tag_box jiathis_style">
+      <a class="jiathis_button_tools_1"></a>
+      <a class="jiathis_button_tools_2"></a>
+      <a class="jiathis_button_tools_3"></a>
+      <a class="jiathis_button_tools_4"></a>
+      <a href="http://www.jiathis.com/share?uid=1715390" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+      <a class="jiathis_counter_style"></a>
+    </ul>
+    <script type="text/javascript">
+    var jiathis_config = {data_track_clickback:'true'};
+    </script>
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1347364934817650" charset="utf-8"></script>
+    <!-- JiaThis Button END -->
+  </div>
+
       
       <div class="clearfix"></div>
     </footer>
@@ -90,175 +111,13 @@
 </article>
 
 
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-03-14T00:00:00.000Z"><a href="/2013/03/14/regex/">2013/3/14</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/03/14/regex/">正则表达式分组，排除字符</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2>问题</h2>
-<p>今天同事处理需求，问到我以下问题：</p>
-<pre><code><span class="setting">date=<span class="value"><span class="number">2012</span>-<span class="number">12</span>-<span class="number">14</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span>;ip=<span class="number">1.1</span>.<span class="number">1.1</span>;cn=abcdef</span></span>
-</code></pre>
-<p>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/03/14/regex/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-03-14T00:00:00.000Z"><a href="/2013/03/14/importance-of-prerequisites/">2013/3/14</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/03/14/importance-of-prerequisites/">软件开发活动中前期准备的重要性</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1>前期准备的重要性</h1>
-<ul>
-<li>目标：降低风险</li>
-<li>一个好的项目规划者能够尽早的将风险清理掉，以使项目的大部分工作能够尽可能平稳的进行。</li>
-</ul>
-<blockquote>
-<blockquote>
-<p>有时用户不完全确定自己想要的东西，因此花时间去找出他们真正想要的东西，至少比“先做出一个错误的东西，然后扔掉，重新再来”的成本要低廉。
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/03/14/importance-of-prerequisites/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-03-11T00:00:00.000Z"><a href="/2013/03/11/chosen/">2013/3/11</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/03/11/chosen/">酷酷的jQuery选择框插件——Chosen</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>Chosen Plugin 是一个 jQuery 插件，用来将网页中的下拉框进行功能扩展和美化。可实现对下拉框的搜索，多个标签编辑等功能。</p>
-<p><img src="http://static.oschina.net/uploads/img/201203/28114015_MgCy.jpg" alt=""></p>
-<p>还在使用常常的选择框吗，赶紧替换一下吧<a href="http://harvesthq.github.com/chosen/">http://harvesthq.github.com/chosen/</a>。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/03/11/chosen/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-03-11T00:00:00.000Z"><a href="/2013/03/11/learn-sql/">2013/3/11</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/03/11/learn-sql/">分析人员有必要学习SQL</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>现在分析人员提出数据需求的模式，大部分是，分析人员给开发人员提出数据需求，开发人员按照需求开发，并生成相应的报表给分析人员，这期间如果是需求沟通环境出现偏差，那么开发就需要返工，对于双方的时间都是个浪费。</p>
-<p>如果为分析人员简单的进行SQL培训，当有数据查询需求时，他们可直接进行数据查询，这样也为开发人员空出更多时间去关注更多更重要的数据处理任务。</p>
-<p>随着Hadoop的流行，大数据的到来，现在的关系型数据库面对海量数据处理已经显得无力，提前做好Hadoop，Hive，Hql的知识储备则是非常有必要的。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/03/11/learn-sql/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-
-  <nav id="pagination">
-  
-    <a href="/archives/2013/page/8/" class="alignleft prev">上一页</a>
-  
-  
-    <a href="/archives/2013/page/10/" class="alignright next">下一页</a>
-  
-  <div class="clearfix"></div>
-</nav>
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <!-- UY BEGIN -->
+	<div id="uyan_frame"></div>
+	<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1715390" async=""></script>
+	<!-- UY END -->
+</section>
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
