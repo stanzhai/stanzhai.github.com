@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>C#处理控制台关闭事件 | StanZhai::Blog</title>
+  <title>MongoDB | StanZhai::Blog</title>
   <meta name="author" content="StanZhai 翟士丹">
   
   <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="C#处理控制台关闭事件"/>
+  
   <meta property="og:site_name" content="StanZhai::Blog"/>
 
   
@@ -48,138 +48,37 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-05T07:49:13.000Z"><a href="/2013/05/05/csharp-handle-close-event/">2013/5/5</a></time>
-      
-      
-  
-    <h1 class="title">C#处理控制台关闭事件</h1>
-  
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title tag">MongoDB</h2>
 
-    </header>
-    <div class="entry">
-      
-        <h2>应用场景</h2>
-<p>我们开发的控制台应用，在运行阶段很有可能被用户Ctrl+C终止或是被用户直接关闭。如果我们不希望用户通过Ctrl+C终止我们的程序，就需要对Ctrl+C或关闭事件作处理。</p>
-<a name="more"></a>
 
-<h2>处理方法</h2>
-<p>在.net平台下Console类有个CancelKeyPress事件可以处理Ctrl+C，不过对于直接关闭控制台应用，这种处理就无能为力了。</p>
-<p>不过Windows API中有个SetConsoleCtrlHandler函数可以处理这两种关闭事件。</p>
-<p>C#处理代码如下：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-</pre></td><td class="code"><pre><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Program</span>
-{</span>
-    <span class="keyword">public</span> <span class="class"><span class="keyword">delegate</span> <span class="title">bool</span> <span class="title">ControlCtrlDelegate</span>(<span class="title">int</span> <span class="title">CtrlType</span>);
-    [<span class="title">DllImport</span>("<span class="title">kernel32</span>.<span class="title">dll</span>")]
-    <span class="title">private</span> <span class="title">static</span> <span class="title">extern</span> <span class="title">bool</span> <span class="title">SetConsoleCtrlHandler</span>(<span class="title">ControlCtrlDelegate</span> <span class="title">HandlerRoutine</span>, <span class="title">bool</span> <span class="title">Add</span>);
-    <span class="title">private</span> <span class="title">static</span> <span class="title">ControlCtrlDelegate</span> <span class="title">cancelHandler</span> = <span class="title">new</span> <span class="title">ControlCtrlDelegate</span>(<span class="title">HandlerRoutine</span>);
-
-    <span class="title">public</span> <span class="title">static</span> <span class="title">bool</span> <span class="title">HandlerRoutine</span>(<span class="title">int</span> <span class="title">CtrlType</span>)
-    {</span>
-        <span class="keyword">switch</span> (CtrlType)
-        {
-            <span class="keyword">case</span> <span class="number">0</span>:
-                Console.WriteLine(<span class="string">"0工具被强制关闭"</span>); <span class="comment">//Ctrl+C关闭  </span>
-                <span class="keyword">break</span>;
-            <span class="keyword">case</span> <span class="number">2</span>:
-                Console.WriteLine(<span class="string">"2工具被强制关闭"</span>);<span class="comment">//按控制台关闭按钮关闭  </span>
-                <span class="keyword">break</span>;
-        }
-        Console.ReadLine();
-        <span class="keyword">return</span> <span class="literal">false</span>;
-    }  
-
-    <span class="comment">/// &lt;summary&gt;</span>
-    <span class="comment">/// 应用程序的主入口点。</span>
-    <span class="comment">/// &lt;/summary&gt;</span>
-    [STAThread]
-    <span class="keyword">static</span> <span class="keyword">void</span> Main(<span class="keyword">string</span>[] args)
-    {
-        SetConsoleCtrlHandler(cancelHandler, <span class="literal">true</span>);
-        Console.ReadLine();
-    }
-}
-</pre></td></tr></table></figure>
-      
-    </div>
-    <footer>
-      
-        
-  
-  <div class="categories">
-    <a href="/categories/学习/">学习</a>
+  <div class="archive">
+    
+      <article class="post">
+        <div class="post-content">
+          <header>
+            <div class="icon"></div>
+            <time datetime="2013-05-09T08:38:20.000Z"><a href="/2013/05/09/mongodb-datetime/">2013/5/9</a></time>
+            
+              <h1 class="title"><a href="/2013/05/09/mongodb-datetime/">MongoDB中日期的时区问题</a></h1>
+            
+          </header>
+        </div>
+      </article>
+    
+      <article class="post">
+        <div class="post-content">
+          <header>
+            <div class="icon"></div>
+            <time datetime="2013-05-08T05:47:07.000Z"><a href="/2013/05/08/mongodb-delete-document-key/">2013/5/8</a></time>
+            
+              <h1 class="title"><a href="/2013/05/08/mongodb-delete-document-key/">MongoDB 删除document中的key</a></h1>
+            
+          </header>
+        </div>
+      </article>
+    
   </div>
-
-        
-        
-  <div class="addthis addthis_toolbox addthis_default_style">
-    <!-- JiaThis Button BEGIN -->
-    <ul class="tag_box jiathis_style">
-      <a class="jiathis_button_tools_1"></a>
-      <a class="jiathis_button_tools_2"></a>
-      <a class="jiathis_button_tools_3"></a>
-      <a class="jiathis_button_tools_4"></a>
-      <a href="http://www.jiathis.com/share?uid=1715390" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
-      <a class="jiathis_counter_style"></a>
-    </ul>
-    <script type="text/javascript">
-    var jiathis_config = {data_track_clickback:'true'};
-    </script>
-    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1347364934817650" charset="utf-8"></script>
-    <!-- JiaThis Button END -->
-  </div>
-
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-<section id="comment">
-  <h1 class="title">评论</h1>
-  <!-- UY BEGIN -->
-	<div id="uyan_frame"></div>
-	<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1715390" async=""></script>
-	<!-- UY END -->
-</section>
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
