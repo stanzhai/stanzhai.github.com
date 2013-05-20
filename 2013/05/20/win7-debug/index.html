@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Linq | StanZhai::Blog</title>
+  <title>Win7_64位,通过DosBox使用debug | StanZhai::Blog</title>
   <meta name="author" content="StanZhai 翟士丹">
   
   <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="Win7_64位,通过DosBox使用debug"/>
   <meta property="og:site_name" content="StanZhai::Blog"/>
 
   
@@ -48,25 +48,85 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title tag">Linq</h2>
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-20T00:42:04.000Z"><a href="/2013/05/20/win7-debug/">2013/5/20</a></time>
+      
+      
+  
+    <h1 class="title">Win7_64位,通过DosBox使用debug</h1>
+  
 
+    </header>
+    <div class="entry">
+      
+        <p>最新学习汇编，以前接触汇编的时候用的还是XP，当时在XP下使用debug做过简单的练习，3年后，发现Win7下的debug不见了。</p>
+<p>微软在64位系统中，把16位的支持全部删除了，只能兼容32位, 微软认为64位的升级，可以把16位的历史累赘剔除，因此在Win7中也没有了debug这个命令。</p>
+<a name="more"></a>
 
-  <div class="archive">
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2013-03-27T00:00:00.000Z"><a href="/2013/03/27/linq-executecommand/">2013/3/27</a></time>
-            
-              <h1 class="title"><a href="/2013/03/27/linq-executecommand/">Linq中使用ExecuteCommand注意事项</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
+<h2>难道Win7下就不能用debug这个彪悍的命令了么？？</h2>
+<p>最近老弟也在学汇编，听他说可以用<a href="http://www.dosbox.com/download.php?main=1">DosBox</a>，到网上找了一下这个东东，发现果然OK。</p>
+<p>下载DosBox并安装。</p>
+<p>还需要下载个Win7下可用的<a href="http://u.115.com/file/b3mmegwu">debug</a>程序。</p>
+<p>假设下载的debug程序放到了D盘根目录。</p>
+<p>打开DosBox，通过一下命令使用debug：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="title">mount</span> c d:\
+c:\<span class="built_in">debug</span>.exe
+</pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/工具/">工具</a>
   </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/汇编/">汇编</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    <!-- JiaThis Button BEGIN -->
+    <ul class="tag_box jiathis_style">
+      <a class="jiathis_button_tools_1"></a>
+      <a class="jiathis_button_tools_2"></a>
+      <a class="jiathis_button_tools_3"></a>
+      <a class="jiathis_button_tools_4"></a>
+      <a href="http://www.jiathis.com/share?uid=1715390" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+      <a class="jiathis_counter_style"></a>
+    </ul>
+    <script type="text/javascript">
+    var jiathis_config = {data_track_clickback:'true'};
+    </script>
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1347364934817650" charset="utf-8"></script>
+    <!-- JiaThis Button END -->
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <!-- UY BEGIN -->
+	<div id="uyan_frame"></div>
+	<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1715390" async=""></script>
+	<!-- UY END -->
+</section>
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
