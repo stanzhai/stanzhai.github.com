@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>第 11 页 | 文章：2013 | StanZhai::Blog</title>
+  <title>扩展C#,DateTime返回和js，Date的getTime相同的值 | StanZhai::Blog</title>
   <meta name="author" content="StanZhai 翟士丹">
   
   <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="扩展C#,DateTime返回和js，Date的getTime相同的值"/>
   <meta property="og:site_name" content="StanZhai::Blog"/>
 
   
@@ -48,41 +48,93 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title">2013</h2>
-
-
-  
-    <article class="post">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-03-11T00:00:00.000Z"><a href="/2013/03/11/learn-sql/">2013/3/11</a></time>
+        <time datetime="2013-05-23T10:22:08.000Z"><a href="/2013/05/23/csharp-gettime/">2013/5/23</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/03/11/learn-sql/">分析人员有必要学习SQL</a></h1>
+    <h1 class="title">扩展C#,DateTime返回和js，Date的getTime相同的值</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>现在分析人员提出数据需求的模式，大部分是，分析人员给开发人员提出数据需求，开发人员按照需求开发，并生成相应的报表给分析人员，这期间如果是需求沟通环境出现偏差，那么开发就需要返工，对于双方的时间都是个浪费。</p>
-<p>如果为分析人员简单的进行SQL培训，当有数据查询需求时，他们可直接进行数据查询，这样也为开发人员空出更多时间去关注更多更重要的数据处理任务。</p>
-<p>随着Hadoop的流行，大数据的到来，现在的关系型数据库面对海量数据处理已经显得无力，提前做好Hadoop，Hive，Hql的知识储备则是非常有必要的。</p>
+        <p>最近做一个基于Web的实时图表，需要为前台提供时间信息，时间格式是类似这样的<code>new Date().getTime()</code>其实就是js实现的返回距 1970年1月1日之间的毫秒数的一个方法。</p>
+<p>数据是由.NET做后端提供，而.NET没有可以实现和js一样的结果的方法。所以现在只好自己实现一个。我使用了扩展方法扩展了DateTime类。具体实现如下：</p>
+<a name="more"></a>
+
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="code"><pre><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> Helpers
+{
+    <span class="comment"><span class="xmlDocTag">///</span> &lt;summary&gt;</span>
+    <span class="comment"><span class="xmlDocTag">///</span> 返回和js中Date，getTime等效的值（UTC，返回距 1970 年 1 月 1 日之间的毫秒数）</span>
+    <span class="comment"><span class="xmlDocTag">///</span> &lt;/summary&gt;</span>
+    <span class="comment"><span class="xmlDocTag">///</span> &lt;param name="dt"&gt;&lt;/param&gt;</span>
+    <span class="comment"><span class="xmlDocTag">///</span> &lt;returns&gt;&lt;/returns&gt;</span>
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> GetTime(<span class="keyword">this</span> DateTime dt)
+    {
+        <span class="keyword">long</span> lLeft = <span class="number">621355968000000000</span>;
+        <span class="keyword">long</span> tick = (dt.ToUniversalTime().Ticks - lLeft) / <span class="number">10000</span>;
+        <span class="keyword">return</span> tick;
+    }
+}
+</pre></td></tr></table></figure>
+
+<p><strong>吐槽一下</strong></p>
+<p>最近被MongoDB的时间问题给搞的头大啊，默认时区为零，js中格式化日期还不方便，与.NET交互时间格式还得统一，想吐啊……</p>
 
       
     </div>
     <footer>
       
         
-          <div class="alignleft">
-            <a href="/2013/03/11/learn-sql/#more" class="more-link">阅读全文</a>
-          </div>
+  
+  <div class="categories">
+    <a href="/categories/学习/">学习</a>
+  </div>
+
         
+  
+  <div class="tags">
+    <a href="/tags/CSharp/">CSharp</a>
+  </div>
+
         
+  <div class="addthis addthis_toolbox addthis_default_style">
+    <!-- JiaThis Button BEGIN -->
+    <ul class="tag_box jiathis_style">
+      <a class="jiathis_button_tools_1"></a>
+      <a class="jiathis_button_tools_2"></a>
+      <a class="jiathis_button_tools_3"></a>
+      <a class="jiathis_button_tools_4"></a>
+      <a href="http://www.jiathis.com/share?uid=1715390" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+      <a class="jiathis_counter_style"></a>
+    </ul>
+    <script type="text/javascript">
+    var jiathis_config = {data_track_clickback:'true'};
+    </script>
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1347364934817650" charset="utf-8"></script>
+    <!-- JiaThis Button END -->
+  </div>
+
       
       <div class="clearfix"></div>
     </footer>
@@ -90,173 +142,13 @@
 </article>
 
 
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-03-08T00:00:00.000Z"><a href="/2013/03/08/work-thinking/">2013/3/8</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/03/08/work-thinking/">工作感想</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>大陆互联网是一个赤裸裸的、弱肉强食的热带雨林，机会到处都是，但是作为掌握某个技术的开发人员，你永远只是猎物。</p>
-<p>在公司里做成大多数的事不可能因为某个人的努力、依赖某一项技术，往往靠很多人之间的协作，靠的人与人之间的沟通；因此我对自己的定位是，你要“不择手段”将上面交代的任务完成，同时让大多数参与其中的人都满意，至于使用的什么技术，真的不重要。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/03/08/work-thinking/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-03-04T00:00:00.000Z"><a href="/2013/03/04/linux-welcome/">2013/3/4</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/03/04/linux-welcome/">修改Linux，SSH登录欢迎信息</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>此处省略一万字，修改方法：</p>
-<pre><code><span class="title">vi</span> /etc/motd
-</code></pre>
-<p>使用root用户编辑上述文件，退出SSH，重新连接就可以看到新增的欢迎信息了。</p>
-<p>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/03/04/linux-welcome/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-03-01T00:00:00.000Z"><a href="/2013/03/01/disable-log4net-log/">2013/3/1</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/03/01/disable-log4net-log/">log4net屏蔽NHibernate日志</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>项目中使用了NHibernate作为数据库ORM组件，同时又使用了log4net作为日志组件。默认情况下，NHibernate会打印对数据库的操作日志，和我们自己写的日志消息混杂在一起，导致日志数量相当庞大，查看不方便。可以在log4net的配置文件中添加如下配置，来屏蔽NHibernate的日志输出：</p>
-<pre><code><span class="tag">&lt;<span class="title">logger</span> <span class="attribute">name</span>=<span class="value">"NHibernate"</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">additivity</span> <span class="attribute">value</span>=<span class="value">"false"</span> /&gt;</span>
-<span class="tag">&lt;/<span class="title">logger</span>&gt;</span>
-</code></pre>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/03/01/disable-log4net-log/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-02-28T00:00:00.000Z"><a href="/2013/02/28/sqlite-database-error/">2013/2/28</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/02/28/sqlite-database-error/">sqlite 数据库错误,Corrupt</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>最近由于程序在对sqlite数据库操作的时候频繁中止，导致操作数据表时出现如下错误：</p>
-<pre><code>[System<span class="preprocessor">.Data</span><span class="preprocessor">.SQLite</span>] ErrorCode: Corrupt
-<span class="label">ErrorMessage:</span> The database disk image is malformed
-database disk image is malformed
-</code></pre>
-<p>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/02/28/sqlite-database-error/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-
-  <nav id="pagination">
-  
-    <a href="/archives/2013/page/10/" class="alignleft prev">上一页</a>
-  
-  
-    <a href="/archives/2013/page/12/" class="alignright next">下一页</a>
-  
-  <div class="clearfix"></div>
-</nav>
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <!-- UY BEGIN -->
+	<div id="uyan_frame"></div>
+	<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1715390" async=""></script>
+	<!-- UY END -->
+</section>
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
