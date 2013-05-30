@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>将博客从jekyll迁移到了hexo | StanZhai::Blog</title>
+  <title>SQLServer使用表值参数，高性能批量插入数据 | StanZhai::Blog</title>
   <meta name="author" content="StanZhai 翟士丹">
   
   <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="将博客从jekyll迁移到了hexo"/>
+  <meta property="og:title" content="SQLServer使用表值参数，高性能批量插入数据"/>
   <meta property="og:site_name" content="StanZhai::Blog"/>
 
   
@@ -54,27 +54,22 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-04-18T10:09:01.000Z"><a href="/2013/04/18/jekyll-2-hexo/">2013/4/18</a></time>
+        <time datetime="2013-05-30T09:30:11.000Z"><a href="/2013/05/30/insert-data-into-sql-server-use-table-value/">2013/5/30</a></time>
       
       
   
-    <h1 class="title">将博客从jekyll迁移到了hexo</h1>
+    <h1 class="title">SQLServer使用表值参数，高性能批量插入数据</h1>
   
 
     </header>
     <div class="entry">
       
-        <h2>关于hexo和jekyll</h2>
-<p>hexo和jekyll一样都是个静态网站生成工具，hexo是一个台湾小伙使用nodejs开发的，jekyll则是用ruby开发，github内置了jekyll，可以直接将jekyll相关的文件提交到github，github会自动给你生成静态页面。</p>
+        <p>记得前段时间帮同事写了个解析账号并入库的小工具，来批量导入账号信息，账号量相当大，程序每读取一条记录便执行一次insert来插入数据，整整跑了一下午才把账号全部入库。</p>
 <a name="more"></a>
 
-<p>hexo由于采用nodejs开发的，因此需要在本地生成静态页面后在提交到github，不过hexo内置了<code>hexo deploy</code>命令，提交博客也是挺方便的。</p>
-<p>之前使用jekyll搭建的个人博客，由于jekyll对分页和文章摘要支持的不是很好，了解一下hexo这个新东西，感觉其页面生成速度还是蛮不错的，对分页和文章摘要也支持的挺好，主要是小清新的light主题吸引了我，于是乎，马上有种把博客迁移到hexo的念头。</p>
-<h2>安装hexo</h2>
-<p>首先需要安装<a href="http://nodejs.org/">nodejs</a>,安装成功后，在命令行下通过<code>npm install hexo -g</code>安装hexo。</p>
-<p>根据hexo<a href="http://zespia.tw/hexo/">官方文档</a>,创建一个网站，生成页面，并通过<code>hexo server</code>本地查看网站，都挺简单的，不在啰嗦了。</p>
-<h2>迁移jekyll到hexo</h2>
-<p>这个对于程序员就比较简单了，对比一下两种markdown文件的差异，写个程序处理一下就OK了，我用c#处理的，贴出代码：</p>
+<p>今天又接到同事类似的需求，不过这次的账号量更大，考虑到上次遇到的问题，这次打算采用某种方案来提高插入数据的性能。</p>
+<p>了解了下SQLServer批量插入数据的技术，主要有两种：<strong>Bulk</strong>和表值参数(SQLServer 2008的特性)，这两种方式相比循环使用insert插入数据，效率和性能明显上升。使用表值参数带来的提升更为显著。</p>
+<h2>使用表值参数插入数据的一个例子</h2>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -147,88 +142,157 @@
 70
 71
 72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
 </pre></td><td class="code"><pre>using System<span class="comment">;</span>
 using System<span class="preprocessor">.Collections</span><span class="preprocessor">.Generic</span><span class="comment">;</span>
-using System<span class="preprocessor">.IO</span><span class="comment">;</span>
 using System<span class="preprocessor">.Linq</span><span class="comment">;</span>
 using System<span class="preprocessor">.Text</span><span class="comment">;</span>
 using System<span class="preprocessor">.Text</span><span class="preprocessor">.RegularExpressions</span><span class="comment">;</span>
+using System<span class="preprocessor">.IO</span><span class="comment">;</span>
+using System<span class="preprocessor">.Collections</span><span class="comment">;</span>
+using NPOI<span class="preprocessor">.HSSF</span><span class="preprocessor">.UserModel</span><span class="comment">;</span>
+using System<span class="preprocessor">.Data</span><span class="preprocessor">.OleDb</span><span class="comment">;</span>
+using System<span class="preprocessor">.Data</span><span class="preprocessor">.SqlClient</span><span class="comment">;</span>
+using System<span class="preprocessor">.Configuration</span><span class="comment">;</span>
+using System<span class="preprocessor">.Data</span><span class="comment">;</span>
 
-namespace Jekyll2Hexo
+namespace Account2DB
 {
     class Program
     {
-        // 将jekyll中包含md文件的文件夹拖放到生成的exe上，处理后的文档保存在文件夹的上级目录
-        // 本程序是针对jekyll-bootstrap博客中的文档做的处理
-        static void Main(string[] args)
+        public static void TableValuedToDB(DataTable dt)
         {
-            if (args<span class="preprocessor">.Length</span> == <span class="number">0</span>)
+            SqlConnection sqlConn = new SqlConnection(ConfigurationManager<span class="preprocessor">.ConnectionStrings</span>[<span class="string">"DefaultConnection"</span>]<span class="preprocessor">.ConnectionString</span>)<span class="comment">;</span>
+            const string TSqlStatement =
+             <span class="string">"insert into NewAccount (Account,Ting,Jie)"</span> +
+             <span class="string">" SELECT nc.Account, nc.Ting,nc.Jie"</span> +
+             <span class="string">" FROM @BulkTvp AS nc"</span><span class="comment">;</span>
+
+            SqlCommand cmd = new SqlCommand(TSqlStatement, sqlConn)<span class="comment">;</span>
+            SqlParameter catParam = cmd<span class="preprocessor">.Parameters</span><span class="preprocessor">.AddWithValue</span>(<span class="string">"@BulkTvp"</span>, dt)<span class="comment">;</span>
+            catParam<span class="preprocessor">.SqlDbType</span> = SqlDbType<span class="preprocessor">.Structured</span><span class="comment">;</span>
+            //表值参数的名字叫BulkUdt，在上面的建立测试环境的SQL中有。  
+            catParam<span class="preprocessor">.TypeName</span> = <span class="string">"dbo.BulkAccount"</span><span class="comment">;</span>
+            try
             {
-                return<span class="comment">;</span>
-            }
-            string folder = args[<span class="number">0</span>]<span class="comment">;</span>
-            if (Directory<span class="preprocessor">.Exists</span>(folder))
-            {
-                foreach (var file <span class="keyword">in</span> Directory<span class="preprocessor">.GetFiles</span>(folder, <span class="string">"*.md"</span>))
+                sqlConn<span class="preprocessor">.Open</span>()<span class="comment">;</span>
+                if (dt != null && dt<span class="preprocessor">.Rows</span><span class="preprocessor">.Count</span> != <span class="number">0</span>)
                 {
-                    FileInfo fi = new FileInfo(file)<span class="comment">;</span>
-                    string date = fi<span class="preprocessor">.Name</span><span class="preprocessor">.Substring</span>(<span class="number">0</span>, <span class="number">10</span>)<span class="comment">;</span>
-                    StringBuilder sb = new StringBuilder()<span class="comment">;</span>
-
-                    FileStream fs = new FileStream(file, FileMode<span class="preprocessor">.Open</span>)<span class="comment">;</span>
-                    using (StreamReader sr = new StreamReader(fs, Encoding<span class="preprocessor">.UTF</span>8))
-                    {
-                        int lineCount = <span class="number">0</span><span class="comment">;</span>
-                        while (!sr<span class="preprocessor">.EndOfStream</span>)
-                        {
-                            var line = sr<span class="preprocessor">.ReadLine</span>()<span class="comment">;</span>
-                            if (line<span class="preprocessor">.StartsWith</span>(<span class="string">"tagline:"</span>))
-                            {
-                                continue<span class="comment">;</span>
-                            }
-                            lineCount++<span class="comment">;</span>
-
-                            if (lineCount == <span class="number">1</span> || lineCount == <span class="number">2</span> || lineCount == <span class="number">4</span> || lineCount == <span class="number">8</span>)
-                            {
-                                continue<span class="comment">;</span>
-                            }
-                            if (lineCount == <span class="number">3</span>)
-                            {
-                                sb<span class="preprocessor">.AppendLine</span>(line<span class="preprocessor">.Replace</span>(<span class="string">"\""</span>, <span class="string">""</span>))<span class="comment">;</span>
-                                sb<span class="preprocessor">.AppendLine</span>(<span class="string">"date: "</span> + date)<span class="comment">;</span>
-                                continue<span class="comment">;</span>
-                            }
-                            if (lineCount == <span class="number">5</span>)
-                            {
-                                sb<span class="preprocessor">.AppendLine</span>(<span class="string">"categories:"</span> + line<span class="preprocessor">.Split</span>(<span class="string">':'</span>)[<span class="number">1</span>])<span class="comment">;</span>
-                                continue<span class="comment">;</span>
-                            }
-                            if (lineCount == <span class="number">16</span>)
-                            {
-                                sb<span class="preprocessor">.AppendLine</span>(<span class="string">"&lt;!-- more --&gt;"</span>)<span class="comment">;</span>
-                            }
-                            sb<span class="preprocessor">.AppendLine</span>(line)<span class="comment">;</span>
-                        }
-                    }
-                    // 保存处理后的md文件
-                    File<span class="preprocessor">.WriteAllText</span>(Path<span class="preprocessor">.Combine</span>(fi<span class="preprocessor">.Directory</span><span class="preprocessor">.Parent</span><span class="preprocessor">.FullName</span>, fi<span class="preprocessor">.Name</span><span class="preprocessor">.Substring</span>(<span class="number">11</span>)),
-                        sb<span class="preprocessor">.ToString</span>(),
-                        Encoding<span class="preprocessor">.UTF</span>8)<span class="comment">;</span>
+                    cmd<span class="preprocessor">.ExecuteNonQuery</span>()<span class="comment">;</span>
                 }
             }
+            catch (Exception ex)
+            {
+                throw ex<span class="comment">;</span>
+            }
+            finally
+            {
+                sqlConn<span class="preprocessor">.Close</span>()<span class="comment">;</span>
+            }
+        }
+
+        public static DataTable GetTableSchema()
+        {
+            DataTable dt = new DataTable()<span class="comment">;</span>
+            dt<span class="preprocessor">.Columns</span><span class="preprocessor">.AddRange</span>(new DataColumn[]{  
+              new DataColumn(<span class="string">"Account"</span>,typeof(string)),  
+              new DataColumn(<span class="string">"Ting"</span>,typeof(DateTime)),  
+              new DataColumn(<span class="string">"Jie"</span>,typeof(DateTime))})<span class="comment">;</span>
+            return dt<span class="comment">;</span>
+        }  
+
+        static void Main(string[] args)
+        {
+            Logger<span class="preprocessor">.Info</span>(<span class="string">"正在插入数据，请稍后..."</span>)<span class="comment">;</span>
+            try
+            {
+                StreamReader sr = new StreamReader(args[<span class="number">0</span>], Encoding<span class="preprocessor">.Default</span>)<span class="comment">;</span>
+                StringBuilder error = new StringBuilder()<span class="comment">;</span>
+                DataTable dt = GetTableSchema()<span class="comment">;</span>
+                int count = <span class="number">0</span><span class="comment">;</span>
+                while (!sr<span class="preprocessor">.EndOfStream</span>)
+                {
+                    string acc = sr<span class="preprocessor">.ReadLine</span>()<span class="comment">;</span>
+                    if (acc<span class="preprocessor">.StartsWith</span>(<span class="string">"账号"</span>) || acc<span class="preprocessor">.StartsWith</span>(<span class="string">"---"</span>) || String<span class="preprocessor">.IsNullOrEmpty</span>(acc))
+                    {
+                        continue<span class="comment">;</span>
+                    }
+                    var data = acc<span class="preprocessor">.Split</span>(<span class="string">','</span>)<span class="comment">;</span>
+                    if (data<span class="preprocessor">.Count</span>() != <span class="number">3</span>)
+                    {
+                        Logger<span class="preprocessor">.Error</span>(<span class="string">"错误数据："</span> + acc)<span class="comment">;</span>
+                        error<span class="preprocessor">.AppendLine</span>(acc)<span class="comment">;</span>
+                    }
+                    DataRow r = dt<span class="preprocessor">.NewRow</span>()<span class="comment">;</span>
+                    r[<span class="number">0</span>] = data[<span class="number">0</span>]<span class="preprocessor">.Trim</span>()<span class="comment">;</span>
+                    r[<span class="number">1</span>] = Convert<span class="preprocessor">.ToDateTime</span>(data[<span class="number">1</span>])<span class="comment">;</span>
+                    r[<span class="number">2</span>] = Convert<span class="preprocessor">.ToDateTime</span>(data[<span class="number">2</span>])<span class="comment">;</span>
+                    dt<span class="preprocessor">.Rows</span><span class="preprocessor">.Add</span>(r)<span class="comment">;</span>
+                    count++<span class="comment">;</span>
+                    // 每一万个账号作为一批账号插入
+                    if (count % <span class="number">10000</span> == <span class="number">0</span>)
+                    {
+                        TableValuedToDB(dt)<span class="comment">;</span>
+                        Logger<span class="preprocessor">.Info</span>(<span class="string">"已插入："</span> + count)<span class="comment">;</span>
+                        dt<span class="preprocessor">.Clear</span>()<span class="comment">;</span>
+                    }
+                }
+                // 插入剩余账号
+                TableValuedToDB(dt)<span class="comment">;</span>
+                Logger<span class="preprocessor">.Info</span>(<span class="string">"已插入："</span> + count)<span class="comment">;</span>
+
+                sr<span class="preprocessor">.Close</span>()<span class="comment">;</span>
+                File<span class="preprocessor">.AppendAllText</span>(Path<span class="preprocessor">.Combine</span>(AppDomain<span class="preprocessor">.CurrentDomain</span><span class="preprocessor">.BaseDirectory</span>, <span class="string">"error.txt"</span>), error<span class="preprocessor">.ToString</span>(), Encoding<span class="preprocessor">.Default</span>)<span class="comment">;</span>
+            }
+            catch (Exception ex)
+            {
+                Logger<span class="preprocessor">.Error</span>(ex<span class="preprocessor">.ToString</span>())<span class="comment">;</span>
+            }
+            Logger<span class="preprocessor">.Info</span>(<span class="string">"执行结束，按任意键关闭..."</span>)<span class="comment">;</span>
+            Console<span class="preprocessor">.ReadLine</span>()<span class="comment">; </span>
         }
     }
 }
+
 </pre></td></tr></table></figure>
-
-<h2>遇到的一些问题</h2>
-<p><strong> 文章摘要设置 </strong></p>
-<p>hexo和jekyll一样，都支持使用markdown编写文章，hexo的文章保存在source/_post目录下。</p>
-<p>需要注意的是，在编写markdown文档是，在文档中插入<code>&lt;!--more--&gt;</code>就可以将文章切分开了，more以上的部分会已摘要的形式显示，当查看全文是more一下的部分也会显示出来。</p>
-<p><strong> 图片路径问题 </strong></p>
-<p>这个也很简单，直接将图片文件夹放到source目录下即可。</p>
-<p>同理将favicon.ico和CNAME（github支持在CNAME文件中加入自定义域名，通过自定义的域名访问自己的网站）也放到source目录。</p>
-
       
     </div>
     <footer>
@@ -236,13 +300,13 @@ namespace Jekyll2Hexo
         
   
   <div class="categories">
-    <a href="/categories/工具/">工具</a>
+    <a href="/categories/学习/">学习</a>
   </div>
 
         
   
   <div class="tags">
-    <a href="/tags/hexo/">hexo</a>
+    <a href="/tags/SQLServer/">SQLServer</a>
   </div>
 
         
