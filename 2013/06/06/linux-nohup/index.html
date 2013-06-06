@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>log4net屏蔽NHibernate日志 | StanZhai::Blog</title>
+  <title>linux 通过nohup使应用退出终端后继续运行 | StanZhai::Blog</title>
   <meta name="author" content="StanZhai 翟士丹">
   
   <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="log4net屏蔽NHibernate日志"/>
+  <meta property="og:title" content="linux 通过nohup使应用退出终端后继续运行"/>
   <meta property="og:site_name" content="StanZhai::Blog"/>
 
   
@@ -54,21 +54,26 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-03-01T00:00:00.000Z"><a href="/2013/03/01/disable-log4net-log/">2013/3/1</a></time>
+        <time datetime="2013-06-06T09:06:01.000Z"><a href="/2013/06/06/linux-nohup/">2013/6/6</a></time>
       
       
   
-    <h1 class="title">log4net屏蔽NHibernate日志</h1>
+    <h1 class="title">linux 通过nohup使应用退出终端后继续运行</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>项目中使用了NHibernate作为数据库ORM组件，同时又使用了log4net作为日志组件。默认情况下，NHibernate会打印对数据库的操作日志，和我们自己写的日志消息混杂在一起，导致日志数量相当庞大，查看不方便。可以在log4net的配置文件中添加如下配置，来屏蔽NHibernate的日志输出：</p>
-<pre><code><span class="tag">&lt;<span class="title">logger</span> <span class="attribute">name</span>=<span class="value">"NHibernate"</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">additivity</span> <span class="attribute">value</span>=<span class="value">"false"</span> /&gt;</span>
-<span class="tag">&lt;/<span class="title">logger</span>&gt;</span>
-</code></pre>
+        <p>使用SSH登录到Linux，系统会创建一个Session表示本次会话，且在此Session上运行的程序会和Session关联，退出SSH会话，那么和Session相关联的程序也会关闭。</p>
+<a name="more"></a>
+
+<p>我们可以通过nohup(no hang up)命令保证程序在session结束后继续执行。</p>
+<p><strong>附：nohup命令参考</strong></p>
+<p><strong>用途：</strong>不挂断地运行命令。</p>
+<p><strong>语法：</strong>nohup Command [ Arg … ] [　&amp; ]</p>
+<p><strong>描述：</strong>nohup 命令运行由 Command 参数和任何相关的 Arg 参数指定的命令，忽略所有挂断（SIGHUP）信号。在注销后使用 nohup 命令运行后台中的程序。要运行后台中的 nohup 命令，添加 &amp; （ 表示”and”的符号）到命令的尾部。</p>
+<p><strong>注意</strong></p>
+<p>使用nohup时，在当shell中提示了nohup成功后还需要按终端上键盘任意键退回到shell输入命令窗口，然后在退出终端，nohup才会生效。</p>
 
       
     </div>
@@ -77,13 +82,13 @@
         
   
   <div class="categories">
-    <a href="/categories/问题修复/">问题修复</a>
+    <a href="/categories/学习/">学习</a>
   </div>
 
         
   
   <div class="tags">
-    <a href="/tags/log4net/">log4net</a>
+    <a href="/tags/Linux/">Linux</a>
   </div>
 
         

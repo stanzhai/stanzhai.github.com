@@ -59,6 +59,49 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-05-09T08:38:20.000Z"><a href="/2013/05/09/mongodb-datetime/">2013/5/9</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/09/mongodb-datetime/">MongoDB中日期的时区问题</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>问题描述</h2>
+<p>使用MongoDB，发现插入到数据库中的时间总是晚了8个小时，如：<code>&quot;Insert&quot; : ISODate(&quot;2013-05-13T01:32:44.401Z&quot;)</code>，突然想到，我们所在的时区为东八区，难道MongoDB中默认时区为0，到网上查了一下还真是这样<code>MongoDB采用标准时区存储日期</code>。</p>
+<h2>解决方案</h2>
+<p>这个问题需要在程序中作处理，本人使用的C#版的官方MongoDB驱动，在数据模型上添加BsonDateTimeOptions特性即可，如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>[BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+<span class="keyword">public</span> DateTime Publish { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+</pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/05/09/mongodb-datetime/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-05-08T05:47:07.000Z"><a href="/2013/05/08/mongodb-delete-document-key/">2013/5/8</a></time>
       
       
@@ -213,43 +256,6 @@
 
 
   
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-06T13:18:01.000Z"><a href="/2013/05/06/use-lambda-in-generic-class/">2013/5/6</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/06/use-lambda-in-generic-class/">C#在泛型类中，通过表达式树构造lambda表达式</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2>场景</h2>
-<p>最近对爬虫的数据库架构做调整，需要将数据迁移到MongoDB上去，需要重新实现一个针对MongoDB的Dao泛型类，好吧，动手开工，当实现删除操作的时候问题来了。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/05/06/use-lambda-in-generic-class/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
 
   <nav id="pagination">
   
@@ -279,7 +285,7 @@
   
     <li><a href="/categories/人文思考/">人文思考</a><small>1</small></li>
   
-    <li><a href="/categories/学习/">学习</a><small>28</small></li>
+    <li><a href="/categories/学习/">学习</a><small>29</small></li>
   
     <li><a href="/categories/工作/">工作</a><small>6</small></li>
   
@@ -312,6 +318,10 @@
   <ul class="entry">
     
       <li>
+        <a href="/2013/06/06/linux-nohup/">linux 通过nohup使应用退出终端后继续运行</a>
+      </li>
+    
+      <li>
         <a href="/2013/06/06/socket-send-recv/">Socket TCP和UDP收发包数据包的区别</a>
       </li>
     
@@ -325,10 +335,6 @@
     
       <li>
         <a href="/2013/05/30/insert-data-into-sql-server-use-table-value/">SQLServer使用表值参数，高性能批量插入数据</a>
-      </li>
-    
-      <li>
-        <a href="/2013/05/23/csharp-gettime/">扩展C#,DateTime返回和js，Date的getTime相同的值</a>
       </li>
     
   </ul>
