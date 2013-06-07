@@ -55,17 +55,20 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-06T09:06:01.000Z"><a href="/2013/06/06/linux-nohup/">2013/6/6</a></time>
+        <time datetime="2013-06-07T13:11:09.000Z"><a href="/2013/06/07/assembly-register/">2013/6/7</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/06/linux-nohup/">linux 通过nohup使应用退出终端后继续运行</a></h1>
+    <h1 class="title"><a href="/2013/06/07/assembly-register/">汇编语言学习——寄存器</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>使用SSH登录到Linux，系统会创建一个Session表示本次会话，且在此Session上运行的程序会和Session关联，退出SSH会话，那么和Session相关联的程序也会关闭。</p>
+        <h2>通用寄存器</h2>
+<ul>
+<li>在进行数据传送或运算时，需注意指令的两个操作对象位数应当一致，如<code>mov ax, bx</code>，不能将al mov到ax中。</li>
+</ul>
 
       
     </div>
@@ -73,43 +76,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/06/06/linux-nohup/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-06-06T01:02:30.000Z"><a href="/2013/06/06/socket-send-recv/">2013/6/6</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/06/06/socket-send-recv/">Socket TCP和UDP收发包数据包的区别</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>一个包没有固定长度，以太网限制在46－1500字节，1500就是以太网的MTU，超过这个量，TCP会为IP数据报设置偏移量进行分片传输，现在一般可允许应用层设置8k（NTFS系统）的缓冲区，8k的数据由底层分片，而应用层看来只是一次发送。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/06/06/socket-send-recv/#more" class="more-link">阅读全文</a>
+            <a href="/2013/06/07/assembly-register/#more" class="more-link">阅读全文</a>
           </div>
         
         
@@ -139,16 +106,12 @@
       
         <p>正则表达式这种东西就是不断学习，不断加强的东西，直接贴代码，js的：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>src = src.<span class="operator"><span class="keyword">replace</span>(/&lt;</span>([a-zA-Z]+)\s*[^&gt;&lt;]*&gt;/g,"&lt;$1&gt;");
+</pre></td><td class="code"><pre>src = src.replace(/<span class="tag">&lt;<span class="title">([a-zA-Z]+)\s*[^</span>&gt;</span><span class="tag">&lt;<span class="title">]*</span>&gt;</span>/g,"<span class="tag">&lt;<span class="title">$1</span>&gt;</span>");
 </pre></td></tr></table></figure>
       
     </div>
     <footer>
       
-        
-          <div class="alignleft">
-            <a href="/2013/06/05/regex-replace-html-property/#more" class="more-link">阅读全文</a>
-          </div>
         
         
       
@@ -231,6 +194,43 @@
 
 
 
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-23T10:22:08.000Z"><a href="/2013/05/23/csharp-gettime/">2013/5/23</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/23/csharp-gettime/">扩展C#,DateTime返回和js，Date的getTime相同的值</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>最近做一个基于Web的实时图表，需要为前台提供时间信息，时间格式是类似这样的<code>new Date().getTime()</code>其实就是js实现的返回距 1970年1月1日之间的毫秒数的一个方法。</p>
+<p>数据是由.NET做后端提供，而.NET没有可以实现和js一样的结果的方法。所以现在只好自己实现一个。我使用了扩展方法扩展了DateTime类。具体实现如下：</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/05/23/csharp-gettime/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
 
 <nav id="pagination">
   
@@ -269,6 +269,8 @@
   
     <li><a href="/categories/问题修复/">问题修复</a><small>17</small></li>
   
+    <li><a href="/categories/学习/问题修复/">问题修复</a><small>1</small></li>
+  
     <li><a href="/categories/学习/项目管理/">项目管理</a><small>1</small></li>
   
   </ul>
@@ -279,7 +281,7 @@
 <div class="widget tagcloud">
   <h3 class="title">标签云</h3>
   <div class="entry">
-    <a href="/tags/C%26C%2B%2B/" style="font-size: 16.58px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 18.42px;">C++</a><a href="/tags/CSharp/" style="font-size: 11.32px;">CSharp</a><a href="/tags/C语言/" style="font-size: 16.84px;">C语言</a><a href="/tags/Eclipse/" style="font-size: 10.53px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 15.26px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.74px;">Linux</a><a href="/tags/MongoDB/" style="font-size: 18.95px;">MongoDB</a><a href="/tags/Redis/" style="font-size: 10.00px;">Redis</a><a href="/tags/Redmine/" style="font-size: 13.95px;">Redmine</a><a href="/tags/SQL/" style="font-size: 15.79px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 18.16px;">SQLServer</a><a href="/tags/TeamViewer/" style="font-size: 12.89px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 16.32px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 17.11px;">WPF</a><a href="/tags/gdb/" style="font-size: 12.11px;">gdb</a><a href="/tags/git/" style="font-size: 12.37px;">git</a><a href="/tags/hexo/" style="font-size: 15.53px;">hexo</a><a href="/tags/jQuery/" style="font-size: 15.00px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 13.16px;">jekyll</a><a href="/tags/js/" style="font-size: 16.05px;">js</a><a href="/tags/linux/" style="font-size: 10.79px;">linux</a><a href="/tags/log4net/" style="font-size: 10.26px;">log4net</a><a href="/tags/mongodb/" style="font-size: 11.05px;">mongodb</a><a href="/tags/nodejs/" style="font-size: 11.84px;">nodejs</a><a href="/tags/pip/" style="font-size: 13.68px;">pip</a><a href="/tags/python/" style="font-size: 13.42px;">python</a><a href="/tags/socket/" style="font-size: 17.37px;">socket</a><a href="/tags/sqlite/" style="font-size: 14.47px;">sqlite</a><a href="/tags/vi/" style="font-size: 14.21px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.47px;">代码大全</a><a href="/tags/多线程/" style="font-size: 14.74px;">多线程</a><a href="/tags/工作/" style="font-size: 17.89px;">工作</a><a href="/tags/方法论/" style="font-size: 12.63px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 17.63px;">正则表达式</a><a href="/tags/汇编/" style="font-size: 18.68px;">汇编</a><a href="/tags/游戏引擎/" style="font-size: 11.58px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 19.21px;">项目管理</a>
+    <a href="/tags/C%26C%2B%2B/" style="font-size: 10.00px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 17.84px;">C++</a><a href="/tags/CSharp/" style="font-size: 10.81px;">CSharp</a><a href="/tags/C语言/" style="font-size: 16.49px;">C语言</a><a href="/tags/Eclipse/" style="font-size: 14.86px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 12.97px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.73px;">Linux</a><a href="/tags/MongoDB/" style="font-size: 18.92px;">MongoDB</a><a href="/tags/Redis/" style="font-size: 15.14px;">Redis</a><a href="/tags/Redmine/" style="font-size: 13.24px;">Redmine</a><a href="/tags/SQL/" style="font-size: 14.59px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 17.57px;">SQLServer</a><a href="/tags/TeamViewer/" style="font-size: 15.41px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 16.22px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 13.78px;">WPF</a><a href="/tags/gdb/" style="font-size: 11.08px;">gdb</a><a href="/tags/git/" style="font-size: 11.35px;">git</a><a href="/tags/hexo/" style="font-size: 13.51px;">hexo</a><a href="/tags/jQuery/" style="font-size: 10.27px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 17.03px;">jekyll</a><a href="/tags/js/" style="font-size: 16.76px;">js</a><a href="/tags/linux/" style="font-size: 14.32px;">linux</a><a href="/tags/log4net/" style="font-size: 14.05px;">log4net</a><a href="/tags/mongodb/" style="font-size: 17.30px;">mongodb</a><a href="/tags/nodejs/" style="font-size: 10.54px;">nodejs</a><a href="/tags/pip/" style="font-size: 11.89px;">pip</a><a href="/tags/python/" style="font-size: 11.62px;">python</a><a href="/tags/sqlite/" style="font-size: 15.68px;">sqlite</a><a href="/tags/vi/" style="font-size: 12.16px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.46px;">代码大全</a><a href="/tags/多线程/" style="font-size: 12.70px;">多线程</a><a href="/tags/工作/" style="font-size: 18.11px;">工作</a><a href="/tags/方法论/" style="font-size: 15.95px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 18.65px;">正则表达式</a><a href="/tags/汇编/" style="font-size: 19.19px;">汇编</a><a href="/tags/游戏引擎/" style="font-size: 12.43px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 18.38px;">项目管理</a>
   </div>
 </div>
 
@@ -290,11 +292,7 @@
   <ul class="entry">
     
       <li>
-        <a href="/2013/06/06/linux-nohup/">linux 通过nohup使应用退出终端后继续运行</a>
-      </li>
-    
-      <li>
-        <a href="/2013/06/06/socket-send-recv/">Socket TCP和UDP收发包数据包的区别</a>
+        <a href="/2013/06/07/assembly-register/">汇编语言学习——寄存器</a>
       </li>
     
       <li>
@@ -307,6 +305,10 @@
     
       <li>
         <a href="/2013/05/30/insert-data-into-sql-server-use-table-value/">SQLServer使用表值参数，高性能批量插入数据</a>
+      </li>
+    
+      <li>
+        <a href="/2013/05/23/csharp-gettime/">扩展C#,DateTime返回和js，Date的getTime相同的值</a>
       </li>
     
   </ul>
