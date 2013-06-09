@@ -59,6 +59,97 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-05-06T07:04:30.000Z"><a href="/2013/05/06/linux-permission-denied/">2013/5/6</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/06/linux-permission-denied/">linux permission denied的奇怪问题</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>问题描述</h2>
+<p>创建了一个带有执行权限的软连接文件，放到了/usr/local/bin目录下，非root用户执行时提示权限不足。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>[zhaishidan<span class="property">@molinux</span> ~]$ ll <span class="regexp">/usr/local/bin/m</span>ongo
+lrwxrwxrwx. <span class="number">1</span> root root <span class="number">19</span> May <span class="number">6</span> <span class="number">11</span>:<span class="number">59</span> <span class="regexp">/usr/local/bin/mongo -&gt; /root/mongodb/m</span>ongo
+[zhaishidan<span class="property">@molinux</span> ~]$ <span class="regexp">/usr/local/bin/m</span>ongo 
+-bash: <span class="regexp">/usr/local/bin/m</span>ongo: Permission denied
+</pre></td></tr></table></figure>
+
+<h2>解决方案</h2>
+<p>软链接的文件权限并不代表真实文件的权限，查看/root目录权限如下：</p>
+<p><figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="comment">dr</span>-<span class="comment">xr</span>-<span class="comment">x</span>-<span class="literal">-</span><span class="literal">-</span><span class="string">.</span>  <span class="comment">25</span> <span class="comment">root</span> <span class="comment">root</span>  <span class="comment">4096</span> <span class="comment">May</span>  <span class="comment">6</span> <span class="comment">13:43</span> <span class="comment">root
+</pre></td></tr></table></figure>
+可知其他用户没有对/root目录的访问权限，自然也就不能执行其中的程序。</p>
+<p>解决方法是：将程序调整到<code>/usr/local/bin</code>目录下，就可以了。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/05/06/linux-permission-denied/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-05T07:49:13.000Z"><a href="/2013/05/05/csharp-handle-close-event/">2013/5/5</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/05/csharp-handle-close-event/">C#处理控制台关闭事件</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>应用场景</h2>
+<p>我们开发的控制台应用，在运行阶段很有可能被用户Ctrl+C终止或是被用户直接关闭。如果我们不希望用户通过Ctrl+C终止我们的程序，就需要对Ctrl+C或关闭事件作处理。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/05/05/csharp-handle-close-event/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-05-03T11:54:32.000Z"><a href="/2013/05/03/how-to-close-screen-and-lock-pc/">2013/5/3</a></time>
       
       
@@ -173,82 +264,6 @@
 
 
   
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-17T00:00:00.000Z"><a href="/2013/04/17/install-pip/">2013/4/17</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/17/install-pip/">安装python包管理工具pip</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2>准备</h2>
-<p>pip依赖setuptools或distribute。</p>
-<p>如果python的版本是3.X，则必须安装distribute。</p>
-<p>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/04/17/install-pip/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-16T00:00:00.000Z"><a href="/2013/04/16/wpf-mulitthread-error/">2013/4/16</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/16/wpf-mulitthread-error/">调用线程必须为 STA，因为许多 UI 组件都需要</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2>问题描述</h2>
-<p>最近用WPF开发桌面端应用，用到了个组件，此组件内部使用了多线程，在处理组件产生的事件时，需要和UI交互。</p>
-<p>处理UI交互的代码抛出了如下异常：调用线程必须为 STA，因为许多 UI 组件都需要。</p>
-<p>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/04/16/wpf-mulitthread-error/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
 
   <nav id="pagination">
   
@@ -278,7 +293,7 @@
   
     <li><a href="/categories/人文思考/">人文思考</a><small>1</small></li>
   
-    <li><a href="/categories/学习/">学习</a><small>29</small></li>
+    <li><a href="/categories/学习/">学习</a><small>31</small></li>
   
     <li><a href="/categories/工作/">工作</a><small>6</small></li>
   
@@ -300,7 +315,7 @@
 <div class="widget tagcloud">
   <h3 class="title">标签云</h3>
   <div class="entry">
-    <a href="/tags/C%26C%2B%2B/" style="font-size: 16.58px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 18.42px;">C++</a><a href="/tags/CSharp/" style="font-size: 11.32px;">CSharp</a><a href="/tags/C语言/" style="font-size: 16.84px;">C语言</a><a href="/tags/Eclipse/" style="font-size: 10.53px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 15.26px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.74px;">Linux</a><a href="/tags/MongoDB/" style="font-size: 18.95px;">MongoDB</a><a href="/tags/Redis/" style="font-size: 10.00px;">Redis</a><a href="/tags/Redmine/" style="font-size: 13.95px;">Redmine</a><a href="/tags/SQL/" style="font-size: 15.79px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 18.16px;">SQLServer</a><a href="/tags/TeamViewer/" style="font-size: 12.89px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 16.32px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 17.11px;">WPF</a><a href="/tags/gdb/" style="font-size: 12.11px;">gdb</a><a href="/tags/git/" style="font-size: 12.37px;">git</a><a href="/tags/hexo/" style="font-size: 15.53px;">hexo</a><a href="/tags/jQuery/" style="font-size: 15.00px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 13.16px;">jekyll</a><a href="/tags/js/" style="font-size: 16.05px;">js</a><a href="/tags/linux/" style="font-size: 10.79px;">linux</a><a href="/tags/log4net/" style="font-size: 10.26px;">log4net</a><a href="/tags/mongodb/" style="font-size: 11.05px;">mongodb</a><a href="/tags/nodejs/" style="font-size: 11.84px;">nodejs</a><a href="/tags/pip/" style="font-size: 13.68px;">pip</a><a href="/tags/python/" style="font-size: 13.42px;">python</a><a href="/tags/socket/" style="font-size: 17.37px;">socket</a><a href="/tags/sqlite/" style="font-size: 14.47px;">sqlite</a><a href="/tags/vi/" style="font-size: 14.21px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.47px;">代码大全</a><a href="/tags/多线程/" style="font-size: 14.74px;">多线程</a><a href="/tags/工作/" style="font-size: 17.89px;">工作</a><a href="/tags/方法论/" style="font-size: 12.63px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 17.63px;">正则表达式</a><a href="/tags/汇编/" style="font-size: 18.68px;">汇编</a><a href="/tags/游戏引擎/" style="font-size: 11.58px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 19.21px;">项目管理</a>
+    <a href="/tags/C%26C%2B%2B/" style="font-size: 16.41px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 18.97px;">C++</a><a href="/tags/CSharp/" style="font-size: 11.79px;">CSharp</a><a href="/tags/C语言/" style="font-size: 16.67px;">C语言</a><a href="/tags/Eclipse/" style="font-size: 10.51px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 15.13px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.74px;">Linux</a><a href="/tags/MongoDB/" style="font-size: 18.72px;">MongoDB</a><a href="/tags/Redis/" style="font-size: 10.00px;">Redis</a><a href="/tags/Redmine/" style="font-size: 13.85px;">Redmine</a><a href="/tags/SQL/" style="font-size: 15.64px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 18.21px;">SQLServer</a><a href="/tags/TeamViewer/" style="font-size: 14.10px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 16.15px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 16.92px;">WPF</a><a href="/tags/c/" style="font-size: 17.44px;">c</a><a href="/tags/gdb/" style="font-size: 12.05px;">gdb</a><a href="/tags/git/" style="font-size: 12.31px;">git</a><a href="/tags/hexo/" style="font-size: 15.38px;">hexo</a><a href="/tags/jQuery/" style="font-size: 14.87px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 13.08px;">jekyll</a><a href="/tags/js/" style="font-size: 15.90px;">js</a><a href="/tags/linux/" style="font-size: 10.77px;">linux</a><a href="/tags/log4net/" style="font-size: 10.26px;">log4net</a><a href="/tags/mongodb/" style="font-size: 11.28px;">mongodb</a><a href="/tags/nodejs/" style="font-size: 12.56px;">nodejs</a><a href="/tags/pip/" style="font-size: 13.59px;">pip</a><a href="/tags/python/" style="font-size: 13.33px;">python</a><a href="/tags/socket/" style="font-size: 11.03px;">socket</a><a href="/tags/sqlite/" style="font-size: 14.36px;">sqlite</a><a href="/tags/vi/" style="font-size: 14.62px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.49px;">代码大全</a><a href="/tags/多线程/" style="font-size: 17.18px;">多线程</a><a href="/tags/工作/" style="font-size: 17.95px;">工作</a><a href="/tags/方法论/" style="font-size: 12.82px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 17.69px;">正则表达式</a><a href="/tags/汇编/" style="font-size: 18.46px;">汇编</a><a href="/tags/游戏引擎/" style="font-size: 11.54px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 19.23px;">项目管理</a>
   </div>
 </div>
 
@@ -309,6 +324,14 @@
 <div class="widget tag">
   <h3 class="title">最新博文</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2013/06/09/big-endian-and-little-endian/">一图道破大端序和小端序的区别</a>
+      </li>
+    
+      <li>
+        <a href="/2013/06/08/mingw-cygwin/">MinGW和Cygwin的区别</a>
+      </li>
     
       <li>
         <a href="/2013/06/06/linux-nohup/">linux 通过nohup使应用退出终端后继续运行</a>
@@ -320,14 +343,6 @@
     
       <li>
         <a href="/2013/06/05/regex-replace-html-property/">通过正则表达式删除html属性</a>
-      </li>
-    
-      <li>
-        <a href="/2013/06/05/mongodb-copy-data-between-collections/">mongodb从一个集合复制数据到另一个集合</a>
-      </li>
-    
-      <li>
-        <a href="/2013/05/30/insert-data-into-sql-server-use-table-value/">SQLServer使用表值参数，高性能批量插入数据</a>
       </li>
     
   </ul>
