@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>MongoDB 删除document中的key | StanZhai::Blog</title>
+  <title>C#处理未捕获的异常 | StanZhai::Blog</title>
   <meta name="author" content="StanZhai 翟士丹">
   
   <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="MongoDB 删除document中的key"/>
+  <meta property="og:title" content="C#处理未捕获的异常"/>
   <meta property="og:site_name" content="StanZhai::Blog"/>
 
   
@@ -54,56 +54,43 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-08T05:47:07.000Z"><a href="/2013/05/08/mongodb-delete-document-key/">2013/5/8</a></time>
+        <time datetime="2013-06-17T06:25:30.000Z"><a href="/2013/06/17/csharp-unhandled-exception/">2013/6/17</a></time>
       
       
   
-    <h1 class="title">MongoDB 删除document中的key</h1>
+    <h1 class="title">C#处理未捕获的异常</h1>
   
 
     </header>
     <div class="entry">
       
-        <h2>需求</h2>
-<p>假设当前Document中的实体为以下形式：</p>
+        <p>尽管在程序中添加了try...catch来处理异常，也很难保证程序就不抛异常，程序崩溃是件令人很不爽的事情，在.net应用程序级别，如何体面的处理异常呢？</p>
+<a name="more"></a>
+
+<p>核心代码如下：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
 4
 5
-</pre></td><td class="code"><pre>{
-  "<span class="attribute">_id</span>" : <span class="value"><span class="number">1234</span></span>,
-  "<span class="attribute">name</span>" : <span class="value"><span class="string">"Chris"</span></span>,
-  "<span class="attribute">description</span>" : <span class="value"><span class="string">"Awesome"</span>
-}</span>
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre>// 此事件处理程序用于捕获UI线程中未处理的异常
+Application<span class="preprocessor">.ThreadException</span> += new ThreadExceptionEventHandler(ErrorHandlerForm<span class="preprocessor">.Form</span>1_UIThreadException)<span class="comment">;</span>
+
+// 强制将所有UI线程中的异常交由Application<span class="preprocessor">.ThreadException</span>处理
+Application<span class="preprocessor">.SetUnhandledExceptionMode</span>(UnhandledExceptionMode<span class="preprocessor">.CatchException</span>)<span class="comment">;</span>
+
+// 处理非UI线程中未处理的异常
+AppDomain<span class="preprocessor">.CurrentDomain</span><span class="preprocessor">.UnhandledException</span> +=
+    new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException)<span class="comment">;</span>
+
 </pre></td></tr></table></figure>
 
-<a name="more"></a>
-
-<p>需要将其调整成以下形式：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>{
-  "<span class="attribute">_id</span>" : <span class="value"><span class="number">1234</span></span>,
-  "<span class="attribute">name</span>" : <span class="value"><span class="string">"Chris"</span>
-}</span>
-</pre></td></tr></table></figure>
-
-<h2>操作方法</h2>
-<p>通过调用update方法，指定<code>$unset</code>来删除属性。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">db</span><span class="class">.collection_name</span><span class="class">.update</span>(<span class="rules">{ <span class="rule"><span class="attribute">_id</span>:<span class="value"> <span class="number">1234</span> }</span></span></span>, <span class="rules">{ <span class="rule">$<span class="attribute">unset </span>:<span class="value"> { description : <span class="number">1</span>}</span></span></span> });
-</pre></td></tr></table></figure>
-update方法默认情况下只会更新第一个匹配，如果对所有符合条件的记录做修改，则需要使用以下方法：
-
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">db</span><span class="class">.collection_name</span><span class="class">.update</span>(<span class="rules">{<span class="rule">}</span></span>, <span class="rules">{ <span class="rule">$<span class="attribute">unset </span>:<span class="value"> { description : <span class="number">1</span>}</span></span></span> }, <span class="tag">false</span>, <span class="tag">true</span>);
-</pre></td></tr></table></figure>
-
-<p>其中第三个参数为upsert,这个参数是个布尔类型，默认是false。当它为true的时候，update方法会首先查找与第一个参数匹配的记录，在用第二个参数更新之，如果找不到与第一个参数匹配的的记录，就插入一条（upsert 的名字也很有趣是个混合体：update+insert）。</p>
-<p>第4个参数设置为true表示更新所有符合条件的记录。</p>
+<p>程序中有些异常出现后，必须要关闭程序，以免影响应用程序状态，我们可以再处理异常的代码中记录日志，保存应用程序状态信息，妥善的处理异常，给用户友好的体验。</p>
 
       
     </div>
@@ -116,11 +103,6 @@ update方法默认情况下只会更新第一个匹配，如果对所有符合�
   </div>
 
         
-  
-  <div class="tags">
-    <a href="/tags/MongoDB/">MongoDB</a>
-  </div>
-
         
   <div class="addthis addthis_toolbox addthis_default_style">
     <!-- JiaThis Button BEGIN -->
