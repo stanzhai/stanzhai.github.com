@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>一图道破大端序和小端序的区别 | StanZhai::Blog</title>
+  <title>C语言变量定义的位置 | StanZhai::Blog</title>
   <meta name="author" content="StanZhai 翟士丹">
   
   <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="一图道破大端序和小端序的区别"/>
+  <meta property="og:title" content="C语言变量定义的位置"/>
   <meta property="og:site_name" content="StanZhai::Blog"/>
 
   
@@ -54,68 +54,21 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-09T01:26:33.000Z"><a href="/2013/06/09/big-endian-and-little-endian/">2013/6/9</a></time>
+        <time datetime="2013-06-18T11:32:30.000Z"><a href="/2013/06/18/c-where-to-define-var/">2013/6/18</a></time>
       
       
   
-    <h1 class="title">一图道破大端序和小端序的区别</h1>
+    <h1 class="title">C语言变量定义的位置</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>在裘宗燕翻译的《程序设计实践》里，这对术语并没有翻译为“大端”和小端，而是“高尾端”和“低尾端”，这就好理解了：如果把一个数看成一个字符串，比如11223344看成&quot;11223344&quot;，末尾是个&#39;\0&#39;，&#39;11&#39;到&#39;44&#39;个占用一个存储单元，那么它的尾端很显然是44，前面的高还是低就表示尾端放在高地址还是低地址，它在内存中的放法非常直观，如下图：</p>
-<p><img src="/images/endian.png" alt="大端序与小端序"></p>
+        <p>N久没有捣鼓C语言的东西了，今天打算用C写个大文件预览的工具，结果遇到了一堆低级的语法问题。其中一点是关于变量定义位置的问题：</p>
 <a name="more"></a>
 
-<p>这两种字节序没有标准可循，都有系统在使用。把某个给定系统所用的字节序称为主机字节序。</p>
-<p>检测主机字节序的代码：</p>
-<figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-</pre></td><td class="code"><pre><span class="preprocessor">#include &lt;stdlib.h&gt;</span>
-<span class="preprocessor">#include &lt;stdio.h&gt;</span>
-<span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)
-{
-    <span class="keyword">union</span> {
-        <span class="keyword">short</span> s;
-        <span class="keyword">char</span> c[<span class="keyword">sizeof</span>(<span class="keyword">short</span>)];
-    } un;
-    un<span class="variable">.s</span> = <span class="number">0x0102</span>;
-    <span class="keyword">if</span>(<span class="keyword">sizeof</span>(<span class="keyword">short</span>)==<span class="number">2</span>) {
-        <span class="keyword">if</span>(un<span class="variable">.c</span>[<span class="number">0</span>]==<span class="number">1</span> && un<span class="variable">.c</span>[<span class="number">1</span>] == <span class="number">2</span>)
-            printf(<span class="string">"big-endian\n"</span>);
-        <span class="keyword">else</span> <span class="keyword">if</span> (un<span class="variable">.c</span>[<span class="number">0</span>] == <span class="number">2</span> && un<span class="variable">.c</span>[<span class="number">1</span>] == <span class="number">1</span>)
-            printf(<span class="string">"little-endian\n"</span>);
-        <span class="keyword">else</span>
-            printf(<span class="string">"unknown\n"</span>);
-    } <span class="keyword">else</span>
-        printf(<span class="string">"sizeof(short)= %d\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">short</span>));
-    exit(<span class="number">0</span>);
-}
-</pre></td></tr></table></figure>
-
-<p>这里补充一下C语言中的union相关的知识，C不熟的同学做个参考：</p>
-<p>union为联合体，其中的数据成员公用同一块内存地址，union所占的内存块的大小，由占用内存空间最大的数据成员决定。</p>
-<p>因为公用同一块内存地址，所以对其中的一个数据成员赋值，会覆盖其他数据成员的内容。</p>
-<p>举例上述代码中的union，对s变量赋值，则可以通过c访问到s的值，同样，如果对c的内容做修改，会覆盖掉s的值。</p>
+<p>这里重新整理下有关C语言定义变量的知识：</p>
+<p>以花括号{}给包围起来的代码段称为block(我不知道它的准确中文翻译是不是叫模块),只要在block开始的地方定义变量就不会错,且该变量的作用域和生存期(除了static限定)只在该block里,且该变量可以屏蔽block外的变量.譬如在block外已经有一个变量名为a = 1的int变量,在block里允许定义一个同名的变量int a = 2,但在block里试着用printf打印的话,会发现printf(&quot;%d&quot;, a)结果是2.这就叫做屏蔽外面的变量!</p>
 
       
     </div>
@@ -128,11 +81,6 @@
   </div>
 
         
-  
-  <div class="tags">
-    <a href="/tags/C/">C</a>
-  </div>
-
         
   <div class="addthis addthis_toolbox addthis_default_style">
     <!-- JiaThis Button BEGIN -->

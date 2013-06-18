@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>一图道破大端序和小端序的区别 | StanZhai::Blog</title>
+  <title>C/C++应用程序内存划分 | StanZhai::Blog</title>
   <meta name="author" content="StanZhai 翟士丹">
   
   <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="一图道破大端序和小端序的区别"/>
+  <meta property="og:title" content="C/C++应用程序内存划分"/>
   <meta property="og:site_name" content="StanZhai::Blog"/>
 
   
@@ -54,22 +54,27 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-09T01:26:33.000Z"><a href="/2013/06/09/big-endian-and-little-endian/">2013/6/9</a></time>
+        <time datetime="2013-06-18T11:15:47.000Z"><a href="/2013/06/18/c-memory-alloc/">2013/6/18</a></time>
       
       
   
-    <h1 class="title">一图道破大端序和小端序的区别</h1>
+    <h1 class="title">C/C++应用程序内存划分</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>在裘宗燕翻译的《程序设计实践》里，这对术语并没有翻译为“大端”和小端，而是“高尾端”和“低尾端”，这就好理解了：如果把一个数看成一个字符串，比如11223344看成&quot;11223344&quot;，末尾是个&#39;\0&#39;，&#39;11&#39;到&#39;44&#39;个占用一个存储单元，那么它的尾端很显然是44，前面的高还是低就表示尾端放在高地址还是低地址，它在内存中的放法非常直观，如下图：</p>
-<p><img src="/images/endian.png" alt="大端序与小端序"></p>
+        <p>一个由C/C++编译的程序占用的内存分为以下几个部分：</p>
 <a name="more"></a>
 
-<p>这两种字节序没有标准可循，都有系统在使用。把某个给定系统所用的字节序称为主机字节序。</p>
-<p>检测主机字节序的代码：</p>
+<ol>
+<li><strong>栈区（stack）</strong>由编译器自动分配释放，存放函数的参数值，局部变量的值等。其操作方式类似于数据结构中的栈。</li>
+<li><strong>堆区（heap）</strong>一般由程序员分配释放，若程序员不释放，程序结束时可能由OS回收。注意它与数据结构中的堆是两回事，分配方式倒是类似于链表，呵呵。</li>
+<li><strong>全局区（静态区）（static）</strong>，全局变量和静态变量的存储是放在一块的，初始化的全局变量和静态变量在一块区域，未初始化的全局变量和未初始化的静态变量在相邻的另一块区域。  程序结束后由系统释放。</li>
+<li><strong>文字常量区</strong>常量字符串就是放在这里的。程序结束后由系统释放</li>
+<li><strong>程序代码区</strong>存放函数体的二进制代码。</li>
+</ol>
+<p>例子程序：</p>
 <figure class="highlight lang-c"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -85,38 +90,22 @@
 13
 14
 15
-16
-17
-18
-19
-20
-</pre></td><td class="code"><pre><span class="preprocessor">#include &lt;stdlib.h&gt;</span>
-<span class="preprocessor">#include &lt;stdio.h&gt;</span>
-<span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)
+</pre></td><td class="code"><pre><span class="comment">//main.cpp  </span>
+<span class="keyword">int</span> a = <span class="number">0</span>; <span class="comment">//全局初始化区</span>
+<span class="keyword">char</span> *p1; <span class="comment">//全局未初始化区</span>
+  
+main()
 {
-    <span class="keyword">union</span> {
-        <span class="keyword">short</span> s;
-        <span class="keyword">char</span> c[<span class="keyword">sizeof</span>(<span class="keyword">short</span>)];
-    } un;
-    un<span class="variable">.s</span> = <span class="number">0x0102</span>;
-    <span class="keyword">if</span>(<span class="keyword">sizeof</span>(<span class="keyword">short</span>)==<span class="number">2</span>) {
-        <span class="keyword">if</span>(un<span class="variable">.c</span>[<span class="number">0</span>]==<span class="number">1</span> && un<span class="variable">.c</span>[<span class="number">1</span>] == <span class="number">2</span>)
-            printf(<span class="string">"big-endian\n"</span>);
-        <span class="keyword">else</span> <span class="keyword">if</span> (un<span class="variable">.c</span>[<span class="number">0</span>] == <span class="number">2</span> && un<span class="variable">.c</span>[<span class="number">1</span>] == <span class="number">1</span>)
-            printf(<span class="string">"little-endian\n"</span>);
-        <span class="keyword">else</span>
-            printf(<span class="string">"unknown\n"</span>);
-    } <span class="keyword">else</span>
-        printf(<span class="string">"sizeof(short)= %d\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">short</span>));
-    exit(<span class="number">0</span>);
-}
+  <span class="keyword">int</span> b; <span class="comment">//栈</span>
+  <span class="keyword">char</span> s[] = <span class="string">"abc"</span>; <span class="comment">//栈</span>
+  <span class="keyword">char</span> *p2; <span class="comment">//栈</span>
+  <span class="keyword">char</span> *p3 = <span class="string">"123456"</span>; <span class="comment">//123456\\0在常量区，p3在栈上。</span>
+  <span class="keyword">static</span> <span class="keyword">int</span> c =<span class="number">0</span>;<span class="comment">//全局（静态）初始化区</span>
+  p1 = (<span class="keyword">char</span> *)malloc(<span class="number">10</span>);  
+  p2 = (<span class="keyword">char</span> *)malloc(<span class="number">20</span>);<span class="comment">//分配得来得10和20字节的区域就在堆区。</span>
+  strcpy(p1, <span class="string">"123456"</span>); <span class="comment">//123456\\0放在常量区，编译器可能会将它与p3所指向的"123456"优化成一个地方。    </span>
+} 
 </pre></td></tr></table></figure>
-
-<p>这里补充一下C语言中的union相关的知识，C不熟的同学做个参考：</p>
-<p>union为联合体，其中的数据成员公用同一块内存地址，union所占的内存块的大小，由占用内存空间最大的数据成员决定。</p>
-<p>因为公用同一块内存地址，所以对其中的一个数据成员赋值，会覆盖其他数据成员的内容。</p>
-<p>举例上述代码中的union，对s变量赋值，则可以通过c访问到s的值，同样，如果对c的内容做修改，会覆盖掉s的值。</p>
-
       
     </div>
     <footer>
