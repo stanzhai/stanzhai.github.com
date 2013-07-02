@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>第 8 页 | StanZhai::Blog</title>
+  <title>Solr4.3添加IKAnalyzer中文分词器 | StanZhai::Blog</title>
   <meta name="author" content="StanZhai 翟士丹">
   
   <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="Solr4.3添加IKAnalyzer中文分词器"/>
   <meta property="og:site_name" content="StanZhai::Blog"/>
 
   
@@ -48,36 +48,80 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-  <article class="post">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-05T08:49:13.000Z"><a href="/2013/05/05/csharp-handle-close-event/">2013/5/5</a></time>
+        <time datetime="2013-07-02T10:22:45.000Z"><a href="/2013/07/02/solr-add-ikanalyzer-support/">2013/7/2</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/05/csharp-handle-close-event/">C#处理控制台关闭事件</a></h1>
+    <h1 class="title">Solr4.3添加IKAnalyzer中文分词器</h1>
   
 
     </header>
     <div class="entry">
       
-        <h2>应用场景</h2>
-<p>我们开发的控制台应用，在运行阶段很有可能被用户Ctrl+C终止或是被用户直接关闭。如果我们不希望用户通过Ctrl+C终止我们的程序，就需要对Ctrl+C或关闭事件作处理。</p>
+        <h2>IKAnalyzer解压后的存放目录</h2>
+<p>solr-4.3.1/example/solr-webapp/webapp/WEB-INF/lib</p>
+<h2>修改schema.xml</h2>
+<p>文件路径: <code>solr-4.3.1/example/solr/collection1/conf/schema.xml</code></p>
+<p>添加text_ik类型,内容如下：</p>
+<figure class="highlight lang-xml"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>&lt;fieldType name="text_ik" class="solr.TextField"&gt;  
+    &lt;analyzer type="index" isMaxWordLength="false" class="org.wltea.analyzer.lucene.IKAnalyzer"/&gt;  
+    &lt;analyzer type="query" isMaxWordLength="true" class="org.wltea.analyzer.lucene.IKAnalyzer"/&gt;  
+&lt;/fieldType&gt;  
+</pre></td></tr></table></figure>
+
+<a name="more"></a>
+
+<h2>lucene4.0与IKAnalyzer的冲突问题</h2>
+<p>运行之后发现异常：Exception in thread &quot;main&quot; java.lang.VerifyError: class org.wltea.analyzer.lucene.IKAnalyzer overrides final method tokenStream.(Ljava/lang/String;Ljava/io/Reader;)Lorg/apache/lucene/analysis/TokenStream;
+原因IKAnalyzer中参考手册中的例子是使用的lucene3.4，与4.0已经是不兼容了。</p>
+<p>从google 上面下载 <a href="https://ik-analyzer.googlecode.com/files/IK%20Analyzer%202012FF_hf1.zip">IK Analyzer 2012FF_hf1.zip</a> 就可以解决问题。</p>
+<h2>启动，并查看分析效果</h2>
+<p>启动命令：</p>
+<figure class="highlight lang-xml"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>cd solr-4.3.1/example
+java -jar start.jar
+</pre></td></tr></table></figure>
+
+<p>查看：</p>
+<p>打开：<a href="http://10.6.154.250:8983/solr/#/collection1/analysis">http://10.6.154.250:8983/solr/#/collection1/analysis</a></p>
+<p>FieldType选择： text_ik</p>
+<p>FieldValue(Query)输入：中华人民共和国，点Analyse Values 显示结果中如果不是单字断开表示正常。</p>
 
       
     </div>
     <footer>
       
         
-          <div class="alignleft">
-            <a href="/2013/05/05/csharp-handle-close-event/#more" class="more-link">阅读全文</a>
-          </div>
         
         
+  <div class="addthis addthis_toolbox addthis_default_style">
+    <!-- JiaThis Button BEGIN -->
+    <ul class="tag_box jiathis_style">
+      <a class="jiathis_button_tools_1"></a>
+      <a class="jiathis_button_tools_2"></a>
+      <a class="jiathis_button_tools_3"></a>
+      <a class="jiathis_button_tools_4"></a>
+      <a href="http://www.jiathis.com/share?uid=1715390" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+      <a class="jiathis_counter_style"></a>
+    </ul>
+    <script type="text/javascript">
+    var jiathis_config = {data_track_clickback:'true'};
+    </script>
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1347364934817650" charset="utf-8"></script>
+    <!-- JiaThis Button END -->
+  </div>
+
       
       <div class="clearfix"></div>
     </footer>
@@ -85,175 +129,14 @@
 </article>
 
 
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-03T12:54:32.000Z"><a href="/2013/05/03/how-to-close-screen-and-lock-pc/">2013/5/3</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/03/how-to-close-screen-and-lock-pc/">Windows平台编程实现关闭显示器并锁定计算机</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2>为何搞个这东西？</h2>
-<p>额，最近主管给俺们这些开发的申请了双显示器，开发感觉相当爽啊。可是公司有规定，离开工位需要锁定计算机，关闭显示器。2个显示器，来回关也挺麻烦的。于是乎突然有了弄个关闭显示器玩玩的想法。
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/05/03/how-to-close-screen-and-lock-pc/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-19T07:01:26.000Z"><a href="/2013/04/19/linux-background-job/">2013/4/19</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/19/linux-background-job/">Linux后台任务相关命令学习</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2>常用命令</h2>
-<ol>
-<li>jobs：查看当前终端相关联的后台任务</li>
-<li>将任务放到后台执行：在执行命令的结尾添加<code>&amp;</code>,如：<code>ls &amp;</code>将在后台执行</li>
-<li><code>Ctrl+Z</code>:用于将当前正在运行的前台进程暂停，变成后台进程。</li>
-<li><code>bg [%n]</code>用于将后台暂停的进程继续运行。</li>
-<li><code>fg [%n]</code>用于将后台执行的进程变成前台进程。</li>
-<li><code>kill [%n]</code>用于杀掉指定的任务。</li>
-</ol>
-<h2>附加</h2>
-<p>上述命令中的%n的值，可以通过jobs命令查看。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/04/19/linux-background-job/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-18T11:09:01.000Z"><a href="/2013/04/18/jekyll-2-hexo/">2013/4/18</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/18/jekyll-2-hexo/">将博客从jekyll迁移到了hexo</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2>关于hexo和jekyll</h2>
-<p>hexo和jekyll一样都是个静态网站生成工具，hexo是一个台湾小伙使用nodejs开发的，jekyll则是用ruby开发，github内置了jekyll，可以直接将jekyll相关的文件提交到github，github会自动给你生成静态页面。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/04/18/jekyll-2-hexo/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-04-17T00:00:00.000Z"><a href="/2013/04/17/install-pip/">2013/4/17</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/04/17/install-pip/">安装python包管理工具pip</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2>准备</h2>
-<p>pip依赖setuptools或distribute。</p>
-<p>如果python的版本是3.X，则必须安装distribute。</p>
-<p>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/04/17/install-pip/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-<nav id="pagination">
-  
-    <a href="/page/7/" class="alignleft prev">上一页</a>
-  
-  
-    <a href="/page/9/" class="alignright next">下一页</a>
-  
-  <div class="clearfix"></div>
-</nav></div></div>
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <!-- UY BEGIN -->
+	<div id="uyan_frame"></div>
+	<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1715390" async=""></script>
+	<!-- UY END -->
+</section>
+</div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form id="search" class="pull-right" enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse" target="_blank">
