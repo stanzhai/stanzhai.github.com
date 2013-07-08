@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>第 4 页 | 文章：2013 | StanZhai::Blog</title>
+  <title>解决.NET中HttpWebRequest第一次请求超时、缓慢问题 | StanZhai::Blog</title>
   <meta name="author" content="StanZhai 翟士丹">
   
   <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="解决.NET中HttpWebRequest第一次请求超时、缓慢问题"/>
   <meta property="og:site_name" content="StanZhai::Blog"/>
 
   
@@ -48,41 +48,85 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title">2013</h2>
-
-
-  
-    <article class="post">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-05T03:13:39.000Z"><a href="/2013/06/05/regex-replace-html-property/">2013/6/5</a></time>
+        <time datetime="2013-07-08T07:54:42.000Z"><a href="/2013/07/08/httpwebrequest-timeout-exception/">2013/7/8</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/05/regex-replace-html-property/">通过正则表达式删除html属性</a></h1>
+    <h1 class="title">解决.NET中HttpWebRequest第一次请求超时、缓慢问题</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>正则表达式这种东西就是不断学习，不断加强的东西，直接贴代码，js的：</p>
+        <h2>问题描述</h2>
+<p>Windows7下写的一个小工具，用到了HttpWebRequest，第一次请求经常超时，而第二次就很快。</p>
+<p>可能是和系统不同的“默认代理和用户验证策略”有关。大家有知道准确原因的请指教。</p>
+<a name="more"></a>
+
+<h2>解决方案</h2>
+<p>修改app.config文件，在configuration节点中添加</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>src = src.<span class="operator"><span class="keyword">replace</span>(/&lt;</span>([a-zA-Z]+)\s*[^&gt;&lt;]*&gt;/g,"&lt;$1&gt;");
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre>&<span class="keyword">lt</span>;<span class="keyword">system</span>.net&<span class="keyword">gt</span>;    
+   &<span class="keyword">lt</span>;defaultProxy   
+      enabled=<span class="string">"false"</span>    
+      useDefaultCredentials=<span class="string">"false"</span>&<span class="keyword">gt</span>;    
+     &<span class="keyword">lt</span>;proxy/&<span class="keyword">gt</span>;    
+     &<span class="keyword">lt</span>;bypasslist/&<span class="keyword">gt</span>;    
+     &<span class="keyword">lt</span>;module/&<span class="keyword">gt</span>;    
+   &<span class="keyword">lt</span>;<span class="regexp">/defaultProxy&gt;
+&lt;/system</span>.net&<span class="keyword">gt</span>;
 </pre></td></tr></table></figure>
+
+<p>禁用默认代理。</p>
+
       
     </div>
     <footer>
       
         
-          <div class="alignleft">
-            <a href="/2013/06/05/regex-replace-html-property/#more" class="more-link">阅读全文</a>
-          </div>
+  
+  <div class="categories">
+    <a href="/categories/问题修复/">问题修复</a>
+  </div>
+
         
+  
+  <div class="tags">
+    <a href="/tags/CSharp/">CSharp</a>
+  </div>
+
         
+  <div class="addthis addthis_toolbox addthis_default_style">
+    <!-- JiaThis Button BEGIN -->
+    <ul class="tag_box jiathis_style">
+      <a class="jiathis_button_tools_1"></a>
+      <a class="jiathis_button_tools_2"></a>
+      <a class="jiathis_button_tools_3"></a>
+      <a class="jiathis_button_tools_4"></a>
+      <a href="http://www.jiathis.com/share?uid=1715390" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+      <a class="jiathis_counter_style"></a>
+    </ul>
+    <script type="text/javascript">
+    var jiathis_config = {data_track_clickback:'true'};
+    </script>
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1347364934817650" charset="utf-8"></script>
+    <!-- JiaThis Button END -->
+  </div>
+
       
       <div class="clearfix"></div>
     </footer>
@@ -90,162 +134,13 @@
 </article>
 
 
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-06-05T03:07:41.000Z"><a href="/2013/06/05/mongodb-copy-data-between-collections/">2013/6/5</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/06/05/mongodb-copy-data-between-collections/">mongodb从一个集合复制数据到另一个集合</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>使用javascript，通过游标操作，代码如下：</p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/06/05/mongodb-copy-data-between-collections/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-30T09:30:11.000Z"><a href="/2013/05/30/insert-data-into-sql-server-use-table-value/">2013/5/30</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/30/insert-data-into-sql-server-use-table-value/">SQLServer使用表值参数，高性能批量插入数据</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>记得前段时间帮同事写了个解析账号并入库的小工具，来批量导入账号信息，账号量相当大，程序每读取一条记录便执行一次insert来插入数据，整整跑了一下午才把账号全部入库。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/05/30/insert-data-into-sql-server-use-table-value/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-23T10:22:08.000Z"><a href="/2013/05/23/csharp-gettime/">2013/5/23</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/23/csharp-gettime/">扩展C#,DateTime返回和js，Date的getTime相同的值</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>最近做一个基于Web的实时图表，需要为前台提供时间信息，时间格式是类似这样的<code>new Date().getTime()</code>其实就是js实现的返回距 1970年1月1日之间的毫秒数的一个方法。</p>
-<p>数据是由.NET做后端提供，而.NET没有可以实现和js一样的结果的方法。所以现在只好自己实现一个。我使用了扩展方法扩展了DateTime类。具体实现如下：</p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/05/23/csharp-gettime/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-23T03:11:54.000Z"><a href="/2013/05/23/nodejs-deploy-code/">2013/5/23</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/23/nodejs-deploy-code/">nodejs使用supervisor进行代码热部署</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>最近使用nodejs做一个实时数据展现的系统，经常需要修改代码，调试。也就是反复的改代码，<code>node app.js</code>，<code>Ctrl+C</code>……</p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/05/23/nodejs-deploy-code/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-
-  <nav id="pagination">
-  
-    <a href="/archives/2013/page/3/" class="alignleft prev">上一页</a>
-  
-  
-    <a href="/archives/2013/page/5/" class="alignright next">下一页</a>
-  
-  <div class="clearfix"></div>
-</nav>
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <!-- UY BEGIN -->
+	<div id="uyan_frame"></div>
+	<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1715390" async=""></script>
+	<!-- UY END -->
+</section>
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
