@@ -1,0 +1,238 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>如何使用NUnit的过程中进行代码调试 | StanZhai::Blog</title>
+  <meta name="author" content="StanZhai 翟士丹">
+  
+  <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="如何使用NUnit的过程中进行代码调试"/>
+  <meta property="og:site_name" content="StanZhai::Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="StanZhai::Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">StanZhai::Blog</a></h1>
+  <h2><a href="/">好记性不如烂键盘！</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/projects">Projects</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="https://github.com/stanzhai">GitHub</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-07-11T06:38:17.000Z"><a href="/2013/07/11/use-nunit-with-debug/">2013/7/11</a></time>
+      
+      
+  
+    <h1 class="title">如何使用NUnit的过程中进行代码调试</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>基本的使用方法</h2>
+<p>请参考 <a href="http://www.cnblogs.com/cnblogsfans/archive/2008/04/15/1153804.html">http://www.cnblogs.com/cnblogsfans/archive/2008/04/15/1153804.html</a></p>
+<a name="more"></a>
+
+<h2>解决.NET 4.0中无法调试的问题</h2>
+<p>修改<code>nunit.exe.config</code>，将startup节点修改为：</p>
+<figure class="highlight lang-xml"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>&lt;startup&gt;  
+  &lt;requiredRuntime version="v4.0.30319" /&gt;
+&lt;/startup&gt;
+</pre></td></tr></table></figure>
+
+<p>参考：<a href="http://www.cnblogs.com/GoodHelper/archive/2010/06/23/vs2010_nunit_debug.html">http://www.cnblogs.com/GoodHelper/archive/2010/06/23/vs2010_nunit_debug.html</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/学习/">学习</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/NUnit/">NUnit</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    <!-- JiaThis Button BEGIN -->
+    <ul class="tag_box jiathis_style">
+      <a class="jiathis_button_tools_1"></a>
+      <a class="jiathis_button_tools_2"></a>
+      <a class="jiathis_button_tools_3"></a>
+      <a class="jiathis_button_tools_4"></a>
+      <a href="http://www.jiathis.com/share?uid=1715390" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+      <a class="jiathis_counter_style"></a>
+    </ul>
+    <script type="text/javascript">
+    var jiathis_config = {data_track_clickback:'true'};
+    </script>
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1347364934817650" charset="utf-8"></script>
+    <!-- JiaThis Button END -->
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <!-- UY BEGIN -->
+	<div id="uyan_frame"></div>
+	<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1715390" async=""></script>
+	<!-- UY END -->
+</section>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form id="search" class="pull-right" enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse" target="_blank">
+    <input type="search" name="q" results="0" placeholder="搜索"/>
+    <input type="hidden" name="cx" value="010188267663376520215:afr8qibwduq"/>
+    <input type="hidden" name="ie" value="UTF-8"/>
+    
+    <input name="siteurl" type="hidden" value="blog.zhaishidan.cn"><input name="ref" type="hidden" value="blog.zhaishidan.cn"><input name="ss" type="hidden" value="">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/人文思考/">人文思考</a><small>2</small></li>
+  
+    <li><a href="/categories/学习/">学习</a><small>42</small></li>
+  
+    <li><a href="/categories/工作/">工作</a><small>6</small></li>
+  
+    <li><a href="/categories/工具/">工具</a><small>6</small></li>
+  
+    <li><a href="/categories/学习/置顶/">置顶</a><small>2</small></li>
+  
+    <li><a href="/categories/读书笔记/">读书笔记</a><small>5</small></li>
+  
+    <li><a href="/categories/问题修复/">问题修复</a><small>18</small></li>
+  
+    <li><a href="/categories/学习/项目管理/">项目管理</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/C/" style="font-size: 18.72px;">C</a><a href="/tags/C%26C%2B%2B/" style="font-size: 16.41px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 17.44px;">C++</a><a href="/tags/CSharp/" style="font-size: 19.49px;">CSharp</a><a href="/tags/Eclipse/" style="font-size: 12.56px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 10.00px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.74px;">Linux</a><a href="/tags/MongoDB/" style="font-size: 16.92px;">MongoDB</a><a href="/tags/NUnit/" style="font-size: 10.26px;">NUnit</a><a href="/tags/Redis/" style="font-size: 16.15px;">Redis</a><a href="/tags/Redmine/" style="font-size: 13.85px;">Redmine</a><a href="/tags/SQL/" style="font-size: 15.64px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 17.95px;">SQLServer</a><a href="/tags/TeamViewer/" style="font-size: 14.87px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 11.28px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 10.77px;">WPF</a><a href="/tags/gdb/" style="font-size: 12.05px;">gdb</a><a href="/tags/git/" style="font-size: 13.08px;">git</a><a href="/tags/hexo/" style="font-size: 14.10px;">hexo</a><a href="/tags/jQuery/" style="font-size: 11.79px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 14.36px;">jekyll</a><a href="/tags/js/" style="font-size: 11.03px;">js</a><a href="/tags/linux/" style="font-size: 15.13px;">linux</a><a href="/tags/log4net/" style="font-size: 12.31px;">log4net</a><a href="/tags/mongodb/" style="font-size: 15.90px;">mongodb</a><a href="/tags/nodejs/" style="font-size: 18.21px;">nodejs</a><a href="/tags/pip/" style="font-size: 13.59px;">pip</a><a href="/tags/python/" style="font-size: 13.33px;">python</a><a href="/tags/socket/" style="font-size: 14.62px;">socket</a><a href="/tags/sqlite/" style="font-size: 11.54px;">sqlite</a><a href="/tags/vi/" style="font-size: 15.38px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.23px;">代码大全</a><a href="/tags/多线程/" style="font-size: 10.51px;">多线程</a><a href="/tags/工作/" style="font-size: 17.69px;">工作</a><a href="/tags/方法论/" style="font-size: 16.67px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 17.18px;">正则表达式</a><a href="/tags/汇编/" style="font-size: 18.97px;">汇编</a><a href="/tags/游戏引擎/" style="font-size: 12.82px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 18.46px;">项目管理</a>
+  </div>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新博文</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2013/07/11/use-nunit-with-debug/">如何使用NUnit的过程中进行代码调试</a>
+      </li>
+    
+      <li>
+        <a href="/2013/07/09/background-thread/">C#后台线程与前台线程的区别</a>
+      </li>
+    
+      <li>
+        <a href="/2013/07/08/httpwebrequest-timeout-exception/">解决.NET中HttpWebRequest第一次请求超时、缓慢问题</a>
+      </li>
+    
+      <li>
+        <a href="/2013/07/03/download-picture-using-httpwebrequest/">使用HttpWebRequest下载图片,保存到本地</a>
+      </li>
+    
+      <li>
+        <a href="/2013/07/02/solr-add-ikanalyzer-support/">Solr4.3添加IKAnalyzer中文分词器</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  <div class="widget twitter">
+  <h3 class="title">新浪微博</h3>
+  <div class="entry">
+	  <iframe id="sina_widget_2884160830" style="width:100%; height:330px;" frameborder="0" scrolling="no" src="http://v.t.sina.com.cn/widget/widget_blog.php?uid=2884160830&height=330&skin=wd_01&showpic=1"></iframe>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 StanZhai 翟士丹
+  
+  <script src="http://s14.cnzz.com/stat.php?id=5017720&web_id=5017720&show=pic" language="JavaScript"></script>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
