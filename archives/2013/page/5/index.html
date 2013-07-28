@@ -59,27 +59,26 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-05T03:13:39.000Z"><a href="/2013/06/05/regex-replace-html-property/">2013/6/5</a></time>
+        <time datetime="2013-06-09T01:26:33.000Z"><a href="/2013/06/09/big-endian-and-little-endian/">2013/6/9</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/05/regex-replace-html-property/">通过正则表达式删除html属性</a></h1>
+    <h1 class="title"><a href="/2013/06/09/big-endian-and-little-endian/">一图道破大端序和小端序的区别</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>正则表达式这种东西就是不断学习，不断加强的东西，直接贴代码，js的：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>src = src.<span class="operator"><span class="keyword">replace</span>(/&lt;</span>([a-zA-Z]+)\s*[^&gt;&lt;]*&gt;/g,"&lt;$1&gt;");
-</pre></td></tr></table></figure>
+        <p>在裘宗燕翻译的《程序设计实践》里，这对术语并没有翻译为“大端”和小端，而是“高尾端”和“低尾端”，这就好理解了：如果把一个数看成一个字符串，比如11223344看成&quot;11223344&quot;，末尾是个&#39;\0&#39;，&#39;11&#39;到&#39;44&#39;个占用一个存储单元，那么它的尾端很显然是44，前面的高还是低就表示尾端放在高地址还是低地址，它在内存中的放法非常直观，如下图：</p>
+<p><img src="/images/endian.png" alt="大端序与小端序"></p>
+
       
     </div>
     <footer>
       
         
           <div class="alignleft">
-            <a href="/2013/06/05/regex-replace-html-property/#more" class="more-link">阅读全文</a>
+            <a href="/2013/06/09/big-endian-and-little-endian/#more" class="more-link">阅读全文</a>
           </div>
         
         
@@ -97,17 +96,17 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-05T03:07:41.000Z"><a href="/2013/06/05/mongodb-copy-data-between-collections/">2013/6/5</a></time>
+        <time datetime="2013-06-08T05:48:56.000Z"><a href="/2013/06/08/mingw-cygwin/">2013/6/8</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/05/mongodb-copy-data-between-collections/">mongodb从一个集合复制数据到另一个集合</a></h1>
+    <h1 class="title"><a href="/2013/06/08/mingw-cygwin/">MinGW和Cygwin的区别</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>使用javascript，通过游标操作，代码如下：</p>
+        <p>Unix下编译通过的C代码,在win32下编译是不能通过的 ,当然Unix 和win32的API都是符合标准C,也就是说,大多数函数调用在unix和win32下是相同的.但是,unix有自己一些独特的API（如fork,spawn,signals,select,sockets等）,如果代码中使用了这些API,在win32下当然找不到对应的库.</p>
 
       
     </div>
@@ -115,7 +114,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/06/05/mongodb-copy-data-between-collections/#more" class="more-link">阅读全文</a>
+            <a href="/2013/06/08/mingw-cygwin/#more" class="more-link">阅读全文</a>
           </div>
         
         
@@ -133,17 +132,20 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-30T09:30:11.000Z"><a href="/2013/05/30/insert-data-into-sql-server-use-table-value/">2013/5/30</a></time>
+        <time datetime="2013-06-07T13:11:09.000Z"><a href="/2013/06/07/assembly-register/">2013/6/7</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/30/insert-data-into-sql-server-use-table-value/">SQLServer使用表值参数，高性能批量插入数据</a></h1>
+    <h1 class="title"><a href="/2013/06/07/assembly-register/">汇编语言学习——寄存器</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>记得前段时间帮同事写了个解析账号并入库的小工具，来批量导入账号信息，账号量相当大，程序每读取一条记录便执行一次insert来插入数据，整整跑了一下午才把账号全部入库。</p>
+        <h2>通用寄存器</h2>
+<ul>
+<li>在进行数据传送或运算时，需注意指令的两个操作对象位数应当一致，如<code>mov ax, bx</code>，不能将al mov到ax中。</li>
+</ul>
 
       
     </div>
@@ -151,7 +153,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/05/30/insert-data-into-sql-server-use-table-value/#more" class="more-link">阅读全文</a>
+            <a href="/2013/06/07/assembly-register/#more" class="more-link">阅读全文</a>
           </div>
         
         
@@ -169,18 +171,17 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-23T10:22:08.000Z"><a href="/2013/05/23/csharp-gettime/">2013/5/23</a></time>
+        <time datetime="2013-06-06T09:06:01.000Z"><a href="/2013/06/06/linux-nohup/">2013/6/6</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/23/csharp-gettime/">扩展C#,DateTime返回和js，Date的getTime相同的值</a></h1>
+    <h1 class="title"><a href="/2013/06/06/linux-nohup/">linux 通过nohup使应用退出终端后继续运行</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>最近做一个基于Web的实时图表，需要为前台提供时间信息，时间格式是类似这样的<code>new Date().getTime()</code>其实就是js实现的返回距 1970年1月1日之间的毫秒数的一个方法。</p>
-<p>数据是由.NET做后端提供，而.NET没有可以实现和js一样的结果的方法。所以现在只好自己实现一个。我使用了扩展方法扩展了DateTime类。具体实现如下：</p>
+        <p>使用SSH登录到Linux，系统会创建一个Session表示本次会话，且在此Session上运行的程序会和Session关联，退出SSH会话，那么和Session相关联的程序也会关闭。</p>
 
       
     </div>
@@ -188,7 +189,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/05/23/csharp-gettime/#more" class="more-link">阅读全文</a>
+            <a href="/2013/06/06/linux-nohup/#more" class="more-link">阅读全文</a>
           </div>
         
         
@@ -206,17 +207,17 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-23T03:11:54.000Z"><a href="/2013/05/23/nodejs-deploy-code/">2013/5/23</a></time>
+        <time datetime="2013-06-06T01:02:30.000Z"><a href="/2013/06/06/socket-send-recv/">2013/6/6</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/23/nodejs-deploy-code/">nodejs使用supervisor进行代码热部署</a></h1>
+    <h1 class="title"><a href="/2013/06/06/socket-send-recv/">Socket TCP和UDP收发包数据包的区别</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>最近使用nodejs做一个实时数据展现的系统，经常需要修改代码，调试。也就是反复的改代码，<code>node app.js</code>，<code>Ctrl+C</code>……</p>
+        <p>一个包没有固定长度，以太网限制在46－1500字节，1500就是以太网的MTU，超过这个量，TCP会为IP数据报设置偏移量进行分片传输，现在一般可允许应用层设置8k（NTFS系统）的缓冲区，8k的数据由底层分片，而应用层看来只是一次发送。</p>
 
       
     </div>
@@ -224,7 +225,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/05/23/nodejs-deploy-code/#more" class="more-link">阅读全文</a>
+            <a href="/2013/06/06/socket-send-recv/#more" class="more-link">阅读全文</a>
           </div>
         
         
@@ -265,7 +266,7 @@
   
     <li><a href="/categories/人文思考/">人文思考</a><small>2</small></li>
   
-    <li><a href="/categories/学习/">学习</a><small>43</small></li>
+    <li><a href="/categories/学习/">学习</a><small>44</small></li>
   
     <li><a href="/categories/工作/">工作</a><small>6</small></li>
   
@@ -287,7 +288,7 @@
 <div class="widget tagcloud">
   <h3 class="title">标签云</h3>
   <div class="entry">
-    <a href="/tags/C/" style="font-size: 18.75px;">C</a><a href="/tags/C%26C%2B%2B/" style="font-size: 16.25px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 17.50px;">C++</a><a href="/tags/CSharp/" style="font-size: 19.50px;">CSharp</a><a href="/tags/Eclipse/" style="font-size: 12.50px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 14.75px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.75px;">Linux</a><a href="/tags/MongoDB/" style="font-size: 17.25px;">MongoDB</a><a href="/tags/NUnit/" style="font-size: 10.50px;">NUnit</a><a href="/tags/Redis/" style="font-size: 16.50px;">Redis</a><a href="/tags/Redmine/" style="font-size: 13.75px;">Redmine</a><a href="/tags/SQL/" style="font-size: 15.50px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 16.75px;">SQLServer</a><a href="/tags/Solr/" style="font-size: 10.25px;">Solr</a><a href="/tags/TeamViewer/" style="font-size: 16.00px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 11.50px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 11.00px;">WPF</a><a href="/tags/gdb/" style="font-size: 12.00px;">gdb</a><a href="/tags/git/" style="font-size: 13.00px;">git</a><a href="/tags/hexo/" style="font-size: 14.00px;">hexo</a><a href="/tags/jQuery/" style="font-size: 11.75px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 14.25px;">jekyll</a><a href="/tags/js/" style="font-size: 11.25px;">js</a><a href="/tags/linux/" style="font-size: 10.00px;">linux</a><a href="/tags/log4net/" style="font-size: 12.25px;">log4net</a><a href="/tags/mongodb/" style="font-size: 15.75px;">mongodb</a><a href="/tags/nodejs/" style="font-size: 17.00px;">nodejs</a><a href="/tags/pip/" style="font-size: 13.50px;">pip</a><a href="/tags/python/" style="font-size: 13.25px;">python</a><a href="/tags/socket/" style="font-size: 15.00px;">socket</a><a href="/tags/sqlite/" style="font-size: 14.50px;">sqlite</a><a href="/tags/vi/" style="font-size: 15.25px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.25px;">代码大全</a><a href="/tags/多线程/" style="font-size: 10.75px;">多线程</a><a href="/tags/工作/" style="font-size: 17.75px;">工作</a><a href="/tags/方法论/" style="font-size: 18.00px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 18.25px;">正则表达式</a><a href="/tags/汇编/" style="font-size: 19.00px;">汇编</a><a href="/tags/游戏引擎/" style="font-size: 12.75px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 18.50px;">项目管理</a>
+    <a href="/tags/C-1/" style="font-size: 18.75px;">C</a><a href="/tags/CC/" style="font-size: 12.50px;">C&C++</a><a href="/tags/C-2/" style="font-size: 18.25px;">C++</a><a href="/tags/CSharp/" style="font-size: 19.50px;">CSharp</a><a href="/tags/Eclipse/" style="font-size: 13.25px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 15.75px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.75px;">Linux</a><a href="/tags/MongoDB/" style="font-size: 17.00px;">MongoDB</a><a href="/tags/NUnit/" style="font-size: 10.25px;">NUnit</a><a href="/tags/Redis/" style="font-size: 12.75px;">Redis</a><a href="/tags/Redmine/" style="font-size: 14.75px;">Redmine</a><a href="/tags/SQL-1/" style="font-size: 15.00px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 16.25px;">SQLServer</a><a href="/tags/Solr/" style="font-size: 11.25px;">Solr</a><a href="/tags/TeamViewer/" style="font-size: 11.75px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 10.75px;">Tomcat</a><a href="/tags/cubieboard-1/" style="font-size: 16.75px;">cubieboard</a><a href="/tags/cubieboard2/" style="font-size: 17.50px;">cubieboard2</a><a href="/tags/gdb/" style="font-size: 12.25px;">gdb</a><a href="/tags/git/" style="font-size: 14.00px;">git</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/jQuery/" style="font-size: 12.00px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 15.25px;">jekyll</a><a href="/tags/js/" style="font-size: 10.50px;">js</a><a href="/tags/linux/" style="font-size: 16.00px;">linux</a><a href="/tags/log4net/" style="font-size: 13.00px;">log4net</a><a href="/tags/mongodb/" style="font-size: 13.50px;">mongodb</a><a href="/tags/nodejs/" style="font-size: 17.25px;">nodejs</a><a href="/tags/pip/" style="font-size: 14.50px;">pip</a><a href="/tags/python/" style="font-size: 14.25px;">python</a><a href="/tags/socket/" style="font-size: 11.50px;">socket</a><a href="/tags/sqlite/" style="font-size: 11.00px;">sqlite</a><a href="/tags/vi/" style="font-size: 15.50px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.25px;">代码大全</a><a href="/tags/工作/" style="font-size: 16.50px;">工作</a><a href="/tags/方法论/" style="font-size: 18.00px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 17.75px;">正则表达式</a><a href="/tags/汇编/" style="font-size: 19.00px;">汇编</a><a href="/tags/游戏引擎/" style="font-size: 13.75px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 18.50px;">项目管理</a>
   </div>
 </div>
 
@@ -298,23 +299,23 @@
   <ul class="entry">
     
       <li>
-        <a href="/2013/07/23/htmlagilitypack-cannot-get-form-innerhtml/">解决HtmlAgilityPack无法获取form标签子节点的问题</a>
+        <a href="/2013/07/28/cubieboard-as-download-server/">将cubieboard配置成远程下载服务器</a>
       </li>
     
       <li>
-        <a href="/2013/07/15/solr-match-all-search/">Solr完全匹配查询</a>
+        <a href="/2013/07/28/cubieboard-run-mongodb/">cubieboard上运行MongoDB</a>
       </li>
     
       <li>
-        <a href="/2013/07/11/use-nunit-with-debug/">如何使用NUnit的过程中进行代码调试</a>
+        <a href="/2013/07/28/linux-config-samba-to-share-files/">linux 配置samba服务来共享文件</a>
       </li>
     
       <li>
-        <a href="/2013/07/09/background-thread/">C#后台线程与前台线程的区别</a>
+        <a href="/2013/07/28/cubieboard-compile-nodejs/">cubieboard 编译nodejs 0.10.5</a>
       </li>
     
       <li>
-        <a href="/2013/07/08/httpwebrequest-timeout-exception/">解决.NET中HttpWebRequest第一次请求超时、缓慢问题</a>
+        <a href="/2013/07/28/cubieboard-wifi-config/">cubieboard 无线网络配置</a>
       </li>
     
   </ul>

@@ -59,19 +59,18 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-11T03:40:29.000Z"><a href="/2013/05/11/work-but-not-for-money/">2013/5/11</a></time>
+        <time datetime="2013-05-20T00:42:04.000Z"><a href="/2013/05/20/win7-debug/">2013/5/20</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/11/work-but-not-for-money/">不为钱工作，然后去挣钱</a></h1>
+    <h1 class="title"><a href="/2013/05/20/win7-debug/">Win7_64位,通过DosBox使用debug</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h2>读乔布斯访谈</h2>
-<p>乔布斯从小被养父母养大，创立苹果公司的时候几乎身无分文，但是他在23岁时身价就达到100万美金，24岁1000万刀，25岁1亿刀。</p>
-<p>这不重要，他从来不是冲着钱去的。富有之后乔布斯依然生活极简，一生如此。</p>
+        <p>最新学习汇编，以前接触汇编的时候用的还是XP，当时在XP下使用debug做过简单的练习，3年后，发现Win7下的debug不见了。</p>
+<p>微软在64位系统中，把16位的支持全部删除了，只能兼容32位, 微软认为64位的升级，可以把16位的历史累赘剔除，因此在Win7中也没有了debug这个命令。</p>
 
       
     </div>
@@ -79,7 +78,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/05/11/work-but-not-for-money/#more" class="more-link">阅读全文</a>
+            <a href="/2013/05/20/win7-debug/#more" class="more-link">阅读全文</a>
           </div>
         
         
@@ -97,18 +96,22 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-11T03:27:56.000Z"><a href="/2013/05/11/learn-programming/">2013/5/11</a></time>
+        <time datetime="2013-05-12T10:42:35.000Z"><a href="/2013/05/12/assembly-base/">2013/5/12</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/11/learn-programming/">每个人都应该学习编程</a></h1>
+    <h1 class="title"><a href="/2013/05/12/assembly-base/">汇编语言学习——基础知识</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>编程不仅能帮助人们开发工具，还能教你如何思考。</p>
-<p>一个视频链接：<a href="http://v.qq.com/boke/page/x/4/j/x0111yh3s4j.html">每个人都应该学习编程|比尔盖茨扎克伯格力荐</a></p>
+        <h2>汇编语言的3种指令类型</h2>
+<ol>
+<li>汇编指令：机器码的助记符，有对应的机器码。</li>
+<li>伪指令：没有对应的机器码，有编译器执行，计算机并不执行。</li>
+<li>其他符号：如+，-，*，/等，由编译器识别，没有对应的机器码。</li>
+</ol>
 
       
     </div>
@@ -116,7 +119,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/05/11/learn-programming/#more" class="more-link">阅读全文</a>
+            <a href="/2013/05/12/assembly-base/#more" class="more-link">阅读全文</a>
           </div>
         
         
@@ -134,68 +137,66 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-11T03:10:53.000Z"><a href="/2013/05/11/folklore/">2013/5/11</a></time>
+        <time datetime="2013-05-11T15:44:49.000Z"><a href="/2013/05/11/sqlite-delete-data-use-datetime-string/">2013/5/11</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/11/folklore/">陈规陋习</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>很多时候我们初入江湖，不知深浅，不知道什么事能做，怎么做，为什么要这么做，即使怯生生问了，得到的答复往往是，That&#39;s the just way it&#39;s done（我们向来这么做），于是我们慢慢也变得成熟、圆滑和懒惰，不再去从深层次思考『为什么要这么做？』因为别人也这么做。慢慢的，这些东西就成为了folklore（陈规陋习）.</p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/05/11/folklore/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-09T08:38:20.000Z"><a href="/2013/05/09/mongodb-datetime/">2013/5/9</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/09/mongodb-datetime/">MongoDB中日期的时区问题</a></h1>
+    <h1 class="title"><a href="/2013/05/11/sqlite-delete-data-use-datetime-string/">sqlite按照日期删除数据是需要注意的地方</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h2>问题描述</h2>
-<p>使用MongoDB，发现插入到数据库中的时间总是晚了8个小时，如：<code>&quot;Insert&quot; : ISODate(&quot;2013-05-13T01:32:44.401Z&quot;)</code>，突然想到，我们所在的时区为东八区，难道MongoDB中默认时区为0，到网上查了一下还真是这样<code>MongoDB采用标准时区存储日期</code>。</p>
-<h2>解决方案</h2>
-<p>这个问题需要在程序中作处理，本人使用的C#版的官方MongoDB驱动，在数据模型上添加BsonDateTimeOptions特性即可，如：</p>
+        <h2>注意点</h2>
+<p>在sqlite中按照日期删除数据时，日期格式必须是yyyy-MM-dd HH:mm:ss这种格式的。</p>
+<p>如：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
-</pre></td><td class="code"><pre>[BsonDateTimeOptions(Kind = DateTimeKind.Local)]
-<span class="keyword">public</span> DateTime Publish { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+</pre></td><td class="code"><pre>var conn = new SQLiteConnection("data.db");
+conn.Execute("<span class="operator"><span class="keyword">delete</span> <span class="keyword">from</span> bbs <span class="keyword">where</span> publish &gt;= ?<span class="string">", new[] { "</span><span class="number">2013</span>-<span class="number">05</span>-<span class="number">10</span><span class="string">" });
 </pre></td></tr></table></figure>
+
+<p>其中日期字符串不能写成&quot;2013-5-10&quot;，sqlite中和日期相关的其他操作同理。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-11T03:47:22.000Z"><a href="/2013/05/11/excellence-and-normal/">2013/5/11</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/11/excellence-and-normal/">卓越和普通</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>生活中大多数事物，卓越与普通之间的差距不会超过两倍。但是在软件行业，这种差距通常会超过几十倍或上百倍。</p>
+
       
     </div>
     <footer>
       
         
           <div class="alignleft">
-            <a href="/2013/05/09/mongodb-datetime/#more" class="more-link">阅读全文</a>
+            <a href="/2013/05/11/excellence-and-normal/#more" class="more-link">阅读全文</a>
           </div>
         
         
@@ -213,30 +214,17 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-05-08T05:47:07.000Z"><a href="/2013/05/08/mongodb-delete-document-key/">2013/5/8</a></time>
+        <time datetime="2013-05-11T03:44:28.000Z"><a href="/2013/05/11/da-gong-si-you-du/">2013/5/11</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/05/08/mongodb-delete-document-key/">MongoDB 删除document中的key</a></h1>
+    <h1 class="title"><a href="/2013/05/11/da-gong-si-you-du/">大公司有毒</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h2>需求</h2>
-<p>假设当前Document中的实体为以下形式：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre>{
-  "<span class="attribute">_id</span>" : <span class="value"><span class="number">1234</span></span>,
-  "<span class="attribute">name</span>" : <span class="value"><span class="string">"Chris"</span></span>,
-  "<span class="attribute">description</span>" : <span class="value"><span class="string">"Awesome"</span>
-}</span>
-</pre></td></tr></table></figure>
-
+        <p>每个公司都是从小变大，之所以能够变大，就是因为有可取之处，因为某些事情作对了。而公司规模扩大后，大部分公司就会变的因循守旧，他们觉得只要遵守流程就能奇迹般的继续成功。于是管理层开始充满幻觉，推行严格的流程制度。很快员工就会把遵守流程和纪律当作工作本身，而不是去创造伟大的产品。</p>
 
       
     </div>
@@ -244,7 +232,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/05/08/mongodb-delete-document-key/#more" class="more-link">阅读全文</a>
+            <a href="/2013/05/11/da-gong-si-you-du/#more" class="more-link">阅读全文</a>
           </div>
         
         
@@ -285,7 +273,7 @@
   
     <li><a href="/categories/人文思考/">人文思考</a><small>2</small></li>
   
-    <li><a href="/categories/学习/">学习</a><small>43</small></li>
+    <li><a href="/categories/学习/">学习</a><small>44</small></li>
   
     <li><a href="/categories/工作/">工作</a><small>6</small></li>
   
@@ -307,7 +295,7 @@
 <div class="widget tagcloud">
   <h3 class="title">标签云</h3>
   <div class="entry">
-    <a href="/tags/C/" style="font-size: 18.75px;">C</a><a href="/tags/C%26C%2B%2B/" style="font-size: 16.25px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 17.50px;">C++</a><a href="/tags/CSharp/" style="font-size: 19.50px;">CSharp</a><a href="/tags/Eclipse/" style="font-size: 12.50px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 14.75px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.75px;">Linux</a><a href="/tags/MongoDB/" style="font-size: 17.25px;">MongoDB</a><a href="/tags/NUnit/" style="font-size: 10.50px;">NUnit</a><a href="/tags/Redis/" style="font-size: 16.50px;">Redis</a><a href="/tags/Redmine/" style="font-size: 13.75px;">Redmine</a><a href="/tags/SQL/" style="font-size: 15.50px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 16.75px;">SQLServer</a><a href="/tags/Solr/" style="font-size: 10.25px;">Solr</a><a href="/tags/TeamViewer/" style="font-size: 16.00px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 11.50px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 11.00px;">WPF</a><a href="/tags/gdb/" style="font-size: 12.00px;">gdb</a><a href="/tags/git/" style="font-size: 13.00px;">git</a><a href="/tags/hexo/" style="font-size: 14.00px;">hexo</a><a href="/tags/jQuery/" style="font-size: 11.75px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 14.25px;">jekyll</a><a href="/tags/js/" style="font-size: 11.25px;">js</a><a href="/tags/linux/" style="font-size: 10.00px;">linux</a><a href="/tags/log4net/" style="font-size: 12.25px;">log4net</a><a href="/tags/mongodb/" style="font-size: 15.75px;">mongodb</a><a href="/tags/nodejs/" style="font-size: 17.00px;">nodejs</a><a href="/tags/pip/" style="font-size: 13.50px;">pip</a><a href="/tags/python/" style="font-size: 13.25px;">python</a><a href="/tags/socket/" style="font-size: 15.00px;">socket</a><a href="/tags/sqlite/" style="font-size: 14.50px;">sqlite</a><a href="/tags/vi/" style="font-size: 15.25px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.25px;">代码大全</a><a href="/tags/多线程/" style="font-size: 10.75px;">多线程</a><a href="/tags/工作/" style="font-size: 17.75px;">工作</a><a href="/tags/方法论/" style="font-size: 18.00px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 18.25px;">正则表达式</a><a href="/tags/汇编/" style="font-size: 19.00px;">汇编</a><a href="/tags/游戏引擎/" style="font-size: 12.75px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 18.50px;">项目管理</a>
+    <a href="/tags/C-1/" style="font-size: 18.75px;">C</a><a href="/tags/CC/" style="font-size: 12.50px;">C&C++</a><a href="/tags/C-2/" style="font-size: 18.25px;">C++</a><a href="/tags/CSharp/" style="font-size: 19.50px;">CSharp</a><a href="/tags/Eclipse/" style="font-size: 13.25px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 15.75px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.75px;">Linux</a><a href="/tags/MongoDB/" style="font-size: 17.00px;">MongoDB</a><a href="/tags/NUnit/" style="font-size: 10.25px;">NUnit</a><a href="/tags/Redis/" style="font-size: 12.75px;">Redis</a><a href="/tags/Redmine/" style="font-size: 14.75px;">Redmine</a><a href="/tags/SQL-1/" style="font-size: 15.00px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 16.25px;">SQLServer</a><a href="/tags/Solr/" style="font-size: 11.25px;">Solr</a><a href="/tags/TeamViewer/" style="font-size: 11.75px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 10.75px;">Tomcat</a><a href="/tags/cubieboard-1/" style="font-size: 16.75px;">cubieboard</a><a href="/tags/cubieboard2/" style="font-size: 17.50px;">cubieboard2</a><a href="/tags/gdb/" style="font-size: 12.25px;">gdb</a><a href="/tags/git/" style="font-size: 14.00px;">git</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/jQuery/" style="font-size: 12.00px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 15.25px;">jekyll</a><a href="/tags/js/" style="font-size: 10.50px;">js</a><a href="/tags/linux/" style="font-size: 16.00px;">linux</a><a href="/tags/log4net/" style="font-size: 13.00px;">log4net</a><a href="/tags/mongodb/" style="font-size: 13.50px;">mongodb</a><a href="/tags/nodejs/" style="font-size: 17.25px;">nodejs</a><a href="/tags/pip/" style="font-size: 14.50px;">pip</a><a href="/tags/python/" style="font-size: 14.25px;">python</a><a href="/tags/socket/" style="font-size: 11.50px;">socket</a><a href="/tags/sqlite/" style="font-size: 11.00px;">sqlite</a><a href="/tags/vi/" style="font-size: 15.50px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.25px;">代码大全</a><a href="/tags/工作/" style="font-size: 16.50px;">工作</a><a href="/tags/方法论/" style="font-size: 18.00px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 17.75px;">正则表达式</a><a href="/tags/汇编/" style="font-size: 19.00px;">汇编</a><a href="/tags/游戏引擎/" style="font-size: 13.75px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 18.50px;">项目管理</a>
   </div>
 </div>
 
@@ -318,23 +306,23 @@
   <ul class="entry">
     
       <li>
-        <a href="/2013/07/23/htmlagilitypack-cannot-get-form-innerhtml/">解决HtmlAgilityPack无法获取form标签子节点的问题</a>
+        <a href="/2013/07/28/cubieboard-as-download-server/">将cubieboard配置成远程下载服务器</a>
       </li>
     
       <li>
-        <a href="/2013/07/15/solr-match-all-search/">Solr完全匹配查询</a>
+        <a href="/2013/07/28/cubieboard-run-mongodb/">cubieboard上运行MongoDB</a>
       </li>
     
       <li>
-        <a href="/2013/07/11/use-nunit-with-debug/">如何使用NUnit的过程中进行代码调试</a>
+        <a href="/2013/07/28/linux-config-samba-to-share-files/">linux 配置samba服务来共享文件</a>
       </li>
     
       <li>
-        <a href="/2013/07/09/background-thread/">C#后台线程与前台线程的区别</a>
+        <a href="/2013/07/28/cubieboard-compile-nodejs/">cubieboard 编译nodejs 0.10.5</a>
       </li>
     
       <li>
-        <a href="/2013/07/08/httpwebrequest-timeout-exception/">解决.NET中HttpWebRequest第一次请求超时、缓慢问题</a>
+        <a href="/2013/07/28/cubieboard-wifi-config/">cubieboard 无线网络配置</a>
       </li>
     
   </ul>

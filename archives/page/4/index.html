@@ -59,18 +59,17 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-09T01:26:33.000Z"><a href="/2013/06/09/big-endian-and-little-endian/">2013/6/9</a></time>
+        <time datetime="2013-06-26T06:43:36.000Z"><a href="/2013/06/26/debug-nodejs-app/">2013/6/26</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/09/big-endian-and-little-endian/">一图道破大端序和小端序的区别</a></h1>
+    <h1 class="title"><a href="/2013/06/26/debug-nodejs-app/">调试nodejs应用</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>在裘宗燕翻译的《程序设计实践》里，这对术语并没有翻译为“大端”和小端，而是“高尾端”和“低尾端”，这就好理解了：如果把一个数看成一个字符串，比如11223344看成&quot;11223344&quot;，末尾是个&#39;\0&#39;，&#39;11&#39;到&#39;44&#39;个占用一个存储单元，那么它的尾端很显然是44，前面的高还是低就表示尾端放在高地址还是低地址，它在内存中的放法非常直观，如下图：</p>
-<p><img src="/images/endian.png" alt="大端序与小端序"></p>
+        <p>nodejs的调试方案有不少，可以使用内置的调试功能，在代码中添加debugger指令；可以使用Eclipse加V8调试，这里介绍的是本人比较喜欢的node-inspector调试方案。</p>
 
       
     </div>
@@ -78,7 +77,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/06/09/big-endian-and-little-endian/#more" class="more-link">阅读全文</a>
+            <a href="/2013/06/26/debug-nodejs-app/#more" class="more-link">阅读全文</a>
           </div>
         
         
@@ -96,17 +95,19 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-08T05:48:56.000Z"><a href="/2013/06/08/mingw-cygwin/">2013/6/8</a></time>
+        <time datetime="2013-06-20T00:54:23.000Z"><a href="/2013/06/20/to-be-a-better-engineer/">2013/6/20</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/08/mingw-cygwin/">MinGW和Cygwin的区别</a></h1>
+    <h1 class="title"><a href="/2013/06/20/to-be-a-better-engineer/">努力成为更优秀的工程师</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Unix下编译通过的C代码,在win32下编译是不能通过的 ,当然Unix 和win32的API都是符合标准C,也就是说,大多数函数调用在unix和win32下是相同的.但是,unix有自己一些独特的API（如fork,spawn,signals,select,sockets等）,如果代码中使用了这些API,在win32下当然找不到对应的库.</p>
+        <h2>甘于平凡</h2>
+<p>程序员真的很高傲，在我接触过的人中，包括我自己也是。我以前经常对一些简单的代码感到不屑，而总想在项目中写一些犀利的代码，让人看起来很NB，但结果总是和想象差太远，代码总是写的很差，逻辑也不够清晰。归根到底，是我带着这样的思想去写代码，而忽略了编程的根本：解决问题。</p>
+<p>踏实的做事，会有意想不到的收获。</p>
 
       
     </div>
@@ -114,7 +115,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/06/08/mingw-cygwin/#more" class="more-link">阅读全文</a>
+            <a href="/2013/06/20/to-be-a-better-engineer/#more" class="more-link">阅读全文</a>
           </div>
         
         
@@ -132,20 +133,17 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-07T13:11:09.000Z"><a href="/2013/06/07/assembly-register/">2013/6/7</a></time>
+        <time datetime="2013-06-18T11:32:30.000Z"><a href="/2013/06/18/c-where-to-define-var/">2013/6/18</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/07/assembly-register/">汇编语言学习——寄存器</a></h1>
+    <h1 class="title"><a href="/2013/06/18/c-where-to-define-var/">C语言变量定义的位置</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h2>通用寄存器</h2>
-<ul>
-<li>在进行数据传送或运算时，需注意指令的两个操作对象位数应当一致，如<code>mov ax, bx</code>，不能将al mov到ax中。</li>
-</ul>
+        <p>N久没有捣鼓C语言的东西了，今天打算用C写个大文件预览的工具，结果遇到了一堆低级的语法问题。其中一点是关于变量定义位置的问题：</p>
 
       
     </div>
@@ -153,7 +151,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/06/07/assembly-register/#more" class="more-link">阅读全文</a>
+            <a href="/2013/06/18/c-where-to-define-var/#more" class="more-link">阅读全文</a>
           </div>
         
         
@@ -171,17 +169,17 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-06T09:06:01.000Z"><a href="/2013/06/06/linux-nohup/">2013/6/6</a></time>
+        <time datetime="2013-06-18T11:15:47.000Z"><a href="/2013/06/18/c-memory-alloc/">2013/6/18</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/06/linux-nohup/">linux 通过nohup使应用退出终端后继续运行</a></h1>
+    <h1 class="title"><a href="/2013/06/18/c-memory-alloc/">C/C++应用程序内存划分</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>使用SSH登录到Linux，系统会创建一个Session表示本次会话，且在此Session上运行的程序会和Session关联，退出SSH会话，那么和Session相关联的程序也会关闭。</p>
+        <p>一个由C/C++编译的程序占用的内存分为以下几个部分：</p>
 
       
     </div>
@@ -189,7 +187,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/06/06/linux-nohup/#more" class="more-link">阅读全文</a>
+            <a href="/2013/06/18/c-memory-alloc/#more" class="more-link">阅读全文</a>
           </div>
         
         
@@ -207,17 +205,17 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-06T01:02:30.000Z"><a href="/2013/06/06/socket-send-recv/">2013/6/6</a></time>
+        <time datetime="2013-06-17T06:25:30.000Z"><a href="/2013/06/17/csharp-unhandled-exception/">2013/6/17</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/06/socket-send-recv/">Socket TCP和UDP收发包数据包的区别</a></h1>
+    <h1 class="title"><a href="/2013/06/17/csharp-unhandled-exception/">C#处理未捕获的异常</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>一个包没有固定长度，以太网限制在46－1500字节，1500就是以太网的MTU，超过这个量，TCP会为IP数据报设置偏移量进行分片传输，现在一般可允许应用层设置8k（NTFS系统）的缓冲区，8k的数据由底层分片，而应用层看来只是一次发送。</p>
+        <p>尽管在程序中添加了try...catch来处理异常，也很难保证程序就不抛异常，程序崩溃是件令人很不爽的事情，在.net应用程序级别，如何体面的处理异常呢？</p>
 
       
     </div>
@@ -225,7 +223,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/06/06/socket-send-recv/#more" class="more-link">阅读全文</a>
+            <a href="/2013/06/17/csharp-unhandled-exception/#more" class="more-link">阅读全文</a>
           </div>
         
         
@@ -266,7 +264,7 @@
   
     <li><a href="/categories/人文思考/">人文思考</a><small>2</small></li>
   
-    <li><a href="/categories/学习/">学习</a><small>43</small></li>
+    <li><a href="/categories/学习/">学习</a><small>44</small></li>
   
     <li><a href="/categories/工作/">工作</a><small>6</small></li>
   
@@ -288,7 +286,7 @@
 <div class="widget tagcloud">
   <h3 class="title">标签云</h3>
   <div class="entry">
-    <a href="/tags/C/" style="font-size: 18.75px;">C</a><a href="/tags/C%26C%2B%2B/" style="font-size: 16.25px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 17.50px;">C++</a><a href="/tags/CSharp/" style="font-size: 19.50px;">CSharp</a><a href="/tags/Eclipse/" style="font-size: 12.50px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 14.75px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.75px;">Linux</a><a href="/tags/MongoDB/" style="font-size: 17.25px;">MongoDB</a><a href="/tags/NUnit/" style="font-size: 10.50px;">NUnit</a><a href="/tags/Redis/" style="font-size: 16.50px;">Redis</a><a href="/tags/Redmine/" style="font-size: 13.75px;">Redmine</a><a href="/tags/SQL/" style="font-size: 15.50px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 16.75px;">SQLServer</a><a href="/tags/Solr/" style="font-size: 10.25px;">Solr</a><a href="/tags/TeamViewer/" style="font-size: 16.00px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 11.50px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 11.00px;">WPF</a><a href="/tags/gdb/" style="font-size: 12.00px;">gdb</a><a href="/tags/git/" style="font-size: 13.00px;">git</a><a href="/tags/hexo/" style="font-size: 14.00px;">hexo</a><a href="/tags/jQuery/" style="font-size: 11.75px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 14.25px;">jekyll</a><a href="/tags/js/" style="font-size: 11.25px;">js</a><a href="/tags/linux/" style="font-size: 10.00px;">linux</a><a href="/tags/log4net/" style="font-size: 12.25px;">log4net</a><a href="/tags/mongodb/" style="font-size: 15.75px;">mongodb</a><a href="/tags/nodejs/" style="font-size: 17.00px;">nodejs</a><a href="/tags/pip/" style="font-size: 13.50px;">pip</a><a href="/tags/python/" style="font-size: 13.25px;">python</a><a href="/tags/socket/" style="font-size: 15.00px;">socket</a><a href="/tags/sqlite/" style="font-size: 14.50px;">sqlite</a><a href="/tags/vi/" style="font-size: 15.25px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.25px;">代码大全</a><a href="/tags/多线程/" style="font-size: 10.75px;">多线程</a><a href="/tags/工作/" style="font-size: 17.75px;">工作</a><a href="/tags/方法论/" style="font-size: 18.00px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 18.25px;">正则表达式</a><a href="/tags/汇编/" style="font-size: 19.00px;">汇编</a><a href="/tags/游戏引擎/" style="font-size: 12.75px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 18.50px;">项目管理</a>
+    <a href="/tags/C-1/" style="font-size: 18.75px;">C</a><a href="/tags/CC/" style="font-size: 12.50px;">C&C++</a><a href="/tags/C-2/" style="font-size: 18.25px;">C++</a><a href="/tags/CSharp/" style="font-size: 19.50px;">CSharp</a><a href="/tags/Eclipse/" style="font-size: 13.25px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 15.75px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.75px;">Linux</a><a href="/tags/MongoDB/" style="font-size: 17.00px;">MongoDB</a><a href="/tags/NUnit/" style="font-size: 10.25px;">NUnit</a><a href="/tags/Redis/" style="font-size: 12.75px;">Redis</a><a href="/tags/Redmine/" style="font-size: 14.75px;">Redmine</a><a href="/tags/SQL-1/" style="font-size: 15.00px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 16.25px;">SQLServer</a><a href="/tags/Solr/" style="font-size: 11.25px;">Solr</a><a href="/tags/TeamViewer/" style="font-size: 11.75px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 10.75px;">Tomcat</a><a href="/tags/cubieboard-1/" style="font-size: 16.75px;">cubieboard</a><a href="/tags/cubieboard2/" style="font-size: 17.50px;">cubieboard2</a><a href="/tags/gdb/" style="font-size: 12.25px;">gdb</a><a href="/tags/git/" style="font-size: 14.00px;">git</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/jQuery/" style="font-size: 12.00px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 15.25px;">jekyll</a><a href="/tags/js/" style="font-size: 10.50px;">js</a><a href="/tags/linux/" style="font-size: 16.00px;">linux</a><a href="/tags/log4net/" style="font-size: 13.00px;">log4net</a><a href="/tags/mongodb/" style="font-size: 13.50px;">mongodb</a><a href="/tags/nodejs/" style="font-size: 17.25px;">nodejs</a><a href="/tags/pip/" style="font-size: 14.50px;">pip</a><a href="/tags/python/" style="font-size: 14.25px;">python</a><a href="/tags/socket/" style="font-size: 11.50px;">socket</a><a href="/tags/sqlite/" style="font-size: 11.00px;">sqlite</a><a href="/tags/vi/" style="font-size: 15.50px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.25px;">代码大全</a><a href="/tags/工作/" style="font-size: 16.50px;">工作</a><a href="/tags/方法论/" style="font-size: 18.00px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 17.75px;">正则表达式</a><a href="/tags/汇编/" style="font-size: 19.00px;">汇编</a><a href="/tags/游戏引擎/" style="font-size: 13.75px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 18.50px;">项目管理</a>
   </div>
 </div>
 
@@ -299,23 +297,23 @@
   <ul class="entry">
     
       <li>
-        <a href="/2013/07/23/htmlagilitypack-cannot-get-form-innerhtml/">解决HtmlAgilityPack无法获取form标签子节点的问题</a>
+        <a href="/2013/07/28/cubieboard-as-download-server/">将cubieboard配置成远程下载服务器</a>
       </li>
     
       <li>
-        <a href="/2013/07/15/solr-match-all-search/">Solr完全匹配查询</a>
+        <a href="/2013/07/28/cubieboard-run-mongodb/">cubieboard上运行MongoDB</a>
       </li>
     
       <li>
-        <a href="/2013/07/11/use-nunit-with-debug/">如何使用NUnit的过程中进行代码调试</a>
+        <a href="/2013/07/28/linux-config-samba-to-share-files/">linux 配置samba服务来共享文件</a>
       </li>
     
       <li>
-        <a href="/2013/07/09/background-thread/">C#后台线程与前台线程的区别</a>
+        <a href="/2013/07/28/cubieboard-compile-nodejs/">cubieboard 编译nodejs 0.10.5</a>
       </li>
     
       <li>
-        <a href="/2013/07/08/httpwebrequest-timeout-exception/">解决.NET中HttpWebRequest第一次请求超时、缓慢问题</a>
+        <a href="/2013/07/28/cubieboard-wifi-config/">cubieboard 无线网络配置</a>
       </li>
     
   </ul>
