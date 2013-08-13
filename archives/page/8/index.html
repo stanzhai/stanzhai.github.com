@@ -59,6 +59,87 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-05-11T15:44:49.000Z"><a href="/2013/05/11/sqlite-delete-data-use-datetime-string/">2013/5/11</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/11/sqlite-delete-data-use-datetime-string/">sqlite按照日期删除数据是需要注意的地方</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>注意点</h2>
+<p>在sqlite中按照日期删除数据时，日期格式必须是yyyy-MM-dd HH:mm:ss这种格式的。</p>
+<p>如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>var conn = new SQLiteConnection("data.db");
+conn.Execute("<span class="operator"><span class="keyword">delete</span> <span class="keyword">from</span> bbs <span class="keyword">where</span> publish &gt;</span>= ?", new[] { "2013-05-10" });
+</pre></td></tr></table></figure>
+
+<p>其中日期字符串不能写成&quot;2013-5-10&quot;，sqlite中和日期相关的其他操作同理。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/05/11/sqlite-delete-data-use-datetime-string/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-11T03:47:22.000Z"><a href="/2013/05/11/excellence-and-normal/">2013/5/11</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/05/11/excellence-and-normal/">卓越和普通</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>生活中大多数事物，卓越与普通之间的差距不会超过两倍。但是在软件行业，这种差距通常会超过几十倍或上百倍。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/05/11/excellence-and-normal/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-05-11T03:44:28.000Z"><a href="/2013/05/11/da-gong-si-you-du/">2013/5/11</a></time>
       
       
@@ -164,83 +245,6 @@
 
 
   
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-11T03:10:53.000Z"><a href="/2013/05/11/folklore/">2013/5/11</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/11/folklore/">陈规陋习</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>很多时候我们初入江湖，不知深浅，不知道什么事能做，怎么做，为什么要这么做，即使怯生生问了，得到的答复往往是，That&#39;s the just way it&#39;s done（我们向来这么做），于是我们慢慢也变得成熟、圆滑和懒惰，不再去从深层次思考『为什么要这么做？』因为别人也这么做。慢慢的，这些东西就成为了folklore（陈规陋习）.</p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/05/11/folklore/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-05-09T08:38:20.000Z"><a href="/2013/05/09/mongodb-datetime/">2013/5/9</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/05/09/mongodb-datetime/">MongoDB中日期的时区问题</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2>问题描述</h2>
-<p>使用MongoDB，发现插入到数据库中的时间总是晚了8个小时，如：<code>&quot;Insert&quot; : ISODate(&quot;2013-05-13T01:32:44.401Z&quot;)</code>，突然想到，我们所在的时区为东八区，难道MongoDB中默认时区为0，到网上查了一下还真是这样<code>MongoDB采用标准时区存储日期</code>。</p>
-<h2>解决方案</h2>
-<p>这个问题需要在程序中作处理，本人使用的C#版的官方MongoDB驱动，在数据模型上添加BsonDateTimeOptions特性即可，如：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>[BsonDateTimeOptions(Kind = DateTimeKind.Local)]
-<span class="keyword">public</span> DateTime Publish { <span class="keyword">get</span>; <span class="keyword">set</span>; }
-</pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
 
   <nav id="pagination">
   
@@ -270,7 +274,7 @@
   
     <li><a href="/categories/人文思考/">人文思考</a><small>2</small></li>
   
-    <li><a href="/categories/学习/">学习</a><small>45</small></li>
+    <li><a href="/categories/学习/">学习</a><small>47</small></li>
   
     <li><a href="/categories/工作/">工作</a><small>6</small></li>
   
@@ -292,7 +296,7 @@
 <div class="widget tagcloud">
   <h3 class="title">标签云</h3>
   <div class="entry">
-    <a href="/tags/C-1/" style="font-size: 18.75px;">C</a><a href="/tags/CC/" style="font-size: 12.50px;">C&C++</a><a href="/tags/C-2/" style="font-size: 18.25px;">C++</a><a href="/tags/CSharp/" style="font-size: 19.50px;">CSharp</a><a href="/tags/Eclipse/" style="font-size: 13.25px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 15.75px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.75px;">Linux</a><a href="/tags/MongoDB/" style="font-size: 17.00px;">MongoDB</a><a href="/tags/NUnit/" style="font-size: 10.25px;">NUnit</a><a href="/tags/Redis/" style="font-size: 12.75px;">Redis</a><a href="/tags/Redmine/" style="font-size: 14.75px;">Redmine</a><a href="/tags/SQL-1/" style="font-size: 15.00px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 16.00px;">SQLServer</a><a href="/tags/Solr/" style="font-size: 11.25px;">Solr</a><a href="/tags/TeamViewer/" style="font-size: 11.75px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 10.75px;">Tomcat</a><a href="/tags/cubieboard-1/" style="font-size: 16.75px;">cubieboard</a><a href="/tags/cubieboard2/" style="font-size: 17.50px;">cubieboard2</a><a href="/tags/gdb/" style="font-size: 12.25px;">gdb</a><a href="/tags/git/" style="font-size: 14.00px;">git</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/jQuery/" style="font-size: 12.00px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 15.25px;">jekyll</a><a href="/tags/js/" style="font-size: 10.50px;">js</a><a href="/tags/linux/" style="font-size: 16.25px;">linux</a><a href="/tags/log4net/" style="font-size: 13.00px;">log4net</a><a href="/tags/mongodb/" style="font-size: 13.50px;">mongodb</a><a href="/tags/nodejs/" style="font-size: 17.25px;">nodejs</a><a href="/tags/pip/" style="font-size: 14.50px;">pip</a><a href="/tags/python/" style="font-size: 14.25px;">python</a><a href="/tags/socket/" style="font-size: 11.50px;">socket</a><a href="/tags/sqlite/" style="font-size: 11.00px;">sqlite</a><a href="/tags/vi/" style="font-size: 15.50px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.25px;">代码大全</a><a href="/tags/工作/" style="font-size: 18.00px;">工作</a><a href="/tags/方法论/" style="font-size: 16.50px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 17.75px;">正则表达式</a><a href="/tags/汇编/" style="font-size: 19.00px;">汇编</a><a href="/tags/游戏引擎/" style="font-size: 13.75px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 18.50px;">项目管理</a>
+    <a href="/tags/C/" style="font-size: 18.75px;">C</a><a href="/tags/C%26C%2B%2B/" style="font-size: 14.75px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 17.50px;">C++</a><a href="/tags/CSharp/" style="font-size: 19.50px;">CSharp</a><a href="/tags/Eclipse/" style="font-size: 11.75px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 13.75px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.75px;">Linux</a><a href="/tags/MongoDB/" style="font-size: 18.25px;">MongoDB</a><a href="/tags/NUnit/" style="font-size: 13.00px;">NUnit</a><a href="/tags/Redis/" style="font-size: 15.00px;">Redis</a><a href="/tags/Redmine/" style="font-size: 10.00px;">Redmine</a><a href="/tags/SQL/" style="font-size: 14.25px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 16.25px;">SQLServer</a><a href="/tags/Solr/" style="font-size: 10.25px;">Solr</a><a href="/tags/TeamViewer/" style="font-size: 15.25px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 16.00px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 10.75px;">WPF</a><a href="/tags/gdb/" style="font-size: 11.25px;">gdb</a><a href="/tags/git/" style="font-size: 12.25px;">git</a><a href="/tags/hexo/" style="font-size: 13.25px;">hexo</a><a href="/tags/jQuery/" style="font-size: 11.00px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 13.50px;">jekyll</a><a href="/tags/js/" style="font-size: 16.50px;">js</a><a href="/tags/linux/" style="font-size: 18.50px;">linux</a><a href="/tags/log4net/" style="font-size: 11.50px;">log4net</a><a href="/tags/mongodb/" style="font-size: 14.50px;">mongodb</a><a href="/tags/nodejs/" style="font-size: 16.75px;">nodejs</a><a href="/tags/pip/" style="font-size: 12.75px;">pip</a><a href="/tags/python/" style="font-size: 12.50px;">python</a><a href="/tags/socket/" style="font-size: 15.50px;">socket</a><a href="/tags/sqlite/" style="font-size: 15.75px;">sqlite</a><a href="/tags/vi/" style="font-size: 14.00px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.25px;">代码大全</a><a href="/tags/多线程/" style="font-size: 10.50px;">多线程</a><a href="/tags/工作/" style="font-size: 17.75px;">工作</a><a href="/tags/方法论/" style="font-size: 18.00px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 17.00px;">正则表达式</a><a href="/tags/汇编/" style="font-size: 19.00px;">汇编</a><a href="/tags/游戏引擎/" style="font-size: 12.00px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 17.25px;">项目管理</a>
   </div>
 </div>
 
@@ -301,6 +305,14 @@
 <div class="widget tag">
   <h3 class="title">最新博文</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2013/08/13/csharp-use-synchronizationcontext-update-ui-in-multithreading/">C#在多线程环境中使用SynchronizationContext更新控件状态</a>
+      </li>
+    
+      <li>
+        <a href="/2013/08/02/js-make-regex/">javascript动态构造正则表达式</a>
+      </li>
     
       <li>
         <a href="/2013/07/29/nohup-do-not-output-logfile/">nohup不输出日志信息的方法，及linux重定向学习</a>
@@ -312,14 +324,6 @@
     
       <li>
         <a href="/2013/07/28/cubieboard-run-mongodb/">cubieboard上运行MongoDB</a>
-      </li>
-    
-      <li>
-        <a href="/2013/07/28/linux-config-samba-to-share-files/">linux 配置samba服务来共享文件</a>
-      </li>
-    
-      <li>
-        <a href="/2013/07/28/cubieboard-compile-nodejs/">cubieboard 编译nodejs 0.10.5</a>
       </li>
     
   </ul>

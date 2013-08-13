@@ -69,9 +69,12 @@
 
 <p>于是乎，从网上搜索mongodb arm平台的相关信息，找到了<a href="https://github.com/skrabban/mongo-nonx86">https://github.com/skrabban/mongo-nonx86</a> ,使用git clone其代码，安装scons进行编译，经过数小时漫长的等待，终于编译完了，看其生成的mongodb文件有120M，妈呀，这也太大了吧，都快赶上一个系统了，试着运行了一下倒是没有报错，关键是这个可执行文件确实大了点，感觉很不爽。</p>
 <p>继续找资料发现github上还有个mongo-arm的开源项目<a href="https://github.com/wtfuzz/mongo-arm">https://github.com/wtfuzz/mongo-arm</a>，后来又找到了编译好了的bin包<a href="https://s3.amazonaws.com/wtfuzz/mongo-arm/mongodb-linux-armv7l-2.4.1.tgz">https://s3.amazonaws.com/wtfuzz/mongo-arm/mongodb-linux-armv7l-2.4.1.tgz</a>，由于编译比较慢，我就直接下载了bin包，解压后发现mongod只有9.8M，心中暗喜，这还差不多嘛，俺的cubieboard上本来就没有多少空间。创建了db文件夹，试着运行了下<code>mongod --dbpath=db</code>，又报了如下的错误：</p>
-<pre><code><figure class="highlight"><pre><span class="constant">Assertion</span><span class="symbol">:</span> <span class="number">14043</span><span class="symbol">:clear</span> tmp files caught exception <span class="symbol">exception:</span> <span class="symbol">locale:</span><span class="symbol">:facet</span><span class="symbol">:</span><span class="symbol">:_S_create_c_locale</span> name <span class="keyword">not</span> valid
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="constant">Assertion</span><span class="symbol">:</span> <span class="number">14043</span><span class="symbol">:clear</span> tmp files caught exception <span class="symbol">exception:</span> <span class="symbol">locale:</span><span class="symbol">:facet</span><span class="symbol">:</span><span class="symbol">:_S_create_c_locale</span> name <span class="keyword">not</span> valid
 exception <span class="keyword">in</span> <span class="symbol">initAndListen:</span> <span class="number">14043</span> clear tmp files caught exception <span class="symbol">exception:</span> <span class="symbol">locale:</span><span class="symbol">:facet</span><span class="symbol">:</span><span class="symbol">:_S_create_c_locale</span> name <span class="keyword">not</span> valid, terminating
-</pre></figure></code></pre>
+</pre></td></tr></table></figure>
+
 <p>好吧，没有看过mongodb的源码，继续查找解决方案，原来是local设置的问题，使用<code>export LC_ALL=&quot;C&quot;</code>去除本地设置，在运行mongodb就可以了。</p>
 <p>有图有真相(真是好折腾啊)：</p>
 <p><img src="/images/cubie-mongodb.png" alt="在cubieboard2上运行mongodb"></p>
@@ -89,7 +92,7 @@ exception <span class="keyword">in</span> <span class="symbol">initAndListen:</s
         
   
   <div class="tags">
-    <a href="/tags/cubieboard-1/">cubieboard</a>
+    <a href="/tags/cubieboard/">cubieboard</a>
   </div>
 
         
@@ -143,7 +146,7 @@ exception <span class="keyword">in</span> <span class="symbol">initAndListen:</s
   
     <li><a href="/categories/人文思考/">人文思考</a><small>2</small></li>
   
-    <li><a href="/categories/学习/">学习</a><small>45</small></li>
+    <li><a href="/categories/学习/">学习</a><small>47</small></li>
   
     <li><a href="/categories/工作/">工作</a><small>6</small></li>
   
@@ -165,7 +168,7 @@ exception <span class="keyword">in</span> <span class="symbol">initAndListen:</s
 <div class="widget tagcloud">
   <h3 class="title">标签云</h3>
   <div class="entry">
-    <a href="/tags/C-1/" style="font-size: 18.75px;">C</a><a href="/tags/CC/" style="font-size: 12.50px;">C&C++</a><a href="/tags/C-2/" style="font-size: 18.25px;">C++</a><a href="/tags/CSharp/" style="font-size: 19.50px;">CSharp</a><a href="/tags/Eclipse/" style="font-size: 13.25px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 15.75px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.75px;">Linux</a><a href="/tags/MongoDB/" style="font-size: 17.00px;">MongoDB</a><a href="/tags/NUnit/" style="font-size: 10.25px;">NUnit</a><a href="/tags/Redis/" style="font-size: 12.75px;">Redis</a><a href="/tags/Redmine/" style="font-size: 14.75px;">Redmine</a><a href="/tags/SQL-1/" style="font-size: 15.00px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 16.00px;">SQLServer</a><a href="/tags/Solr/" style="font-size: 11.25px;">Solr</a><a href="/tags/TeamViewer/" style="font-size: 11.75px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 10.75px;">Tomcat</a><a href="/tags/cubieboard-1/" style="font-size: 16.75px;">cubieboard</a><a href="/tags/cubieboard2/" style="font-size: 17.50px;">cubieboard2</a><a href="/tags/gdb/" style="font-size: 12.25px;">gdb</a><a href="/tags/git/" style="font-size: 14.00px;">git</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/jQuery/" style="font-size: 12.00px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 15.25px;">jekyll</a><a href="/tags/js/" style="font-size: 10.50px;">js</a><a href="/tags/linux/" style="font-size: 16.25px;">linux</a><a href="/tags/log4net/" style="font-size: 13.00px;">log4net</a><a href="/tags/mongodb/" style="font-size: 13.50px;">mongodb</a><a href="/tags/nodejs/" style="font-size: 17.25px;">nodejs</a><a href="/tags/pip/" style="font-size: 14.50px;">pip</a><a href="/tags/python/" style="font-size: 14.25px;">python</a><a href="/tags/socket/" style="font-size: 11.50px;">socket</a><a href="/tags/sqlite/" style="font-size: 11.00px;">sqlite</a><a href="/tags/vi/" style="font-size: 15.50px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.25px;">代码大全</a><a href="/tags/工作/" style="font-size: 18.00px;">工作</a><a href="/tags/方法论/" style="font-size: 16.50px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 17.75px;">正则表达式</a><a href="/tags/汇编/" style="font-size: 19.00px;">汇编</a><a href="/tags/游戏引擎/" style="font-size: 13.75px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 18.50px;">项目管理</a>
+    <a href="/tags/C/" style="font-size: 18.75px;">C</a><a href="/tags/C%26C%2B%2B/" style="font-size: 14.75px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 17.50px;">C++</a><a href="/tags/CSharp/" style="font-size: 19.50px;">CSharp</a><a href="/tags/Eclipse/" style="font-size: 11.75px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 13.75px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.75px;">Linux</a><a href="/tags/MongoDB/" style="font-size: 18.25px;">MongoDB</a><a href="/tags/NUnit/" style="font-size: 13.00px;">NUnit</a><a href="/tags/Redis/" style="font-size: 15.00px;">Redis</a><a href="/tags/Redmine/" style="font-size: 10.00px;">Redmine</a><a href="/tags/SQL/" style="font-size: 14.25px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 16.25px;">SQLServer</a><a href="/tags/Solr/" style="font-size: 10.25px;">Solr</a><a href="/tags/TeamViewer/" style="font-size: 15.25px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 16.00px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 10.75px;">WPF</a><a href="/tags/gdb/" style="font-size: 11.25px;">gdb</a><a href="/tags/git/" style="font-size: 12.25px;">git</a><a href="/tags/hexo/" style="font-size: 13.25px;">hexo</a><a href="/tags/jQuery/" style="font-size: 11.00px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 13.50px;">jekyll</a><a href="/tags/js/" style="font-size: 16.50px;">js</a><a href="/tags/linux/" style="font-size: 18.50px;">linux</a><a href="/tags/log4net/" style="font-size: 11.50px;">log4net</a><a href="/tags/mongodb/" style="font-size: 14.50px;">mongodb</a><a href="/tags/nodejs/" style="font-size: 16.75px;">nodejs</a><a href="/tags/pip/" style="font-size: 12.75px;">pip</a><a href="/tags/python/" style="font-size: 12.50px;">python</a><a href="/tags/socket/" style="font-size: 15.50px;">socket</a><a href="/tags/sqlite/" style="font-size: 15.75px;">sqlite</a><a href="/tags/vi/" style="font-size: 14.00px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.25px;">代码大全</a><a href="/tags/多线程/" style="font-size: 10.50px;">多线程</a><a href="/tags/工作/" style="font-size: 17.75px;">工作</a><a href="/tags/方法论/" style="font-size: 18.00px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 17.00px;">正则表达式</a><a href="/tags/汇编/" style="font-size: 19.00px;">汇编</a><a href="/tags/游戏引擎/" style="font-size: 12.00px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 17.25px;">项目管理</a>
   </div>
 </div>
 
@@ -174,6 +177,14 @@ exception <span class="keyword">in</span> <span class="symbol">initAndListen:</s
 <div class="widget tag">
   <h3 class="title">最新博文</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2013/08/13/csharp-use-synchronizationcontext-update-ui-in-multithreading/">C#在多线程环境中使用SynchronizationContext更新控件状态</a>
+      </li>
+    
+      <li>
+        <a href="/2013/08/02/js-make-regex/">javascript动态构造正则表达式</a>
+      </li>
     
       <li>
         <a href="/2013/07/29/nohup-do-not-output-logfile/">nohup不输出日志信息的方法，及linux重定向学习</a>
@@ -185,14 +196,6 @@ exception <span class="keyword">in</span> <span class="symbol">initAndListen:</s
     
       <li>
         <a href="/2013/07/28/cubieboard-run-mongodb/">cubieboard上运行MongoDB</a>
-      </li>
-    
-      <li>
-        <a href="/2013/07/28/linux-config-samba-to-share-files/">linux 配置samba服务来共享文件</a>
-      </li>
-    
-      <li>
-        <a href="/2013/07/28/cubieboard-compile-nodejs/">cubieboard 编译nodejs 0.10.5</a>
       </li>
     
   </ul>
