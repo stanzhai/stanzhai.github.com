@@ -59,6 +59,122 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-03-08T00:00:00.000Z"><a href="/2013/03/08/work-thinking/">2013/3/8</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/03/08/work-thinking/">工作感想</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>大陆互联网是一个赤裸裸的、弱肉强食的热带雨林，机会到处都是，但是作为掌握某个技术的开发人员，你永远只是猎物。</p>
+<p>在公司里做成大多数的事不可能因为某个人的努力、依赖某一项技术，往往靠很多人之间的协作，靠的人与人之间的沟通；因此我对自己的定位是，你要“不择手段”将上面交代的任务完成，同时让大多数参与其中的人都满意，至于使用的什么技术，真的不重要。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/03/08/work-thinking/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-03-04T00:00:00.000Z"><a href="/2013/03/04/linux-welcome/">2013/3/4</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/03/04/linux-welcome/">修改Linux，SSH登录欢迎信息</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>此处省略一万字，修改方法：</p>
+<pre><code><span class="title">vi</span> /etc/motd
+</code></pre>
+<p>使用root用户编辑上述文件，退出SSH，重新连接就可以看到新增的欢迎信息了。</p>
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/03/04/linux-welcome/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-03-01T00:00:00.000Z"><a href="/2013/03/01/disable-log4net-log/">2013/3/1</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/03/01/disable-log4net-log/">log4net屏蔽NHibernate日志</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>项目中使用了NHibernate作为数据库ORM组件，同时又使用了log4net作为日志组件。默认情况下，NHibernate会打印对数据库的操作日志，和我们自己写的日志消息混杂在一起，导致日志数量相当庞大，查看不方便。可以在log4net的配置文件中添加如下配置，来屏蔽NHibernate的日志输出：</p>
+<pre><code><span class="tag">&lt;<span class="title">logger</span> <span class="attribute">name</span>=<span class="value">"NHibernate"</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">additivity</span> <span class="attribute">value</span>=<span class="value">"false"</span> /&gt;</span>
+<span class="tag">&lt;/<span class="title">logger</span>&gt;</span>
+</code></pre>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/03/01/disable-log4net-log/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-02-28T00:00:00.000Z"><a href="/2013/02/28/sqlite-database-error/">2013/2/28</a></time>
       
       
@@ -132,127 +248,13 @@ database disk image is malformed
 
 
   
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-01-30T00:00:00.000Z"><a href="/2013/01/30/jekyll-encoding-problem/">2013/1/30</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/01/30/jekyll-encoding-problem/">jekyll 中文编码问题</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2>问题描述</h2>
-<p>本人在Windows下，安装Ruby和jekyll。</p>
-<p>安装完jekyll,使用jekyll命令生成静态页面时，提示：YAML Exception reading about.md: invalid byte sequence in GB2312，导致无法生成静态页面。</p>
-<p>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/01/30/jekyll-encoding-problem/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-01-30T00:00:00.000Z"><a href="/2013/01/30/install-redmine/">2013/1/30</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/01/30/install-redmine/">Windows平台安装Redmine2.2.x</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2>安装准备</h2>
-<ol>
-<li><a href="http://rubyinstaller.org/downloads/">下载RubyInstaller和Development Kit</a></li>
-<li>下载<a href="http://www.mysql.com/downloads/mysql/">MySql</a></li>
-<li>下载<a href="http://cdn.mysql.com/Downloads/Connector-C/mysql-connector-c-noinstall-6.0.2-win32.zip">mysql-connector-c-noinstall-6.0.2-win32.zip</a></li>
-<li>下载<a href="http://rubyforge.org/frs/?group_id=1850">Redmine</a>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/01/30/install-redmine/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-01-15T00:00:00.000Z"><a href="/2013/01/15/welcome-to-software-construction/">2013/1/15</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/01/15/welcome-to-software-construction/">欢迎进入软件构建的世界</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1>什么是软件构建</h1>
-<p>构建活动主要是编码和调试，但也涉及详细设计、开发构建、规划构建、单元测试、集成、集成测试等其他活动。</p>
-<h2>编码（Coding）与编程（Programming）</h2>
-<p>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/01/15/welcome-to-software-construction/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  
 
   <nav id="pagination">
   
     <a href="/archives/2013/page/17/" class="alignleft prev">上一页</a>
   
+  
+    <a href="/archives/2013/page/19/" class="alignright next">下一页</a>
   
   <div class="clearfix"></div>
 </nav>
@@ -275,7 +277,7 @@ database disk image is malformed
   
     <li><a href="/categories/人文思考/">人文思考</a><small>2</small></li>
   
-    <li><a href="/categories/学习/">学习</a><small>47</small></li>
+    <li><a href="/categories/学习/">学习</a><small>49</small></li>
   
     <li><a href="/categories/工作/">工作</a><small>6</small></li>
   
@@ -285,7 +287,7 @@ database disk image is malformed
   
     <li><a href="/categories/读书笔记/">读书笔记</a><small>5</small></li>
   
-    <li><a href="/categories/问题修复/">问题修复</a><small>19</small></li>
+    <li><a href="/categories/问题修复/">问题修复</a><small>20</small></li>
   
     <li><a href="/categories/学习/项目管理/">项目管理</a><small>1</small></li>
   
@@ -308,23 +310,23 @@ database disk image is malformed
   <ul class="entry">
     
       <li>
+        <a href="/2013/08/22/csharp-build-xmlrpc-server-without-iis/">C#无需IIS构建XmlRpc服务器</a>
+      </li>
+    
+      <li>
+        <a href="/2013/08/22/can-not-push-rep-to-heroku/">解决git push heroku超时的问题</a>
+      </li>
+    
+      <li>
+        <a href="/2013/08/21/cpp-const/">C++ const学习总结(不整理还真觉得有些乱)</a>
+      </li>
+    
+      <li>
         <a href="/2013/08/13/csharp-use-synchronizationcontext-update-ui-in-multithreading/">C#在多线程环境中使用SynchronizationContext更新控件状态</a>
       </li>
     
       <li>
         <a href="/2013/08/02/js-make-regex/">javascript动态构造正则表达式</a>
-      </li>
-    
-      <li>
-        <a href="/2013/07/29/nohup-do-not-output-logfile/">nohup不输出日志信息的方法，及linux重定向学习</a>
-      </li>
-    
-      <li>
-        <a href="/2013/07/28/cubieboard-as-download-server/">将cubieboard配置成远程下载服务器</a>
-      </li>
-    
-      <li>
-        <a href="/2013/07/28/cubieboard-run-mongodb/">cubieboard上运行MongoDB</a>
       </li>
     
   </ul>
