@@ -55,19 +55,21 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-01-30T00:00:00.000Z"><a href="/2013/01/30/jekyll-encoding-problem/">2013/1/30</a></time>
+        <time datetime="2013-02-28T00:00:00.000Z"><a href="/2013/02/28/sqlite-database-error/">2013/2/28</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/01/30/jekyll-encoding-problem/">jekyll 中文编码问题</a></h1>
+    <h1 class="title"><a href="/2013/02/28/sqlite-database-error/">sqlite 数据库错误,Corrupt</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h2>问题描述</h2>
-<p>本人在Windows下，安装Ruby和jekyll。</p>
-<p>安装完jekyll,使用jekyll命令生成静态页面时，提示：YAML Exception reading about.md: invalid byte sequence in GB2312，导致无法生成静态页面。</p>
+        <p>最近由于程序在对sqlite数据库操作的时候频繁中止，导致操作数据表时出现如下错误：</p>
+<pre><code>[System<span class="preprocessor">.Data</span><span class="preprocessor">.SQLite</span>] ErrorCode: Corrupt
+<span class="label">ErrorMessage:</span> The database disk image is malformed
+database disk image is malformed
+</code></pre>
 <p>
       
     </div>
@@ -75,7 +77,46 @@
       
         
           <div class="alignleft">
-            <a href="/2013/01/30/jekyll-encoding-problem/#more" class="more-link">阅读全文</a>
+            <a href="/2013/02/28/sqlite-database-error/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-01-31T00:00:00.000Z"><a href="/2013/01/31/fragment/">2013/1/31</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/01/31/fragment/">零碎点</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>工欲善其事，必先利其器</h2>
+<p><strong>C &amp; C++</strong></p>
+<ul>
+<li>Thrift:用来进行可扩展且跨语言的服务的开发。</li>
+<li>libevent:是一个事件触发的网络库，适用于windows、linux、bsd等多种平台，内部使用select、epoll、kqueue等系统调用管理事件机制。
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/01/31/fragment/#more" class="more-link">阅读全文</a>
           </div>
         
         
@@ -116,6 +157,44 @@
         
           <div class="alignleft">
             <a href="/2013/01/30/install-redmine/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-01-30T00:00:00.000Z"><a href="/2013/01/30/jekyll-encoding-problem/">2013/1/30</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/01/30/jekyll-encoding-problem/">jekyll 中文编码问题</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>问题描述</h2>
+<p>本人在Windows下，安装Ruby和jekyll。</p>
+<p>安装完jekyll,使用jekyll命令生成静态页面时，提示：YAML Exception reading about.md: invalid byte sequence in GB2312，导致无法生成静态页面。</p>
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/01/30/jekyll-encoding-problem/#more" class="more-link">阅读全文</a>
           </div>
         
         
@@ -189,9 +268,9 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/人文思考/">人文思考</a><small>2</small></li>
+    <li><a href="/categories/人文思考/">人文思考</a><small>3</small></li>
   
-    <li><a href="/categories/学习/">学习</a><small>49</small></li>
+    <li><a href="/categories/学习/">学习</a><small>50</small></li>
   
     <li><a href="/categories/工作/">工作</a><small>6</small></li>
   
@@ -224,6 +303,14 @@
   <ul class="entry">
     
       <li>
+        <a href="/2013/08/23/csharp-code-review/">C#代码审查清单</a>
+      </li>
+    
+      <li>
+        <a href="/2013/08/23/find-your-place/">IT职场人的“存在主义” 找到你的定位</a>
+      </li>
+    
+      <li>
         <a href="/2013/08/22/csharp-build-xmlrpc-server-without-iis/">C#无需IIS构建XmlRpc服务器</a>
       </li>
     
@@ -233,14 +320,6 @@
     
       <li>
         <a href="/2013/08/21/cpp-const/">C++ const学习总结(不整理还真觉得有些乱)</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/13/csharp-use-synchronizationcontext-update-ui-in-multithreading/">C#在多线程环境中使用SynchronizationContext更新控件状态</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/02/js-make-regex/">javascript动态构造正则表达式</a>
       </li>
     
   </ul>

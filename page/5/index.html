@@ -55,6 +55,82 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2013-07-01T07:31:41.000Z"><a href="/2013/07/01/csharp-forcing-free-memory/">2013/7/1</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/07/01/csharp-forcing-free-memory/">C#强制释放内存</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>最近对部门的爬虫做内存优化，起初重写了核心的爬取组件，内存占用确实低了很多，不过代码中有大量的文本处理，加之.net对string类型的特殊处理，爬虫长时间运行后，内存占用还是很高，使用VMMap分析后，发现Working Set中Managed Heap（托管堆）占用比例最大。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/07/01/csharp-forcing-free-memory/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-27T09:16:00.000Z"><a href="/2013/06/27/charset-encoding/">2013/6/27</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/27/charset-encoding/">字符集与编码(解决一次C#与C++程序通讯乱码问题)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>弄清楚Charset和Encoding的区别</h2>
+<p><strong>字符集（Charset）</strong></p>
+<p>字符集即字符的集合，规定了在这些集合里面有哪些字符，每一个字符都有一个编号（一个整数），但这只是编号不是编码。</p>
+<p><strong>编码（Encoding）</strong></p>
+<p>编码就规定了一个字符的编号如何与二进制交互。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/06/27/charset-encoding/#more" class="more-link">阅读全文</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2013-06-27T03:41:05.000Z"><a href="/2013/06/27/csharp-read-data-in-multithread-safely/">2013/6/27</a></time>
       
       
@@ -162,78 +238,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-06-18T11:32:30.000Z"><a href="/2013/06/18/c-where-to-define-var/">2013/6/18</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/06/18/c-where-to-define-var/">C语言变量定义的位置</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>N久没有捣鼓C语言的东西了，今天打算用C写个大文件预览的工具，结果遇到了一堆低级的语法问题。其中一点是关于变量定义位置的问题：</p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/06/18/c-where-to-define-var/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2013-06-18T11:15:47.000Z"><a href="/2013/06/18/c-memory-alloc/">2013/6/18</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/06/18/c-memory-alloc/">C/C++应用程序内存划分</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>一个由C/C++编译的程序占用的内存分为以下几个部分：</p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2013/06/18/c-memory-alloc/#more" class="more-link">阅读全文</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
 
 <nav id="pagination">
   
@@ -260,9 +264,9 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/人文思考/">人文思考</a><small>2</small></li>
+    <li><a href="/categories/人文思考/">人文思考</a><small>3</small></li>
   
-    <li><a href="/categories/学习/">学习</a><small>49</small></li>
+    <li><a href="/categories/学习/">学习</a><small>50</small></li>
   
     <li><a href="/categories/工作/">工作</a><small>6</small></li>
   
@@ -295,6 +299,14 @@
   <ul class="entry">
     
       <li>
+        <a href="/2013/08/23/csharp-code-review/">C#代码审查清单</a>
+      </li>
+    
+      <li>
+        <a href="/2013/08/23/find-your-place/">IT职场人的“存在主义” 找到你的定位</a>
+      </li>
+    
+      <li>
         <a href="/2013/08/22/csharp-build-xmlrpc-server-without-iis/">C#无需IIS构建XmlRpc服务器</a>
       </li>
     
@@ -304,14 +316,6 @@
     
       <li>
         <a href="/2013/08/21/cpp-const/">C++ const学习总结(不整理还真觉得有些乱)</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/13/csharp-use-synchronizationcontext-update-ui-in-multithreading/">C#在多线程环境中使用SynchronizationContext更新控件状态</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/02/js-make-regex/">javascript动态构造正则表达式</a>
       </li>
     
   </ul>
