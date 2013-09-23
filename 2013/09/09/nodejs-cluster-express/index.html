@@ -1,0 +1,312 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>nodejs+cluster+express 构建高性能Web服务器 | StanZhai::Blog</title>
+  <meta name="author" content="StanZhai 翟士丹">
+  
+  <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="nodejs+cluster+express 构建高性能Web服务器"/>
+  <meta property="og:site_name" content="StanZhai::Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="StanZhai::Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">StanZhai::Blog</a></h1>
+  <h2><a href="/">好记性不如烂键盘！</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-09-09T08:26:17.000Z"><a href="/2013/09/09/nodejs-cluster-express/">2013/9/9</a></time>
+      
+      
+  
+    <h1 class="title">nodejs+cluster+express 构建高性能Web服务器</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>前言</h2>
+<p>nodejs本身是单线程模型的，可以借助cluster模块实现多进程，增加程序在多核CPU机器上的性能表现，充分发挥nodejs的优势。</p>
+<p>express算是nodejs中比较流行的Web开发框架了，假如你的网站使用的是express开发的，那么恭喜你，你只需添加少量的代码就可以实现多进程模式，重要的是这些进程可以共享一个端口哦。</p>
+<a id="more"></a>
+
+<h2>如何实现</h2>
+<p>这里直接贴出代码了，关键点请看注释：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="code"><pre><span class="javadoc">/**
+ * index.js 
+ */</span>
+<span class="keyword">var</span> cluster = require(<span class="string">'cluster'</span>);
+<span class="keyword">var</span> numCPUs = require(<span class="string">'os'</span>).cpus().length;
+
+<span class="keyword">if</span> (cluster.isMaster) {
+  <span class="comment">// Fork workers.</span>
+  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; numCPUs; i++) {
+    cluster.fork();
+  }
+
+  cluster.on(<span class="string">'exit'</span>, function(worker, code, signal) {
+    console.log(<span class="string">'worker '</span> + worker.process.pid + <span class="string">' died'</span>);
+  });
+} <span class="keyword">else</span> {
+  <span class="comment">// Code to run if we're in a worker process</span>
+  require(<span class="string">'./app'</span>);
+  console.log(<span class="string">'Worker '</span> + cluster.worker.id + <span class="string">' running!'</span>);
+}
+</pre></td></tr></table></figure>
+
+<p>以上代码中我们根据CPU的数量创建对应的进程数。假设我们原来的express启动代码为app.js那么只需要在工作者进程中执行require(‘./app’)就可以了，改成多进程非常方便。</p>
+<h2>注意</h2>
+<p>cluster模块现在还处于实验阶段，不过使用ab测试了下，性能比单进程的提高了很多，大家可以自己去测下，这里就不给出测试数据了。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/学习/">学习</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/nodejs/">nodejs</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:blog.zhaishidan.cn">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/人文思考/">人文思考</a><small>3</small></li>
+  
+    <li><a href="/categories/学习/">学习</a><small>55</small></li>
+  
+    <li><a href="/categories/工作/">工作</a><small>6</small></li>
+  
+    <li><a href="/categories/工具/">工具</a><small>7</small></li>
+  
+    <li><a href="/categories/学习/置顶/">置顶</a><small>2</small></li>
+  
+    <li><a href="/categories/读书笔记/">读书笔记</a><small>5</small></li>
+  
+    <li><a href="/categories/问题修复/">问题修复</a><small>22</small></li>
+  
+    <li><a href="/categories/学习/项目管理/">项目管理</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/C/">C</a><small>3</small></li>
+  
+    <li><a href="/tags/C&C++/">C&amp;C++</a><small>1</small></li>
+  
+    <li><a href="/tags/C++/">C++</a><small>2</small></li>
+  
+    <li><a href="/tags/CSharp/">CSharp</a><small>6</small></li>
+  
+    <li><a href="/tags/Eclipse/">Eclipse</a><small>2</small></li>
+  
+    <li><a href="/tags/Linq/">Linq</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>11</small></li>
+  
+    <li><a href="/tags/MongoDB/">MongoDB</a><small>2</small></li>
+  
+    <li><a href="/tags/NUnit/">NUnit</a><small>1</small></li>
+  
+    <li><a href="/tags/Redis/">Redis</a><small>1</small></li>
+  
+    <li><a href="/tags/Redmine/">Redmine</a><small>1</small></li>
+  
+    <li><a href="/tags/SQL/">SQL</a><small>1</small></li>
+  
+    <li><a href="/tags/SQLServer/">SQLServer</a><small>2</small></li>
+  
+    <li><a href="/tags/Solr/">Solr</a><small>1</small></li>
+  
+    <li><a href="/tags/TeamViewer/">TeamViewer</a><small>1</small></li>
+  
+    <li><a href="/tags/Tomcat/">Tomcat</a><small>1</small></li>
+  
+    <li><a href="/tags/WPF/">WPF</a><small>1</small></li>
+  
+    <li><a href="/tags/cpp/">cpp</a><small>2</small></li>
+  
+    <li><a href="/tags/cubieboard/">cubieboard</a><small>2</small></li>
+  
+    <li><a href="/tags/cubieboard2/">cubieboard2</a><small>2</small></li>
+  
+    <li><a href="/tags/gdb/">gdb</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>1</small></li>
+  
+    <li><a href="/tags/jekyll/">jekyll</a><small>1</small></li>
+  
+    <li><a href="/tags/js/">js</a><small>2</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>2</small></li>
+  
+    <li><a href="/tags/log4net/">log4net</a><small>1</small></li>
+  
+    <li><a href="/tags/mongodb/">mongodb</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>4</small></li>
+  
+    <li><a href="/tags/pip/">pip</a><small>1</small></li>
+  
+    <li><a href="/tags/python/">python</a><small>1</small></li>
+  
+    <li><a href="/tags/rpc/">rpc</a><small>1</small></li>
+  
+    <li><a href="/tags/socket/">socket</a><small>1</small></li>
+  
+    <li><a href="/tags/sqlite/">sqlite</a><small>1</small></li>
+  
+    <li><a href="/tags/sublime text/">sublime text</a><small>1</small></li>
+  
+    <li><a href="/tags/vi/">vi</a><small>1</small></li>
+  
+    <li><a href="/tags/代码大全/">代码大全</a><small>4</small></li>
+  
+    <li><a href="/tags/多线程/">多线程</a><small>1</small></li>
+  
+    <li><a href="/tags/工作/">工作</a><small>2</small></li>
+  
+    <li><a href="/tags/方法论/">方法论</a><small>2</small></li>
+  
+    <li><a href="/tags/正则表达式/">正则表达式</a><small>2</small></li>
+  
+    <li><a href="/tags/汇编/">汇编</a><small>3</small></li>
+  
+    <li><a href="/tags/游戏引擎/">游戏引擎</a><small>1</small></li>
+  
+    <li><a href="/tags/项目管理/">项目管理</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 StanZhai 翟士丹
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

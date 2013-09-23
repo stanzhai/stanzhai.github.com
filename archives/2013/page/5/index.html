@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>第 5 页 | 文章：2013 | StanZhai::Blog</title>
+  <title>第 5 页 | 归档：2013 | StanZhai::Blog</title>
   <meta name="author" content="StanZhai 翟士丹">
   
   <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
@@ -22,7 +22,6 @@
   <link rel="alternate" href="/atom.xml" title="StanZhai::Blog" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
   
 </head>
 
@@ -35,13 +34,9 @@
 <nav id="main-nav" class="alignright">
   <ul>
     
+      <li><a href="/">Home</a></li>
+    
       <li><a href="/archives">Archives</a></li>
-    
-      <li><a href="/projects">Projects</a></li>
-    
-      <li><a href="/about">About</a></li>
-    
-      <li><a href="https://github.com/stanzhai">GitHub</a></li>
     
   </ul>
   <div class="clearfix"></div>
@@ -59,17 +54,18 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-07-01T07:31:41.000Z"><a href="/2013/07/01/csharp-forcing-free-memory/">2013/7/1</a></time>
+        <time datetime="2013-07-27T16:17:59.000Z"><a href="/2013/07/28/cubieboard-compile-nodejs/">2013/7/28</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/07/01/csharp-forcing-free-memory/">C#强制释放内存</a></h1>
+    <h1 class="title"><a href="/2013/07/28/cubieboard-compile-nodejs/">cubieboard 编译nodejs 0.10.15</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>最近对部门的爬虫做内存优化，起初重写了核心的爬取组件，内存占用确实低了很多，不过代码中有大量的文本处理，加之.net对string类型的特殊处理，爬虫长时间运行后，内存占用还是很高，使用VMMap分析后，发现Working Set中Managed Heap（托管堆）占用比例最大。</p>
+        <h2>准备</h2>
+<p>下载nodejs源码:<a href="http://nodejs.org/dist/v0.10.15/node-v0.10.15.tar.gz" target="_blank">http://nodejs.org/dist/v0.10.15/node-v0.10.15.tar.gz</a> 并解压。</p>
 
       
     </div>
@@ -77,7 +73,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/07/01/csharp-forcing-free-memory/#more" class="more-link">阅读全文</a>
+            <a href="/2013/07/28/cubieboard-compile-nodejs/#more" class="more-link">Read More</a>
           </div>
         
         
@@ -95,21 +91,21 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-27T09:16:00.000Z"><a href="/2013/06/27/charset-encoding/">2013/6/27</a></time>
+        <time datetime="2013-07-27T16:15:48.000Z"><a href="/2013/07/28/cubieboard-wifi-config/">2013/7/28</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/27/charset-encoding/">字符集与编码(解决一次C#与C++程序通讯乱码问题)</a></h1>
+    <h1 class="title"><a href="/2013/07/28/cubieboard-wifi-config/">cubieboard 无线网络配置</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h2>弄清楚Charset和Encoding的区别</h2>
-<p><strong>字符集（Charset）</strong></p>
-<p>字符集即字符的集合，规定了在这些集合里面有哪些字符，每一个字符都有一个编号（一个整数），但这只是编号不是编码。</p>
-<p><strong>编码（Encoding）</strong></p>
-<p>编码就规定了一个字符的编号如何与二进制交互。</p>
+        <h2>准备</h2>
+<ol>
+<li>先确保已经装好了无线网卡的驱动，我用的是LUbuntu，已经集成了8188u的芯片驱动了</li>
+<li>使用ifconfig查看无线网卡的配置，我的是wlan0，如果看不到无线的配置，使用iwconfig查看</li>
+</ol>
 
       
     </div>
@@ -117,7 +113,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/06/27/charset-encoding/#more" class="more-link">阅读全文</a>
+            <a href="/2013/07/28/cubieboard-wifi-config/#more" class="more-link">Read More</a>
           </div>
         
         
@@ -135,20 +131,18 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-27T03:41:05.000Z"><a href="/2013/06/27/csharp-read-data-in-multithread-safely/">2013/6/27</a></time>
+        <time datetime="2013-07-23T07:08:51.000Z"><a href="/2013/07/23/htmlagilitypack-cannot-get-form-innerhtml/">2013/7/23</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/27/csharp-read-data-in-multithread-safely/">C#在多线程环境中，进行安全遍历操作</a></h1>
+    <h1 class="title"><a href="/2013/07/23/htmlagilitypack-cannot-get-form-innerhtml/">解决HtmlAgilityPack无法获取form标签子节点的问题</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h2>本文以List作为操作对象</h2>
-<p><strong>MSDN官方给出的List的线程安全的说法：</strong></p>
-<p>此类型的公共静态成员是线程安全的。但不能保证任何实例成员是线程安全的。</p>
-<p>只要不修改该集合，List 就可以同时支持多个阅读器。通过集合枚举在本质上不是一个线程安全的过程。在枚举与一个或多个写访问竞争的罕见情况下，确保线程安全的唯一方法是在整个枚举期间锁定集合。若要允许多个线程访问集合以进行读写操作，则必须实现自己的同步。</p>
+        <h2>问题描述</h2>
+<p>今天使用HtmlAgilityPack提取Form表单下的input节点，发现提取的form节点没有子节点，InnerHtml也是为空，起初以为是标签不全导致，后来分析html代码发现不可能是这个问题，提取div标签正常，偏偏form标签有问题，最终从网上找到了答案。</p>
 
       
     </div>
@@ -156,7 +150,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/06/27/csharp-read-data-in-multithread-safely/#more" class="more-link">阅读全文</a>
+            <a href="/2013/07/23/htmlagilitypack-cannot-get-form-innerhtml/#more" class="more-link">Read More</a>
           </div>
         
         
@@ -174,17 +168,18 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-26T06:43:36.000Z"><a href="/2013/06/26/debug-nodejs-app/">2013/6/26</a></time>
+        <time datetime="2013-07-15T03:55:11.000Z"><a href="/2013/07/15/solr-match-all-search/">2013/7/15</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/26/debug-nodejs-app/">调试nodejs应用</a></h1>
+    <h1 class="title"><a href="/2013/07/15/solr-match-all-search/">Solr完全匹配查询</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p>nodejs的调试方案有不少，可以使用内置的调试功能，在代码中添加debugger指令；可以使用Eclipse加V8调试，这里介绍的是本人比较喜欢的node-inspector调试方案。</p>
+        <p>进行查询时，为查询条件加上双引号即可进行完全匹配的精确查询，如</p>
+<p><code>url:&quot;http://bbs.17173.com/thread-7375839-1-1.html&quot;</code></p>
 
       
     </div>
@@ -192,7 +187,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/06/26/debug-nodejs-app/#more" class="more-link">阅读全文</a>
+            <a href="/2013/07/15/solr-match-all-search/#more" class="more-link">Read More</a>
           </div>
         
         
@@ -210,19 +205,18 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-06-20T00:54:23.000Z"><a href="/2013/06/20/to-be-a-better-engineer/">2013/6/20</a></time>
+        <time datetime="2013-07-11T06:38:17.000Z"><a href="/2013/07/11/use-nunit-with-debug/">2013/7/11</a></time>
       
       
   
-    <h1 class="title"><a href="/2013/06/20/to-be-a-better-engineer/">努力成为更优秀的工程师</a></h1>
+    <h1 class="title"><a href="/2013/07/11/use-nunit-with-debug/">如何使用NUnit的过程中进行代码调试</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h2>甘于平凡</h2>
-<p>程序员真的很高傲，在我接触过的人中，包括我自己也是。我以前经常对一些简单的代码感到不屑，而总想在项目中写一些犀利的代码，让人看起来很NB，但结果总是和想象差太远，代码总是写的很差，逻辑也不够清晰。归根到底，是我带着这样的思想去写代码，而忽略了编程的根本：解决问题。</p>
-<p>踏实的做事，会有意想不到的收获。</p>
+        <h2>基本的使用方法</h2>
+<p>请参考 <a href="http://www.cnblogs.com/cnblogsfans/archive/2008/04/15/1153804.html" target="_blank">http://www.cnblogs.com/cnblogsfans/archive/2008/04/15/1153804.html</a></p>
 
       
     </div>
@@ -230,7 +224,7 @@
       
         
           <div class="alignleft">
-            <a href="/2013/06/20/to-be-a-better-engineer/#more" class="more-link">阅读全文</a>
+            <a href="/2013/07/11/use-nunit-with-debug/#more" class="more-link">Read More</a>
           </div>
         
         
@@ -255,12 +249,9 @@
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
-  <form id="search" class="pull-right" enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse" target="_blank">
-    <input type="search" name="q" results="0" placeholder="搜索"/>
-    <input type="hidden" name="cx" value="010188267663376520215:afr8qibwduq"/>
-    <input type="hidden" name="ie" value="UTF-8"/>
-    
-    <input name="siteurl" type="hidden" value="blog.zhaishidan.cn"><input name="ref" type="hidden" value="blog.zhaishidan.cn"><input name="ss" type="hidden" value="">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:blog.zhaishidan.cn">
   </form>
 </div>
 
@@ -271,17 +262,17 @@
   
     <li><a href="/categories/人文思考/">人文思考</a><small>3</small></li>
   
-    <li><a href="/categories/学习/">学习</a><small>50</small></li>
+    <li><a href="/categories/学习/">学习</a><small>55</small></li>
   
     <li><a href="/categories/工作/">工作</a><small>6</small></li>
   
-    <li><a href="/categories/工具/">工具</a><small>6</small></li>
+    <li><a href="/categories/工具/">工具</a><small>7</small></li>
   
     <li><a href="/categories/学习/置顶/">置顶</a><small>2</small></li>
   
     <li><a href="/categories/读书笔记/">读书笔记</a><small>5</small></li>
   
-    <li><a href="/categories/问题修复/">问题修复</a><small>20</small></li>
+    <li><a href="/categories/问题修复/">问题修复</a><small>22</small></li>
   
     <li><a href="/categories/学习/项目管理/">项目管理</a><small>1</small></li>
   
@@ -290,48 +281,101 @@
 
 
   
-<div class="widget tagcloud">
-  <h3 class="title">标签云</h3>
-  <div class="entry">
-    <a href="/tags/C/" style="font-size: 18.75px;">C</a><a href="/tags/C%26C%2B%2B/" style="font-size: 14.75px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 17.50px;">C++</a><a href="/tags/CSharp/" style="font-size: 19.50px;">CSharp</a><a href="/tags/Eclipse/" style="font-size: 11.75px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 13.75px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.75px;">Linux</a><a href="/tags/MongoDB/" style="font-size: 18.25px;">MongoDB</a><a href="/tags/NUnit/" style="font-size: 13.00px;">NUnit</a><a href="/tags/Redis/" style="font-size: 15.00px;">Redis</a><a href="/tags/Redmine/" style="font-size: 10.00px;">Redmine</a><a href="/tags/SQL/" style="font-size: 14.25px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 16.25px;">SQLServer</a><a href="/tags/Solr/" style="font-size: 10.25px;">Solr</a><a href="/tags/TeamViewer/" style="font-size: 15.25px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 16.00px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 10.75px;">WPF</a><a href="/tags/gdb/" style="font-size: 11.25px;">gdb</a><a href="/tags/git/" style="font-size: 12.25px;">git</a><a href="/tags/hexo/" style="font-size: 13.25px;">hexo</a><a href="/tags/jQuery/" style="font-size: 11.00px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 13.50px;">jekyll</a><a href="/tags/js/" style="font-size: 16.50px;">js</a><a href="/tags/linux/" style="font-size: 18.50px;">linux</a><a href="/tags/log4net/" style="font-size: 11.50px;">log4net</a><a href="/tags/mongodb/" style="font-size: 14.50px;">mongodb</a><a href="/tags/nodejs/" style="font-size: 16.75px;">nodejs</a><a href="/tags/pip/" style="font-size: 12.75px;">pip</a><a href="/tags/python/" style="font-size: 12.50px;">python</a><a href="/tags/socket/" style="font-size: 15.50px;">socket</a><a href="/tags/sqlite/" style="font-size: 15.75px;">sqlite</a><a href="/tags/vi/" style="font-size: 14.00px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.25px;">代码大全</a><a href="/tags/多线程/" style="font-size: 10.50px;">多线程</a><a href="/tags/工作/" style="font-size: 17.75px;">工作</a><a href="/tags/方法论/" style="font-size: 18.00px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 17.00px;">正则表达式</a><a href="/tags/汇编/" style="font-size: 19.00px;">汇编</a><a href="/tags/游戏引擎/" style="font-size: 12.00px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 17.25px;">项目管理</a>
-  </div>
-</div>
-
-
-  
 <div class="widget tag">
-  <h3 class="title">最新博文</h3>
+  <h3 class="title">标签</h3>
   <ul class="entry">
-    
-      <li>
-        <a href="/2013/08/23/csharp-code-review/">C#代码审查清单</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/23/find-your-place/">IT职场人的“存在主义” 找到你的定位</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/22/csharp-build-xmlrpc-server-without-iis/">C#无需IIS构建XmlRpc服务器</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/22/can-not-push-rep-to-heroku/">解决git push heroku超时的问题</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/21/cpp-const/">C++ const学习总结(不整理还真觉得有些乱)</a>
-      </li>
-    
+  
+    <li><a href="/tags/C/">C</a><small>3</small></li>
+  
+    <li><a href="/tags/C&C++/">C&amp;C++</a><small>1</small></li>
+  
+    <li><a href="/tags/C++/">C++</a><small>2</small></li>
+  
+    <li><a href="/tags/CSharp/">CSharp</a><small>6</small></li>
+  
+    <li><a href="/tags/Eclipse/">Eclipse</a><small>2</small></li>
+  
+    <li><a href="/tags/Linq/">Linq</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>11</small></li>
+  
+    <li><a href="/tags/MongoDB/">MongoDB</a><small>2</small></li>
+  
+    <li><a href="/tags/NUnit/">NUnit</a><small>1</small></li>
+  
+    <li><a href="/tags/Redis/">Redis</a><small>1</small></li>
+  
+    <li><a href="/tags/Redmine/">Redmine</a><small>1</small></li>
+  
+    <li><a href="/tags/SQL/">SQL</a><small>1</small></li>
+  
+    <li><a href="/tags/SQLServer/">SQLServer</a><small>2</small></li>
+  
+    <li><a href="/tags/Solr/">Solr</a><small>1</small></li>
+  
+    <li><a href="/tags/TeamViewer/">TeamViewer</a><small>1</small></li>
+  
+    <li><a href="/tags/Tomcat/">Tomcat</a><small>1</small></li>
+  
+    <li><a href="/tags/WPF/">WPF</a><small>1</small></li>
+  
+    <li><a href="/tags/cpp/">cpp</a><small>2</small></li>
+  
+    <li><a href="/tags/cubieboard/">cubieboard</a><small>2</small></li>
+  
+    <li><a href="/tags/cubieboard2/">cubieboard2</a><small>2</small></li>
+  
+    <li><a href="/tags/gdb/">gdb</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>1</small></li>
+  
+    <li><a href="/tags/jekyll/">jekyll</a><small>1</small></li>
+  
+    <li><a href="/tags/js/">js</a><small>2</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>2</small></li>
+  
+    <li><a href="/tags/log4net/">log4net</a><small>1</small></li>
+  
+    <li><a href="/tags/mongodb/">mongodb</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>4</small></li>
+  
+    <li><a href="/tags/pip/">pip</a><small>1</small></li>
+  
+    <li><a href="/tags/python/">python</a><small>1</small></li>
+  
+    <li><a href="/tags/rpc/">rpc</a><small>1</small></li>
+  
+    <li><a href="/tags/socket/">socket</a><small>1</small></li>
+  
+    <li><a href="/tags/sqlite/">sqlite</a><small>1</small></li>
+  
+    <li><a href="/tags/sublime text/">sublime text</a><small>1</small></li>
+  
+    <li><a href="/tags/vi/">vi</a><small>1</small></li>
+  
+    <li><a href="/tags/代码大全/">代码大全</a><small>4</small></li>
+  
+    <li><a href="/tags/多线程/">多线程</a><small>1</small></li>
+  
+    <li><a href="/tags/工作/">工作</a><small>2</small></li>
+  
+    <li><a href="/tags/方法论/">方法论</a><small>2</small></li>
+  
+    <li><a href="/tags/正则表达式/">正则表达式</a><small>2</small></li>
+  
+    <li><a href="/tags/汇编/">汇编</a><small>3</small></li>
+  
+    <li><a href="/tags/游戏引擎/">游戏引擎</a><small>1</small></li>
+  
+    <li><a href="/tags/项目管理/">项目管理</a><small>2</small></li>
+  
   </ul>
-</div>
-
-
-  <div class="widget twitter">
-  <h3 class="title">新浪微博</h3>
-  <div class="entry">
-	  <iframe id="sina_widget_2884160830" style="width:100%; height:330px;" frameborder="0" scrolling="no" src="http://v.t.sina.com.cn/widget/widget_blog.php?uid=2884160830&height=330&skin=wd_01&showpic=1"></iframe>
-  </div>
 </div>
 
 </aside>
@@ -341,10 +385,10 @@
   
   &copy; 2013 StanZhai 翟士丹
   
-  <script src="http://s14.cnzz.com/stat.php?id=5017720&web_id=5017720&show=pic" language="JavaScript"></script>
 </div>
 <div class="clearfix"></div></footer>
-  <script src="/js/jquery.imagesloaded.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 
 

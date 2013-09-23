@@ -22,7 +22,6 @@
   <link rel="alternate" href="/atom.xml" title="StanZhai::Blog" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
   
 </head>
 
@@ -35,13 +34,9 @@
 <nav id="main-nav" class="alignright">
   <ul>
     
+      <li><a href="/">Home</a></li>
+    
       <li><a href="/archives">Archives</a></li>
-    
-      <li><a href="/projects">Projects</a></li>
-    
-      <li><a href="/about">About</a></li>
-    
-      <li><a href="https://github.com/stanzhai">GitHub</a></li>
     
   </ul>
   <div class="clearfix"></div>
@@ -67,14 +62,13 @@
         <h2>什么是CMMI</h2>
 <p>CMMI全称是Capability Maturity Model Integration, 即软件能力成熟度模型集成。</p>
 <p>其目的是帮助软件企业对软件工程过程进行管理和改进，增强开发与改进能力，从而能按时地、不超预算地开发出高质量的软件。</p>
-<a name="more"></a>
+<a id="more"></a>
 
 <p>其所依据的想法是：只要集中精力持续努力去建立有效的软件工程过程的基础结构，不断进行管理的实践和过程的改进，就可以克服软件开发中的困难。</p>
 <p>CMMI为改进一个组织的各种过程提供了一个单一的集成化框架，新的集成模型框架消除了各个模型的不一致性，减少了模型间的重复，增加透明度和理解，建立了一个自动的、可扩展的框架。因而能够从总体上改进组织的质量和效率。CMMI主要关注点就是成本效益、明确重点、过程集中和灵活性四个方面。</p>
 <h2>过程域</h2>
 <p>Process Area：过程域</p>
-<p>简单的说就是做好一个事情的某一个方面。
-对应软件开发来说，就是做好软件开发的某一个方面。</p>
+<p>简单的说就是做好一个事情的某一个方面。<br>对应软件开发来说，就是做好软件开发的某一个方面。</p>
 <p>2、3级共有18个过程域（PA）,主要内容如下，分四大类：</p>
 <p><strong>一、过程管理：</strong></p>
 <ol>
@@ -85,30 +79,20 @@
 <p><strong>二、项目管理：</strong></p>
 <ol>
 <li>PP：（Project Plan）项目计划。保证在正确的时间有正确的资源可用。为每个人员分配任务。协调人员。根据实际情况，调整项目。</li>
-<li>PMC：（Project Monitoring and Control）项目监督与控制。通过项目的跟踪与监控活动，及时反映项目的进度、费用、风险、规模、关键计算机资源及工作量等情况，通过对跟踪结果的分析，依据跟踪与监控策略采取有效的行动，使项目组能在既定的时间、费用、质量要求等情况下完成项目。
-6．SAM：（Supplier Agreement Management）供应商协议管理。旨在对以正式协定的形式从项目之外的供方采办的产品和服务实施管理。
-7．IPM：（Integrated Project Management）集成项目管理。根据从组织标准过程剪裁而来的集成的、定义的过程对项目和利益相关者的介入进行管理。</li>
+<li>PMC：（Project Monitoring and Control）项目监督与控制。通过项目的跟踪与监控活动，及时反映项目的进度、费用、风险、规模、关键计算机资源及工作量等情况，通过对跟踪结果的分析，依据跟踪与监控策略采取有效的行动，使项目组能在既定的时间、费用、质量要求等情况下完成项目。<br>6．SAM：（Supplier Agreement Management）供应商协议管理。旨在对以正式协定的形式从项目之外的供方采办的产品和服务实施管理。<br>7．IPM：（Integrated Project Management）集成项目管理。根据从组织标准过程剪裁而来的集成的、定义的过程对项目和利益相关者的介入进行管理。</li>
 <li>RSKM：（Risk Management）风险管理。识别潜在的问题，以便策划应对风险的活动和必要时在整个项目生存周期中实施这些活动，缓解不利的影响，实现目标。</li>
 </ol>
 <p><strong>三、工程管理:</strong></p>
-<p>9．RD：（Requirement Development）需求开发。需求开发的目的在于定义系统的边界和功能、非功能需求，以便涉众(客户、最终用户)和项目组对所开发的内容达成一致。
-10．REQM（Requirement Management）需求管理。需求管理的目的是在客户和软件项目之间就需要满足的需求建立和 维护一致的约定。
-11．TS：（Technical Solution）技术解决方案。在开发。设计和实现满足需求的解决方案。解决方案的设计和实现等都围绕产品、产品组件和与过程有关的产品。
-12．PI：（Product Integration）产品集成。从产品部件组装产品，确保集成产品功能正确并交付产品。
-13．VER：（Verification）验证。验证确保选定的工作产品满足需求规格。
-14．VAL：（Validation）确认。确认证明产品或产品部件在实际应用下满足应用要求。</p>
+<p>9．RD：（Requirement Development）需求开发。需求开发的目的在于定义系统的边界和功能、非功能需求，以便涉众(客户、最终用户)和项目组对所开发的内容达成一致。<br>10．REQM（Requirement Management）需求管理。需求管理的目的是在客户和软件项目之间就需要满足的需求建立和 维护一致的约定。<br>11．TS：（Technical Solution）技术解决方案。在开发。设计和实现满足需求的解决方案。解决方案的设计和实现等都围绕产品、产品组件和与过程有关的产品。<br>12．PI：（Product Integration）产品集成。从产品部件组装产品，确保集成产品功能正确并交付产品。<br>13．VER：（Verification）验证。验证确保选定的工作产品满足需求规格。<br>14．VAL：（Validation）确认。确认证明产品或产品部件在实际应用下满足应用要求。</p>
 <p><strong>四、支持管理：</strong></p>
 <ol>
-<li>CM：（Configuration Management）配置管理。建立和维护在项目的整个软件生存周期中软件项目产品的完整性 。
-16．PPQA：（Process and Product Quality Assurance）过程和产品质量保证。为项目组和管理层提供项目过程和相关工作产品的客观信息。
-17．MA：（Measurement and Analysis）测量与分析。开发和维持度量的能力，以便支持对管理信息的需要。作为改进、了解、控制决策。</li>
+<li>CM：（Configuration Management）配置管理。建立和维护在项目的整个软件生存周期中软件项目产品的完整性 。<br>16．PPQA：（Process and Product Quality Assurance）过程和产品质量保证。为项目组和管理层提供项目过程和相关工作产品的客观信息。<br>17．MA：（Measurement and Analysis）测量与分析。开发和维持度量的能力，以便支持对管理信息的需要。作为改进、了解、控制决策。</li>
 <li>DAR：（Decision Analysis and Resolution）决策分析与解决。应用正式的评估过程依据指标评估候选方案，在此基础上进行决策。</li>
 </ol>
 <p>第4级除第2、3级所涵盖的18个流程领域外，增加</p>
 <ol>
 <li>OPP ：（Organizational Process Preformace）组织过程性能。建立与维护组织过程性能的量化标准，以便使用量化方式的管理项目。</li>
-<li>QPM（Quantitative Project Management) 量化的项目管理，量化管理项目已定义的项目过程，以达成项目既定的质量和过程性能目标。。
-第5级包含第2级到第4级的20个流程领域外，增加，</li>
+<li>QPM（Quantitative Project Management) 量化的项目管理，量化管理项目已定义的项目过程，以达成项目既定的质量和过程性能目标。。<br>第5级包含第2级到第4级的20个流程领域外，增加，</li>
 <li>OID：(Organizational Innovation and Deployment）组织的创新与推展，选择并推展渐进创新的组织过程和技术改善，改善应是可度量的，所选择及推展的改善需支持基于组织业务目的的质量及过程执行目标。</li>
 <li>CAR：（Causal Analysis and Resolution），识别缺失的原因并进行矫正进一步的防止未来再次发生。</li>
 </ol>
@@ -139,21 +123,21 @@
         
         
   <div class="addthis addthis_toolbox addthis_default_style">
-    <!-- JiaThis Button BEGIN -->
-    <ul class="tag_box jiathis_style">
-      <a class="jiathis_button_tools_1"></a>
-      <a class="jiathis_button_tools_2"></a>
-      <a class="jiathis_button_tools_3"></a>
-      <a class="jiathis_button_tools_4"></a>
-      <a href="http://www.jiathis.com/share?uid=1715390" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
-      <a class="jiathis_counter_style"></a>
-    </ul>
-    <script type="text/javascript">
-    var jiathis_config = {data_track_clickback:'true'};
-    </script>
-    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1347364934817650" charset="utf-8"></script>
-    <!-- JiaThis Button END -->
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
   </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
 
       
       <div class="clearfix"></div>
@@ -161,23 +145,12 @@
   </div>
 </article>
 
-
-<section id="comment">
-  <h1 class="title">评论</h1>
-  <!-- UY BEGIN -->
-	<div id="uyan_frame"></div>
-	<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1715390" async=""></script>
-	<!-- UY END -->
-</section>
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
-  <form id="search" class="pull-right" enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse" target="_blank">
-    <input type="search" name="q" results="0" placeholder="搜索"/>
-    <input type="hidden" name="cx" value="010188267663376520215:afr8qibwduq"/>
-    <input type="hidden" name="ie" value="UTF-8"/>
-    
-    <input name="siteurl" type="hidden" value="blog.zhaishidan.cn"><input name="ref" type="hidden" value="blog.zhaishidan.cn"><input name="ss" type="hidden" value="">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:blog.zhaishidan.cn">
   </form>
 </div>
 
@@ -188,17 +161,17 @@
   
     <li><a href="/categories/人文思考/">人文思考</a><small>3</small></li>
   
-    <li><a href="/categories/学习/">学习</a><small>50</small></li>
+    <li><a href="/categories/学习/">学习</a><small>55</small></li>
   
     <li><a href="/categories/工作/">工作</a><small>6</small></li>
   
-    <li><a href="/categories/工具/">工具</a><small>6</small></li>
+    <li><a href="/categories/工具/">工具</a><small>7</small></li>
   
     <li><a href="/categories/学习/置顶/">置顶</a><small>2</small></li>
   
     <li><a href="/categories/读书笔记/">读书笔记</a><small>5</small></li>
   
-    <li><a href="/categories/问题修复/">问题修复</a><small>20</small></li>
+    <li><a href="/categories/问题修复/">问题修复</a><small>22</small></li>
   
     <li><a href="/categories/学习/项目管理/">项目管理</a><small>1</small></li>
   
@@ -207,48 +180,101 @@
 
 
   
-<div class="widget tagcloud">
-  <h3 class="title">标签云</h3>
-  <div class="entry">
-    <a href="/tags/C/" style="font-size: 18.75px;">C</a><a href="/tags/C%26C%2B%2B/" style="font-size: 14.75px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 17.50px;">C++</a><a href="/tags/CSharp/" style="font-size: 19.50px;">CSharp</a><a href="/tags/Eclipse/" style="font-size: 11.75px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 13.75px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.75px;">Linux</a><a href="/tags/MongoDB/" style="font-size: 18.25px;">MongoDB</a><a href="/tags/NUnit/" style="font-size: 13.00px;">NUnit</a><a href="/tags/Redis/" style="font-size: 15.00px;">Redis</a><a href="/tags/Redmine/" style="font-size: 10.00px;">Redmine</a><a href="/tags/SQL/" style="font-size: 14.25px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 16.25px;">SQLServer</a><a href="/tags/Solr/" style="font-size: 10.25px;">Solr</a><a href="/tags/TeamViewer/" style="font-size: 15.25px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 16.00px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 10.75px;">WPF</a><a href="/tags/gdb/" style="font-size: 11.25px;">gdb</a><a href="/tags/git/" style="font-size: 12.25px;">git</a><a href="/tags/hexo/" style="font-size: 13.25px;">hexo</a><a href="/tags/jQuery/" style="font-size: 11.00px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 13.50px;">jekyll</a><a href="/tags/js/" style="font-size: 16.50px;">js</a><a href="/tags/linux/" style="font-size: 18.50px;">linux</a><a href="/tags/log4net/" style="font-size: 11.50px;">log4net</a><a href="/tags/mongodb/" style="font-size: 14.50px;">mongodb</a><a href="/tags/nodejs/" style="font-size: 16.75px;">nodejs</a><a href="/tags/pip/" style="font-size: 12.75px;">pip</a><a href="/tags/python/" style="font-size: 12.50px;">python</a><a href="/tags/socket/" style="font-size: 15.50px;">socket</a><a href="/tags/sqlite/" style="font-size: 15.75px;">sqlite</a><a href="/tags/vi/" style="font-size: 14.00px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.25px;">代码大全</a><a href="/tags/多线程/" style="font-size: 10.50px;">多线程</a><a href="/tags/工作/" style="font-size: 17.75px;">工作</a><a href="/tags/方法论/" style="font-size: 18.00px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 17.00px;">正则表达式</a><a href="/tags/汇编/" style="font-size: 19.00px;">汇编</a><a href="/tags/游戏引擎/" style="font-size: 12.00px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 17.25px;">项目管理</a>
-  </div>
-</div>
-
-
-  
 <div class="widget tag">
-  <h3 class="title">最新博文</h3>
+  <h3 class="title">标签</h3>
   <ul class="entry">
-    
-      <li>
-        <a href="/2013/08/23/csharp-code-review/">C#代码审查清单</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/23/find-your-place/">IT职场人的“存在主义” 找到你的定位</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/22/csharp-build-xmlrpc-server-without-iis/">C#无需IIS构建XmlRpc服务器</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/22/can-not-push-rep-to-heroku/">解决git push heroku超时的问题</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/21/cpp-const/">C++ const学习总结(不整理还真觉得有些乱)</a>
-      </li>
-    
+  
+    <li><a href="/tags/C/">C</a><small>3</small></li>
+  
+    <li><a href="/tags/C&C++/">C&amp;C++</a><small>1</small></li>
+  
+    <li><a href="/tags/C++/">C++</a><small>2</small></li>
+  
+    <li><a href="/tags/CSharp/">CSharp</a><small>6</small></li>
+  
+    <li><a href="/tags/Eclipse/">Eclipse</a><small>2</small></li>
+  
+    <li><a href="/tags/Linq/">Linq</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>11</small></li>
+  
+    <li><a href="/tags/MongoDB/">MongoDB</a><small>2</small></li>
+  
+    <li><a href="/tags/NUnit/">NUnit</a><small>1</small></li>
+  
+    <li><a href="/tags/Redis/">Redis</a><small>1</small></li>
+  
+    <li><a href="/tags/Redmine/">Redmine</a><small>1</small></li>
+  
+    <li><a href="/tags/SQL/">SQL</a><small>1</small></li>
+  
+    <li><a href="/tags/SQLServer/">SQLServer</a><small>2</small></li>
+  
+    <li><a href="/tags/Solr/">Solr</a><small>1</small></li>
+  
+    <li><a href="/tags/TeamViewer/">TeamViewer</a><small>1</small></li>
+  
+    <li><a href="/tags/Tomcat/">Tomcat</a><small>1</small></li>
+  
+    <li><a href="/tags/WPF/">WPF</a><small>1</small></li>
+  
+    <li><a href="/tags/cpp/">cpp</a><small>2</small></li>
+  
+    <li><a href="/tags/cubieboard/">cubieboard</a><small>2</small></li>
+  
+    <li><a href="/tags/cubieboard2/">cubieboard2</a><small>2</small></li>
+  
+    <li><a href="/tags/gdb/">gdb</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>1</small></li>
+  
+    <li><a href="/tags/jekyll/">jekyll</a><small>1</small></li>
+  
+    <li><a href="/tags/js/">js</a><small>2</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>2</small></li>
+  
+    <li><a href="/tags/log4net/">log4net</a><small>1</small></li>
+  
+    <li><a href="/tags/mongodb/">mongodb</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>4</small></li>
+  
+    <li><a href="/tags/pip/">pip</a><small>1</small></li>
+  
+    <li><a href="/tags/python/">python</a><small>1</small></li>
+  
+    <li><a href="/tags/rpc/">rpc</a><small>1</small></li>
+  
+    <li><a href="/tags/socket/">socket</a><small>1</small></li>
+  
+    <li><a href="/tags/sqlite/">sqlite</a><small>1</small></li>
+  
+    <li><a href="/tags/sublime text/">sublime text</a><small>1</small></li>
+  
+    <li><a href="/tags/vi/">vi</a><small>1</small></li>
+  
+    <li><a href="/tags/代码大全/">代码大全</a><small>4</small></li>
+  
+    <li><a href="/tags/多线程/">多线程</a><small>1</small></li>
+  
+    <li><a href="/tags/工作/">工作</a><small>2</small></li>
+  
+    <li><a href="/tags/方法论/">方法论</a><small>2</small></li>
+  
+    <li><a href="/tags/正则表达式/">正则表达式</a><small>2</small></li>
+  
+    <li><a href="/tags/汇编/">汇编</a><small>3</small></li>
+  
+    <li><a href="/tags/游戏引擎/">游戏引擎</a><small>1</small></li>
+  
+    <li><a href="/tags/项目管理/">项目管理</a><small>2</small></li>
+  
   </ul>
-</div>
-
-
-  <div class="widget twitter">
-  <h3 class="title">新浪微博</h3>
-  <div class="entry">
-	  <iframe id="sina_widget_2884160830" style="width:100%; height:330px;" frameborder="0" scrolling="no" src="http://v.t.sina.com.cn/widget/widget_blog.php?uid=2884160830&height=330&skin=wd_01&showpic=1"></iframe>
-  </div>
 </div>
 
 </aside>
@@ -258,10 +284,10 @@
   
   &copy; 2013 StanZhai 翟士丹
   
-  <script src="http://s14.cnzz.com/stat.php?id=5017720&web_id=5017720&show=pic" language="JavaScript"></script>
 </div>
 <div class="clearfix"></div></footer>
-  <script src="/js/jquery.imagesloaded.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 
 

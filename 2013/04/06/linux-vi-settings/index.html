@@ -22,7 +22,6 @@
   <link rel="alternate" href="/atom.xml" title="StanZhai::Blog" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
   
 </head>
 
@@ -35,13 +34,9 @@
 <nav id="main-nav" class="alignright">
   <ul>
     
+      <li><a href="/">Home</a></li>
+    
       <li><a href="/archives">Archives</a></li>
-    
-      <li><a href="/projects">Projects</a></li>
-    
-      <li><a href="/about">About</a></li>
-    
-      <li><a href="https://github.com/stanzhai">GitHub</a></li>
     
   </ul>
   <div class="clearfix"></div>
@@ -69,7 +64,7 @@
 <li>ctags:为项目生成索引，方便阅读代码时的定位，<code>ctags -R</code>生成索引，<code>Ctrl + ]</code>定位到函数声明处，<code>Ctrl + o</code>返回。</li>
 <li>taglist：借助ctags，现实代码中的宏定义，变量和函数，阅读一份代码就比较直观了。（在taglist窗口中通过Ctrl+w+w切换代码窗口）.</li>
 <li>Autocomplpop:自动完成插件，编码时自动出现代码提示，下载插件后直接解压到~/.vim文件夹下就可以使用了。</li>
-<li>CppCompleete：为C和C++优化的代码提示插件。<a name="more"></a></li>
+<li>CppCompleete：为C和C++优化的代码提示插件。<a id="more"></a></li>
 <li>vimball: 是为了安装其他插件用的，有些插件使用了vimball的形式发布的。</li>
 <li>netrw.vim：文件浏览用的，支持网络文件浏览如ftp</li>
 <li>winmanager: 可以让你的vim变成windows风格的IDE</li>
@@ -77,15 +72,14 @@
 <li>a.vim: C和C++程序员的福音，在.h和.c文件之间来回切换(<code>:A</code>)</li>
 <li>visualmark.vim: 高亮标记插件, <code>mm</code>进行标记，<code>F2</code>在标记之间进行切换</li>
 </ol>
-<p>ctags,到<a href="http://sourceforge.net/projects/ctags/">这里</a>下载.</p>
-<p>其他插件到<a href="http://www.vim.org/scripts/script_search_results.php?order_by=creation_date&amp;direction=descending">这里</a>自行搜索下载。</p>
+<p>ctags,到<a href="http://sourceforge.net/projects/ctags/" target="_blank">这里</a>下载.</p>
+<p>其他插件到<a href="http://www.vim.org/scripts/script_search_results.php?order_by=creation_date&amp;direction=descending" target="_blank">这里</a>自行搜索下载。</p>
 <p><strong> 注意 </strong></p>
 <p>netrw.vim和winmanager插件安装是通过vimball的形式安装的，安装方式如下：</p>
 <pre><code>cd 插件所在的目录
 vi 下载的插件文件名
 <span class="symbol">:so</span> %
-<span class="symbol">:q</span>
-</code></pre>
+<span class="symbol">:q</span></code></pre>
 <p>a.vim 和 grep.vim 直接将文件复制到~/.vim/plugin目录下即可完成安装</p>
 <h2>vi配置</h2>
 <p>编辑～/.vimrc文件,直接在文件中添加需要的选项即可，vi启动是默认加载其中的选项，这样就不必每次都进行设置了。</p>
@@ -102,7 +96,6 @@ set tabstop=4
 set shiftwidth=4
 " 设置匹配模式，类似当输入一个左括号时会匹配相应的那个右括号
 set showmatch
-
 " 设置ctags自动加载当前目录下的tags
 set tags=tags;
 set autochdir
@@ -116,9 +109,8 @@ let Tlist_Exit_OnlyWindow=1                  "
 
 " 文件浏览窗口和TagList
 let g:winManagerWindowLayout='FileExplorer|TagList'
-nmap wm :WMToggle<span class="tag">&lt;<span class="title">cr</span>&gt;</span>
-</code></pre>
-<p><strong> 附：</strong> <a href="http://amix.dk/vim/vimrc.html">史上最强的VI配置</a></p>
+nmap wm :WMToggle<span class="tag">&lt;<span class="title">cr</span>&gt;</span></code></pre>
+<p><strong> 附：</strong> <a href="http://amix.dk/vim/vimrc.html" target="_blank">史上最强的VI配置</a></p>
 <h2>代码编辑进行时</h2>
 <p>编辑好代码以后，通过<code>:make</code>直接编译整个项目，<code>:cw</code>或<code>:copen</code>可以调出QuickFix窗口，查看调试过程中的警告和错误。通过<code>cclose</code>关闭QuickFix窗口。</p>
 <h2>最终打造的vi效果图</h2>
@@ -143,21 +135,21 @@ nmap wm :WMToggle<span class="tag">&lt;<span class="title">cr</span>&gt;</span>
 
         
   <div class="addthis addthis_toolbox addthis_default_style">
-    <!-- JiaThis Button BEGIN -->
-    <ul class="tag_box jiathis_style">
-      <a class="jiathis_button_tools_1"></a>
-      <a class="jiathis_button_tools_2"></a>
-      <a class="jiathis_button_tools_3"></a>
-      <a class="jiathis_button_tools_4"></a>
-      <a href="http://www.jiathis.com/share?uid=1715390" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
-      <a class="jiathis_counter_style"></a>
-    </ul>
-    <script type="text/javascript">
-    var jiathis_config = {data_track_clickback:'true'};
-    </script>
-    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1347364934817650" charset="utf-8"></script>
-    <!-- JiaThis Button END -->
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
   </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
 
       
       <div class="clearfix"></div>
@@ -165,23 +157,12 @@ nmap wm :WMToggle<span class="tag">&lt;<span class="title">cr</span>&gt;</span>
   </div>
 </article>
 
-
-<section id="comment">
-  <h1 class="title">评论</h1>
-  <!-- UY BEGIN -->
-	<div id="uyan_frame"></div>
-	<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1715390" async=""></script>
-	<!-- UY END -->
-</section>
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
-  <form id="search" class="pull-right" enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse" target="_blank">
-    <input type="search" name="q" results="0" placeholder="搜索"/>
-    <input type="hidden" name="cx" value="010188267663376520215:afr8qibwduq"/>
-    <input type="hidden" name="ie" value="UTF-8"/>
-    
-    <input name="siteurl" type="hidden" value="blog.zhaishidan.cn"><input name="ref" type="hidden" value="blog.zhaishidan.cn"><input name="ss" type="hidden" value="">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:blog.zhaishidan.cn">
   </form>
 </div>
 
@@ -192,17 +173,17 @@ nmap wm :WMToggle<span class="tag">&lt;<span class="title">cr</span>&gt;</span>
   
     <li><a href="/categories/人文思考/">人文思考</a><small>3</small></li>
   
-    <li><a href="/categories/学习/">学习</a><small>50</small></li>
+    <li><a href="/categories/学习/">学习</a><small>55</small></li>
   
     <li><a href="/categories/工作/">工作</a><small>6</small></li>
   
-    <li><a href="/categories/工具/">工具</a><small>6</small></li>
+    <li><a href="/categories/工具/">工具</a><small>7</small></li>
   
     <li><a href="/categories/学习/置顶/">置顶</a><small>2</small></li>
   
     <li><a href="/categories/读书笔记/">读书笔记</a><small>5</small></li>
   
-    <li><a href="/categories/问题修复/">问题修复</a><small>20</small></li>
+    <li><a href="/categories/问题修复/">问题修复</a><small>22</small></li>
   
     <li><a href="/categories/学习/项目管理/">项目管理</a><small>1</small></li>
   
@@ -211,48 +192,101 @@ nmap wm :WMToggle<span class="tag">&lt;<span class="title">cr</span>&gt;</span>
 
 
   
-<div class="widget tagcloud">
-  <h3 class="title">标签云</h3>
-  <div class="entry">
-    <a href="/tags/C/" style="font-size: 18.75px;">C</a><a href="/tags/C%26C%2B%2B/" style="font-size: 14.75px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 17.50px;">C++</a><a href="/tags/CSharp/" style="font-size: 19.50px;">CSharp</a><a href="/tags/Eclipse/" style="font-size: 11.75px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 13.75px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.75px;">Linux</a><a href="/tags/MongoDB/" style="font-size: 18.25px;">MongoDB</a><a href="/tags/NUnit/" style="font-size: 13.00px;">NUnit</a><a href="/tags/Redis/" style="font-size: 15.00px;">Redis</a><a href="/tags/Redmine/" style="font-size: 10.00px;">Redmine</a><a href="/tags/SQL/" style="font-size: 14.25px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 16.25px;">SQLServer</a><a href="/tags/Solr/" style="font-size: 10.25px;">Solr</a><a href="/tags/TeamViewer/" style="font-size: 15.25px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 16.00px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 10.75px;">WPF</a><a href="/tags/gdb/" style="font-size: 11.25px;">gdb</a><a href="/tags/git/" style="font-size: 12.25px;">git</a><a href="/tags/hexo/" style="font-size: 13.25px;">hexo</a><a href="/tags/jQuery/" style="font-size: 11.00px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 13.50px;">jekyll</a><a href="/tags/js/" style="font-size: 16.50px;">js</a><a href="/tags/linux/" style="font-size: 18.50px;">linux</a><a href="/tags/log4net/" style="font-size: 11.50px;">log4net</a><a href="/tags/mongodb/" style="font-size: 14.50px;">mongodb</a><a href="/tags/nodejs/" style="font-size: 16.75px;">nodejs</a><a href="/tags/pip/" style="font-size: 12.75px;">pip</a><a href="/tags/python/" style="font-size: 12.50px;">python</a><a href="/tags/socket/" style="font-size: 15.50px;">socket</a><a href="/tags/sqlite/" style="font-size: 15.75px;">sqlite</a><a href="/tags/vi/" style="font-size: 14.00px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.25px;">代码大全</a><a href="/tags/多线程/" style="font-size: 10.50px;">多线程</a><a href="/tags/工作/" style="font-size: 17.75px;">工作</a><a href="/tags/方法论/" style="font-size: 18.00px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 17.00px;">正则表达式</a><a href="/tags/汇编/" style="font-size: 19.00px;">汇编</a><a href="/tags/游戏引擎/" style="font-size: 12.00px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 17.25px;">项目管理</a>
-  </div>
-</div>
-
-
-  
 <div class="widget tag">
-  <h3 class="title">最新博文</h3>
+  <h3 class="title">标签</h3>
   <ul class="entry">
-    
-      <li>
-        <a href="/2013/08/23/csharp-code-review/">C#代码审查清单</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/23/find-your-place/">IT职场人的“存在主义” 找到你的定位</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/22/csharp-build-xmlrpc-server-without-iis/">C#无需IIS构建XmlRpc服务器</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/22/can-not-push-rep-to-heroku/">解决git push heroku超时的问题</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/21/cpp-const/">C++ const学习总结(不整理还真觉得有些乱)</a>
-      </li>
-    
+  
+    <li><a href="/tags/C/">C</a><small>3</small></li>
+  
+    <li><a href="/tags/C&C++/">C&amp;C++</a><small>1</small></li>
+  
+    <li><a href="/tags/C++/">C++</a><small>2</small></li>
+  
+    <li><a href="/tags/CSharp/">CSharp</a><small>6</small></li>
+  
+    <li><a href="/tags/Eclipse/">Eclipse</a><small>2</small></li>
+  
+    <li><a href="/tags/Linq/">Linq</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>11</small></li>
+  
+    <li><a href="/tags/MongoDB/">MongoDB</a><small>2</small></li>
+  
+    <li><a href="/tags/NUnit/">NUnit</a><small>1</small></li>
+  
+    <li><a href="/tags/Redis/">Redis</a><small>1</small></li>
+  
+    <li><a href="/tags/Redmine/">Redmine</a><small>1</small></li>
+  
+    <li><a href="/tags/SQL/">SQL</a><small>1</small></li>
+  
+    <li><a href="/tags/SQLServer/">SQLServer</a><small>2</small></li>
+  
+    <li><a href="/tags/Solr/">Solr</a><small>1</small></li>
+  
+    <li><a href="/tags/TeamViewer/">TeamViewer</a><small>1</small></li>
+  
+    <li><a href="/tags/Tomcat/">Tomcat</a><small>1</small></li>
+  
+    <li><a href="/tags/WPF/">WPF</a><small>1</small></li>
+  
+    <li><a href="/tags/cpp/">cpp</a><small>2</small></li>
+  
+    <li><a href="/tags/cubieboard/">cubieboard</a><small>2</small></li>
+  
+    <li><a href="/tags/cubieboard2/">cubieboard2</a><small>2</small></li>
+  
+    <li><a href="/tags/gdb/">gdb</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>1</small></li>
+  
+    <li><a href="/tags/jekyll/">jekyll</a><small>1</small></li>
+  
+    <li><a href="/tags/js/">js</a><small>2</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>2</small></li>
+  
+    <li><a href="/tags/log4net/">log4net</a><small>1</small></li>
+  
+    <li><a href="/tags/mongodb/">mongodb</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>4</small></li>
+  
+    <li><a href="/tags/pip/">pip</a><small>1</small></li>
+  
+    <li><a href="/tags/python/">python</a><small>1</small></li>
+  
+    <li><a href="/tags/rpc/">rpc</a><small>1</small></li>
+  
+    <li><a href="/tags/socket/">socket</a><small>1</small></li>
+  
+    <li><a href="/tags/sqlite/">sqlite</a><small>1</small></li>
+  
+    <li><a href="/tags/sublime text/">sublime text</a><small>1</small></li>
+  
+    <li><a href="/tags/vi/">vi</a><small>1</small></li>
+  
+    <li><a href="/tags/代码大全/">代码大全</a><small>4</small></li>
+  
+    <li><a href="/tags/多线程/">多线程</a><small>1</small></li>
+  
+    <li><a href="/tags/工作/">工作</a><small>2</small></li>
+  
+    <li><a href="/tags/方法论/">方法论</a><small>2</small></li>
+  
+    <li><a href="/tags/正则表达式/">正则表达式</a><small>2</small></li>
+  
+    <li><a href="/tags/汇编/">汇编</a><small>3</small></li>
+  
+    <li><a href="/tags/游戏引擎/">游戏引擎</a><small>1</small></li>
+  
+    <li><a href="/tags/项目管理/">项目管理</a><small>2</small></li>
+  
   </ul>
-</div>
-
-
-  <div class="widget twitter">
-  <h3 class="title">新浪微博</h3>
-  <div class="entry">
-	  <iframe id="sina_widget_2884160830" style="width:100%; height:330px;" frameborder="0" scrolling="no" src="http://v.t.sina.com.cn/widget/widget_blog.php?uid=2884160830&height=330&skin=wd_01&showpic=1"></iframe>
-  </div>
 </div>
 
 </aside>
@@ -262,10 +296,10 @@ nmap wm :WMToggle<span class="tag">&lt;<span class="title">cr</span>&gt;</span>
   
   &copy; 2013 StanZhai 翟士丹
   
-  <script src="http://s14.cnzz.com/stat.php?id=5017720&web_id=5017720&show=pic" language="JavaScript"></script>
 </div>
 <div class="clearfix"></div></footer>
-  <script src="/js/jquery.imagesloaded.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 
 

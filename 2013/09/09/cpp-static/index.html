@@ -1,0 +1,358 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C++类的static成员 | StanZhai::Blog</title>
+  <meta name="author" content="StanZhai 翟士丹">
+  
+  <meta name="description" content="翟士丹的技术博客，爱编码，爱生活，有梦想，不抱怨。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="C++类的static成员"/>
+  <meta property="og:site_name" content="StanZhai::Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="StanZhai::Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">StanZhai::Blog</a></h1>
+  <h2><a href="/">好记性不如烂键盘！</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-09-09T08:25:52.000Z"><a href="/2013/09/09/cpp-static/">2013/9/9</a></time>
+      
+      
+  
+    <h1 class="title">C++类的static成员</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>使用类的static成员的优点</h2>
+<ol>
+<li>static成员的名字在类的作用域中，可以避免与其他类的成员或全局对象名字冲突。</li>
+<li>可以进行封装。static成员可以是私有成员，而全局对象不可以。</li>
+<li>阅读程序可以看出static与类的关联，可以清晰的表明程序员的意图。</li>
+</ol>
+<a id="more"></a>
+
+<h2>定义static成员</h2>
+<p>在成员关键字前加上static将成员设为static，static成员遵循正常的公有/私有访问规则。</p>
+<p>例如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="class"><span class="keyword">class</span> <span class="title">Account</span> {</span>
+<span class="keyword">public</span>:
+  <span class="keyword">void</span> applyint() { amount += amount * interestRate; }
+  <span class="keyword">static</span> <span class="keyword">double</span> rate() { <span class="keyword">return</span> interestRate; }
+  <span class="keyword">static</span> <span class="keyword">void</span> rate(<span class="keyword">double</span>);     <span class="comment">// sets a new rate</span>
+
+<span class="keyword">private</span>:
+  <span class="keyword">double</span> amount;
+  <span class="keyword">static</span> <span class="keyword">double</span> interestRate;
+  <span class="keyword">static</span> <span class="keyword">double</span> initRate();
+};
+</pre></td></tr></table></figure>
+
+<h2>static成员函数</h2>
+<p>Account类有2个rate的static成员函数，其中一个在类的内部定义，当我们在外部定义static成员时，无须重复指定static保留字，该保留字只出现在类定义体内部的声明处。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="title">void</span> Account::rate(double newRate)
+{
+  <span class="title">interestRate</span> = newRate;
+}
+</pre></td></tr></table></figure>
+
+<p><strong>static函数没有this指针</strong></p>
+<p>static成员不是任何对象的组成部分，所以static成员函数不能声明为const（毕竟，将成员函数声明为const就是承诺不会修改该函数所属的对象，而static成员不属于对象）。</p>
+<p>static成员函数也不能被声明为虚函数。</p>
+<h2>static数据成员</h2>
+<p>static数据成员可以声明为任意类型，如常量，引用，数组，类类型等。</p>
+<p><strong>定义，初始化方法</strong></p>
+<p>static数据成员必须在类定义体的外部定义（正好一次）。static数据成员是在定义时初始化，而普通的数据成员是通过构造函数进行初始化。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="regexp">//</span> Account.cpp
+double Account::interestRate = initRate();  
+<span class="regexp">//</span> initRate() <span class="keyword">is</span> a private static method <span class="keyword">of</span> Account
+</pre></td></tr></table></figure>
+
+<p>以上代码需要注意的是：interestRate定义在Account类的作用域中，因此可以直接访问该类的私有成员。</p>
+<p><strong>const static成员</strong></p>
+<p>一般而言，类的static成员和普通数据成员一样，不能再类的定义体中初始化。但是const static则是个例外。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="class"><span class="keyword">class</span> <span class="title">Account</span> {</span>
+<span class="keyword">private</span>:
+  <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> period = <span class="number">10</span>; <span class="comment">// const static数据成员可以在类中进行初始化。</span>
+  <span class="comment">// 虽然已经在这进行初始化了，当时还必须在类外进行定义</span>
+};
+</pre></td></tr></table></figure>
+
+<h2>static成员不是类对象的组成部分</h2>
+<p>static数据成员的类型可以是该成员所属的类类型。非static成员被限定声明为其自身类对象的指针或引用，如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="class"><span class="keyword">class</span> <span class="title">Bar</span> {</span>
+<span class="keyword">private</span>:
+  <span class="keyword">static</span> Bar mem1;  <span class="comment">// ok</span>
+  Bar *mem2;        <span class="comment">// ok</span>
+  Bar mem3;         <span class="comment">// error</span>
+};
+</pre></td></tr></table></figure>
+
+<h2>使用类的static成员</h2>
+<p>可以通过作用域操作符从类直接调用static成员，或者通过对象、引用或指向该类类型对象的指针间接调用。</p>
+<p><strong>注意：在C#中只能通过类名去使用static成员哦</strong></p>
+<h2>参考文献</h2>
+<p>《C++ Primer中文版（第4版）》</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/学习/">学习</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/cpp/">cpp</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:blog.zhaishidan.cn">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/人文思考/">人文思考</a><small>3</small></li>
+  
+    <li><a href="/categories/学习/">学习</a><small>55</small></li>
+  
+    <li><a href="/categories/工作/">工作</a><small>6</small></li>
+  
+    <li><a href="/categories/工具/">工具</a><small>7</small></li>
+  
+    <li><a href="/categories/学习/置顶/">置顶</a><small>2</small></li>
+  
+    <li><a href="/categories/读书笔记/">读书笔记</a><small>5</small></li>
+  
+    <li><a href="/categories/问题修复/">问题修复</a><small>22</small></li>
+  
+    <li><a href="/categories/学习/项目管理/">项目管理</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/C/">C</a><small>3</small></li>
+  
+    <li><a href="/tags/C&C++/">C&amp;C++</a><small>1</small></li>
+  
+    <li><a href="/tags/C++/">C++</a><small>2</small></li>
+  
+    <li><a href="/tags/CSharp/">CSharp</a><small>6</small></li>
+  
+    <li><a href="/tags/Eclipse/">Eclipse</a><small>2</small></li>
+  
+    <li><a href="/tags/Linq/">Linq</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>11</small></li>
+  
+    <li><a href="/tags/MongoDB/">MongoDB</a><small>2</small></li>
+  
+    <li><a href="/tags/NUnit/">NUnit</a><small>1</small></li>
+  
+    <li><a href="/tags/Redis/">Redis</a><small>1</small></li>
+  
+    <li><a href="/tags/Redmine/">Redmine</a><small>1</small></li>
+  
+    <li><a href="/tags/SQL/">SQL</a><small>1</small></li>
+  
+    <li><a href="/tags/SQLServer/">SQLServer</a><small>2</small></li>
+  
+    <li><a href="/tags/Solr/">Solr</a><small>1</small></li>
+  
+    <li><a href="/tags/TeamViewer/">TeamViewer</a><small>1</small></li>
+  
+    <li><a href="/tags/Tomcat/">Tomcat</a><small>1</small></li>
+  
+    <li><a href="/tags/WPF/">WPF</a><small>1</small></li>
+  
+    <li><a href="/tags/cpp/">cpp</a><small>2</small></li>
+  
+    <li><a href="/tags/cubieboard/">cubieboard</a><small>2</small></li>
+  
+    <li><a href="/tags/cubieboard2/">cubieboard2</a><small>2</small></li>
+  
+    <li><a href="/tags/gdb/">gdb</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>1</small></li>
+  
+    <li><a href="/tags/jekyll/">jekyll</a><small>1</small></li>
+  
+    <li><a href="/tags/js/">js</a><small>2</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>2</small></li>
+  
+    <li><a href="/tags/log4net/">log4net</a><small>1</small></li>
+  
+    <li><a href="/tags/mongodb/">mongodb</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>4</small></li>
+  
+    <li><a href="/tags/pip/">pip</a><small>1</small></li>
+  
+    <li><a href="/tags/python/">python</a><small>1</small></li>
+  
+    <li><a href="/tags/rpc/">rpc</a><small>1</small></li>
+  
+    <li><a href="/tags/socket/">socket</a><small>1</small></li>
+  
+    <li><a href="/tags/sqlite/">sqlite</a><small>1</small></li>
+  
+    <li><a href="/tags/sublime text/">sublime text</a><small>1</small></li>
+  
+    <li><a href="/tags/vi/">vi</a><small>1</small></li>
+  
+    <li><a href="/tags/代码大全/">代码大全</a><small>4</small></li>
+  
+    <li><a href="/tags/多线程/">多线程</a><small>1</small></li>
+  
+    <li><a href="/tags/工作/">工作</a><small>2</small></li>
+  
+    <li><a href="/tags/方法论/">方法论</a><small>2</small></li>
+  
+    <li><a href="/tags/正则表达式/">正则表达式</a><small>2</small></li>
+  
+    <li><a href="/tags/汇编/">汇编</a><small>3</small></li>
+  
+    <li><a href="/tags/游戏引擎/">游戏引擎</a><small>1</small></li>
+  
+    <li><a href="/tags/项目管理/">项目管理</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 StanZhai 翟士丹
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

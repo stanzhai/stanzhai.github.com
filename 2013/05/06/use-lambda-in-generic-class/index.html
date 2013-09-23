@@ -22,7 +22,6 @@
   <link rel="alternate" href="/atom.xml" title="StanZhai::Blog" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
   
 </head>
 
@@ -35,13 +34,9 @@
 <nav id="main-nav" class="alignright">
   <ul>
     
+      <li><a href="/">Home</a></li>
+    
       <li><a href="/archives">Archives</a></li>
-    
-      <li><a href="/projects">Projects</a></li>
-    
-      <li><a href="/about">About</a></li>
-    
-      <li><a href="https://github.com/stanzhai">GitHub</a></li>
     
   </ul>
   <div class="clearfix"></div>
@@ -66,7 +61,7 @@
       
         <h2>场景</h2>
 <p>最近对爬虫的数据库架构做调整，需要将数据迁移到MongoDB上去，需要重新实现一个针对MongoDB的Dao泛型类，好吧，动手开工，当实现删除操作的时候问题来了。</p>
-<a name="more"></a>
+<a id="more"></a>
 
 <p>我们的删除操作定义如下：<code>void Delete(TEntity entity)</code>。TEntity是我们的泛型类。</p>
 <p>而MongoDB官方驱动自带的删除操作是这样的：</p>
@@ -116,10 +111,10 @@ coll<span class="variable">.Remove</span>(query);
 27
 28
 29
-</pre></td><td class="code"><pre><span class="comment"><span class="xmlDocTag">///</span> &lt;summary&gt;</span>
+</pre></td><td class="code"><pre><span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;summary&gt;</span></span>
 <span class="comment"><span class="xmlDocTag">///</span> 因为使用的Mongodb，每个数据模型必定包含Id属性，通过Id属性来删除实体</span>
-<span class="comment"><span class="xmlDocTag">///</span> &lt;/summary&gt;</span>
-<span class="comment"><span class="xmlDocTag">///</span> &lt;param name="entity"&gt;&lt;/param&gt;</span>
+<span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;/summary&gt;</span></span>
+<span class="comment"><span class="xmlDocTag">///</span> <span class="xmlDocTag">&lt;param name="entity"&gt;</span><span class="xmlDocTag">&lt;/param&gt;</span></span>
 <span class="keyword">public</span> <span class="keyword">void</span> Delete(TEntity entity)
 {
     <span class="keyword">var</span> coll = _db.GetCollection&lt;TEntity&gt;(<span class="keyword">typeof</span>(TEntity).Name);
@@ -149,12 +144,12 @@ coll<span class="variable">.Remove</span>(query);
 
 <h2>参考资料</h2>
 <ol>
-<li><a href="http://www.csharpwin.com/csharpspace/5379r5603.shtml">C# Lambda表达式树浅谈</a></li>
-<li><a href="http://www.webjx.com/aspnet/2009-04-12/11231.html">C#教程:lambda表达式转换成表达式树</a></li>
+<li><a href="http://www.csharpwin.com/csharpspace/5379r5603.shtml" target="_blank">C# Lambda表达式树浅谈</a></li>
+<li><a href="http://www.webjx.com/aspnet/2009-04-12/11231.html" target="_blank">C#教程:lambda表达式转换成表达式树</a></li>
 </ol>
 <h2>用到的工具</h2>
-<p>之前都是直接使用lambda表示，而且用的还很Happy，今天遇到的问题，让我很傻眼，基础还得巩固啊。今天也是第一次调试lambda表达式，用到了<a href="http://exprtreevisualizer.codeplex.com/releases?ReleaseId=88943">Expression Tree Visualizer for VS 2010</a>这个小工具。在项目调试过程中可以比较直观的查看编译好的lambda表达式。</p>
-<p>安装和使用方法，请参见:<a href="http://zhangyue.info/?p=351">在Visual Studio 2010设置Expression Tree Visualizer</a></p>
+<p>之前都是直接使用lambda表示，而且用的还很Happy，今天遇到的问题，让我很傻眼，基础还得巩固啊。今天也是第一次调试lambda表达式，用到了<a href="http://exprtreevisualizer.codeplex.com/releases?ReleaseId=88943" target="_blank">Expression Tree Visualizer for VS 2010</a>这个小工具。在项目调试过程中可以比较直观的查看编译好的lambda表达式。</p>
+<p>安装和使用方法，请参见:<a href="http://zhangyue.info/?p=351" target="_blank">在Visual Studio 2010设置Expression Tree Visualizer</a></p>
 
       
     </div>
@@ -169,21 +164,21 @@ coll<span class="variable">.Remove</span>(query);
         
         
   <div class="addthis addthis_toolbox addthis_default_style">
-    <!-- JiaThis Button BEGIN -->
-    <ul class="tag_box jiathis_style">
-      <a class="jiathis_button_tools_1"></a>
-      <a class="jiathis_button_tools_2"></a>
-      <a class="jiathis_button_tools_3"></a>
-      <a class="jiathis_button_tools_4"></a>
-      <a href="http://www.jiathis.com/share?uid=1715390" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
-      <a class="jiathis_counter_style"></a>
-    </ul>
-    <script type="text/javascript">
-    var jiathis_config = {data_track_clickback:'true'};
-    </script>
-    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1347364934817650" charset="utf-8"></script>
-    <!-- JiaThis Button END -->
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
   </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
 
       
       <div class="clearfix"></div>
@@ -191,23 +186,12 @@ coll<span class="variable">.Remove</span>(query);
   </div>
 </article>
 
-
-<section id="comment">
-  <h1 class="title">评论</h1>
-  <!-- UY BEGIN -->
-	<div id="uyan_frame"></div>
-	<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1715390" async=""></script>
-	<!-- UY END -->
-</section>
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
-  <form id="search" class="pull-right" enctype="application/x-www-form-urlencoded" method="get" id="cse-search-box" action="http://www.google.com/cse" target="_blank">
-    <input type="search" name="q" results="0" placeholder="搜索"/>
-    <input type="hidden" name="cx" value="010188267663376520215:afr8qibwduq"/>
-    <input type="hidden" name="ie" value="UTF-8"/>
-    
-    <input name="siteurl" type="hidden" value="blog.zhaishidan.cn"><input name="ref" type="hidden" value="blog.zhaishidan.cn"><input name="ss" type="hidden" value="">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:blog.zhaishidan.cn">
   </form>
 </div>
 
@@ -218,17 +202,17 @@ coll<span class="variable">.Remove</span>(query);
   
     <li><a href="/categories/人文思考/">人文思考</a><small>3</small></li>
   
-    <li><a href="/categories/学习/">学习</a><small>50</small></li>
+    <li><a href="/categories/学习/">学习</a><small>55</small></li>
   
     <li><a href="/categories/工作/">工作</a><small>6</small></li>
   
-    <li><a href="/categories/工具/">工具</a><small>6</small></li>
+    <li><a href="/categories/工具/">工具</a><small>7</small></li>
   
     <li><a href="/categories/学习/置顶/">置顶</a><small>2</small></li>
   
     <li><a href="/categories/读书笔记/">读书笔记</a><small>5</small></li>
   
-    <li><a href="/categories/问题修复/">问题修复</a><small>20</small></li>
+    <li><a href="/categories/问题修复/">问题修复</a><small>22</small></li>
   
     <li><a href="/categories/学习/项目管理/">项目管理</a><small>1</small></li>
   
@@ -237,48 +221,101 @@ coll<span class="variable">.Remove</span>(query);
 
 
   
-<div class="widget tagcloud">
-  <h3 class="title">标签云</h3>
-  <div class="entry">
-    <a href="/tags/C/" style="font-size: 18.75px;">C</a><a href="/tags/C%26C%2B%2B/" style="font-size: 14.75px;">C&C++</a><a href="/tags/C%2B%2B/" style="font-size: 17.50px;">C++</a><a href="/tags/CSharp/" style="font-size: 19.50px;">CSharp</a><a href="/tags/Eclipse/" style="font-size: 11.75px;">Eclipse</a><a href="/tags/Linq/" style="font-size: 13.75px;">Linq</a><a href="/tags/Linux/" style="font-size: 19.75px;">Linux</a><a href="/tags/MongoDB/" style="font-size: 18.25px;">MongoDB</a><a href="/tags/NUnit/" style="font-size: 13.00px;">NUnit</a><a href="/tags/Redis/" style="font-size: 15.00px;">Redis</a><a href="/tags/Redmine/" style="font-size: 10.00px;">Redmine</a><a href="/tags/SQL/" style="font-size: 14.25px;">SQL</a><a href="/tags/SQLServer/" style="font-size: 16.25px;">SQLServer</a><a href="/tags/Solr/" style="font-size: 10.25px;">Solr</a><a href="/tags/TeamViewer/" style="font-size: 15.25px;">TeamViewer</a><a href="/tags/Tomcat/" style="font-size: 16.00px;">Tomcat</a><a href="/tags/WPF/" style="font-size: 10.75px;">WPF</a><a href="/tags/gdb/" style="font-size: 11.25px;">gdb</a><a href="/tags/git/" style="font-size: 12.25px;">git</a><a href="/tags/hexo/" style="font-size: 13.25px;">hexo</a><a href="/tags/jQuery/" style="font-size: 11.00px;">jQuery</a><a href="/tags/jekyll/" style="font-size: 13.50px;">jekyll</a><a href="/tags/js/" style="font-size: 16.50px;">js</a><a href="/tags/linux/" style="font-size: 18.50px;">linux</a><a href="/tags/log4net/" style="font-size: 11.50px;">log4net</a><a href="/tags/mongodb/" style="font-size: 14.50px;">mongodb</a><a href="/tags/nodejs/" style="font-size: 16.75px;">nodejs</a><a href="/tags/pip/" style="font-size: 12.75px;">pip</a><a href="/tags/python/" style="font-size: 12.50px;">python</a><a href="/tags/socket/" style="font-size: 15.50px;">socket</a><a href="/tags/sqlite/" style="font-size: 15.75px;">sqlite</a><a href="/tags/vi/" style="font-size: 14.00px;">vi</a><a href="/tags/代码大全/" style="font-size: 19.25px;">代码大全</a><a href="/tags/多线程/" style="font-size: 10.50px;">多线程</a><a href="/tags/工作/" style="font-size: 17.75px;">工作</a><a href="/tags/方法论/" style="font-size: 18.00px;">方法论</a><a href="/tags/正则表达式/" style="font-size: 17.00px;">正则表达式</a><a href="/tags/汇编/" style="font-size: 19.00px;">汇编</a><a href="/tags/游戏引擎/" style="font-size: 12.00px;">游戏引擎</a><a href="/tags/项目管理/" style="font-size: 17.25px;">项目管理</a>
-  </div>
-</div>
-
-
-  
 <div class="widget tag">
-  <h3 class="title">最新博文</h3>
+  <h3 class="title">标签</h3>
   <ul class="entry">
-    
-      <li>
-        <a href="/2013/08/23/csharp-code-review/">C#代码审查清单</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/23/find-your-place/">IT职场人的“存在主义” 找到你的定位</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/22/csharp-build-xmlrpc-server-without-iis/">C#无需IIS构建XmlRpc服务器</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/22/can-not-push-rep-to-heroku/">解决git push heroku超时的问题</a>
-      </li>
-    
-      <li>
-        <a href="/2013/08/21/cpp-const/">C++ const学习总结(不整理还真觉得有些乱)</a>
-      </li>
-    
+  
+    <li><a href="/tags/C/">C</a><small>3</small></li>
+  
+    <li><a href="/tags/C&C++/">C&amp;C++</a><small>1</small></li>
+  
+    <li><a href="/tags/C++/">C++</a><small>2</small></li>
+  
+    <li><a href="/tags/CSharp/">CSharp</a><small>6</small></li>
+  
+    <li><a href="/tags/Eclipse/">Eclipse</a><small>2</small></li>
+  
+    <li><a href="/tags/Linq/">Linq</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>11</small></li>
+  
+    <li><a href="/tags/MongoDB/">MongoDB</a><small>2</small></li>
+  
+    <li><a href="/tags/NUnit/">NUnit</a><small>1</small></li>
+  
+    <li><a href="/tags/Redis/">Redis</a><small>1</small></li>
+  
+    <li><a href="/tags/Redmine/">Redmine</a><small>1</small></li>
+  
+    <li><a href="/tags/SQL/">SQL</a><small>1</small></li>
+  
+    <li><a href="/tags/SQLServer/">SQLServer</a><small>2</small></li>
+  
+    <li><a href="/tags/Solr/">Solr</a><small>1</small></li>
+  
+    <li><a href="/tags/TeamViewer/">TeamViewer</a><small>1</small></li>
+  
+    <li><a href="/tags/Tomcat/">Tomcat</a><small>1</small></li>
+  
+    <li><a href="/tags/WPF/">WPF</a><small>1</small></li>
+  
+    <li><a href="/tags/cpp/">cpp</a><small>2</small></li>
+  
+    <li><a href="/tags/cubieboard/">cubieboard</a><small>2</small></li>
+  
+    <li><a href="/tags/cubieboard2/">cubieboard2</a><small>2</small></li>
+  
+    <li><a href="/tags/gdb/">gdb</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>1</small></li>
+  
+    <li><a href="/tags/jekyll/">jekyll</a><small>1</small></li>
+  
+    <li><a href="/tags/js/">js</a><small>2</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>2</small></li>
+  
+    <li><a href="/tags/log4net/">log4net</a><small>1</small></li>
+  
+    <li><a href="/tags/mongodb/">mongodb</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>4</small></li>
+  
+    <li><a href="/tags/pip/">pip</a><small>1</small></li>
+  
+    <li><a href="/tags/python/">python</a><small>1</small></li>
+  
+    <li><a href="/tags/rpc/">rpc</a><small>1</small></li>
+  
+    <li><a href="/tags/socket/">socket</a><small>1</small></li>
+  
+    <li><a href="/tags/sqlite/">sqlite</a><small>1</small></li>
+  
+    <li><a href="/tags/sublime text/">sublime text</a><small>1</small></li>
+  
+    <li><a href="/tags/vi/">vi</a><small>1</small></li>
+  
+    <li><a href="/tags/代码大全/">代码大全</a><small>4</small></li>
+  
+    <li><a href="/tags/多线程/">多线程</a><small>1</small></li>
+  
+    <li><a href="/tags/工作/">工作</a><small>2</small></li>
+  
+    <li><a href="/tags/方法论/">方法论</a><small>2</small></li>
+  
+    <li><a href="/tags/正则表达式/">正则表达式</a><small>2</small></li>
+  
+    <li><a href="/tags/汇编/">汇编</a><small>3</small></li>
+  
+    <li><a href="/tags/游戏引擎/">游戏引擎</a><small>1</small></li>
+  
+    <li><a href="/tags/项目管理/">项目管理</a><small>2</small></li>
+  
   </ul>
-</div>
-
-
-  <div class="widget twitter">
-  <h3 class="title">新浪微博</h3>
-  <div class="entry">
-	  <iframe id="sina_widget_2884160830" style="width:100%; height:330px;" frameborder="0" scrolling="no" src="http://v.t.sina.com.cn/widget/widget_blog.php?uid=2884160830&height=330&skin=wd_01&showpic=1"></iframe>
-  </div>
 </div>
 
 </aside>
@@ -288,10 +325,10 @@ coll<span class="variable">.Remove</span>(query);
   
   &copy; 2013 StanZhai 翟士丹
   
-  <script src="http://s14.cnzz.com/stat.php?id=5017720&web_id=5017720&show=pic" language="JavaScript"></script>
 </div>
 <div class="clearfix"></div></footer>
-  <script src="/js/jquery.imagesloaded.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 
 
